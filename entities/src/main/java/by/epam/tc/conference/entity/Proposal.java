@@ -5,6 +5,8 @@ public class Proposal implements Identifiable<Long> {
     private Long id;
     private String title;
     private String description;
+    private Long sectionId;
+    private Long participantId;
     private ProposalStatus status;
 
     @Override
@@ -31,6 +33,22 @@ public class Proposal implements Identifiable<Long> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getSectionId() {
+        return sectionId;
+    }
+
+    public void setSectionId(Long sectionId) {
+        this.sectionId = sectionId;
+    }
+
+    public Long getParticipantId() {
+        return participantId;
+    }
+
+    public void setParticipantId(Long participantId) {
+        this.participantId = participantId;
     }
 
     public ProposalStatus getStatus() {

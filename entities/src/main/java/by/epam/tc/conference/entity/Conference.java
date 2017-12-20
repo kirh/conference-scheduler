@@ -9,7 +9,7 @@ public class Conference implements Identifiable<Long>{
     private String name;
     private String address;
     private Date date;
-    private List<Section> sections;
+    private Long administratorId;
 
     @Override
     public Long getId() {
@@ -45,11 +45,11 @@ public class Conference implements Identifiable<Long>{
         this.date = date;
     }
 
-    public List<Section> getSections() {
-        return sections;
+    public Long getAdministratorId() {
+        return administratorId;
     }
 
-    public void setSections(List<Section> sections) {
-        this.sections = sections;
+    public void setAdministratorId(Long administratorId) {
+        this.administratorId = administratorId;
     }
 }

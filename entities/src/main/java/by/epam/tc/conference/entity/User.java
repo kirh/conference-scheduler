@@ -8,6 +8,7 @@ public class User implements Identifiable<Long> {
     private String email;
     private String firstName;
     private String lastName;
+    private boolean isAdmin;
 
     @Override
     public Long getId() {
@@ -57,5 +58,13 @@ public class User implements Identifiable<Long> {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

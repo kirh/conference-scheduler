@@ -6,7 +6,7 @@ public class Section implements Identifiable<Long> {
 
     private Long id;
     private String topic;
-    private List<Proposal> proposals;
+    private Long conferenceId;
 
     @Override
     public Long getId() {
@@ -26,11 +26,11 @@ public class Section implements Identifiable<Long> {
         this.topic = topic;
     }
 
-    public List<Proposal> getProposals() {
-        return proposals;
+    public Long getConferenceId() {
+        return conferenceId;
     }
 
-    public void setProposals(List<Proposal> proposals) {
-        this.proposals = proposals;
+    public void setConferenceId(Long conferenceId) {
+        this.conferenceId = conferenceId;
     }
 }

@@ -1,12 +1,15 @@
 package by.epam.tc.conference.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Message implements Identifiable<Long> {
 
     private Long id;
     private String text;
-    private Date created;
+    private Long questionId;
+    private Long userId;
+    private Timestamp createTime;
 
     @Override
     public Long getId() {
@@ -26,11 +29,27 @@ public class Message implements Identifiable<Long> {
         this.text = text;
     }
 
-    public Date getCreated() {
-        return created;
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 }
