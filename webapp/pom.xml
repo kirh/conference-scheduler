@@ -7,7 +7,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>conference-webapp</artifactId>
+    <groupId>by.epam.tc.conference</groupId>
+    <artifactId>webapp</artifactId>
     <packaging>war</packaging>
     <name>conference-webapp</name>
     <url>http://maven.apache.org</url>
