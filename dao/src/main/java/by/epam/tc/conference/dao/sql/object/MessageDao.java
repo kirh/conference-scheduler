@@ -2,13 +2,12 @@ package by.epam.tc.conference.dao.sql.object;
 
 import by.epam.tc.conference.dao.sql.Executor;
 import by.epam.tc.conference.dao.sql.ResultHandler;
-import by.epam.tc.conference.dao.sql.object.AbstractDao;
 import by.epam.tc.conference.entity.Message;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class MessageDao extends AbstractDao<Long, Message> {
+public class MessageDao extends AbstractDao<Message> {
 
     private static final String UPDATE = "update message set m_text=?, m_q_id=?, m_u_id=? where m_id=?";
     private static final String DELETE = "delete from message where m_id=?";
@@ -16,7 +15,7 @@ public class MessageDao extends AbstractDao<Long, Message> {
     private static final String SELECT_ALL = "select * from message";
     private static final String SAVE = "insert into message (m_text, m_q_id, m_u_id) values(?, ?, ?)";
 
-    public MessageDao(ResultHandler<Message> resultHandler, Executor<Long, Message> executor) {
+    public MessageDao(ResultHandler<Message> resultHandler, Executor<Message> executor) {
         super(resultHandler, executor);
     }
 
@@ -46,28 +45,15 @@ public class MessageDao extends AbstractDao<Long, Message> {
     }
 
     @Override
-    protected void configureUpdateStatement(Message entity, PreparedStatement statement) throws SQLException {
-        statement.setString(0, entity.getText());
-        statement.setLong(1, entity.getQuestionId());
-        statement.setLong(2, entity.getUserId());
-        statement.setLong(3, entity.getId());
+    protected void configureSaveStatement(Message message, PreparedStatement statement) throws SQLException {
+        statement.setString(0, message.getText());
+        statement.setLong(1, message.getQuestionId());
+        statement.setLong(2, message.getUserId());
     }
 
     @Override
-    protected void configureSelectByIdStatement(Long id, PreparedStatement statement) throws SQLException {
-        statement.setLong(0, id);
-    }
-
-    @Override
-    protected void configureSaveStatement(Message entity, PreparedStatement statement) throws SQLException {
-        statement.setString(0, entity.getText());
-        statement.setLong(1, entity.getQuestionId());
-        statement.setLong(2, entity.getUserId());
-    }
-
-    @Override
-    protected void configureDeleteStatement(Message entity, PreparedStatement statement) throws SQLException {
-        statement.setLong(0, entity.getId());
-
+    protected void configureUpdateStatement(Message message, PreparedStatement statement) throws SQLException {
+        configureSaveStatement(message, statement);
+        statement.setLong(3, message.getId());
     }
 }

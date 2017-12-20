@@ -1,6 +1,6 @@
 package by.epam.tc.conference.entity;
 
-public class User implements Identifiable<Long> {
+public class User implements Identifiable {
 
     private Long id;
     private String username;

@@ -1,9 +1,8 @@
 package by.epam.tc.conference.entity;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
-public class Message implements Identifiable<Long> {
+public class Message implements Identifiable {
 
     private Long id;
     private String text;

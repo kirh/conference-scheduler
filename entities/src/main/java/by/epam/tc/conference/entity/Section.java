@@ -1,8 +1,6 @@
 package by.epam.tc.conference.entity;
 
-import java.util.List;
-
-public class Section implements Identifiable<Long> {
+public class Section implements Identifiable {
 
     private Long id;
     private String topic;

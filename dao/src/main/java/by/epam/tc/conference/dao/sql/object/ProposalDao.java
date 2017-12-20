@@ -2,13 +2,12 @@ package by.epam.tc.conference.dao.sql.object;
 
 import by.epam.tc.conference.dao.sql.Executor;
 import by.epam.tc.conference.dao.sql.ResultHandler;
-import by.epam.tc.conference.dao.sql.object.AbstractDao;
 import by.epam.tc.conference.entity.Proposal;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ProposalDao extends AbstractDao<Long, Proposal> {
+public class ProposalDao extends AbstractDao<Proposal> {
 
     private static final String UPDATE = "update proposal set p_title=?, p_description=?, p_s_id=?, p_u_id=?, " +
             "p_status=? where p_id=?";
@@ -18,7 +17,7 @@ public class ProposalDao extends AbstractDao<Long, Proposal> {
     private static final String SAVE = "insert into proposal (p_title, p_description, p_s_id, p_u_id, p_status) " +
             "values(?, ?, ?, ?, ?)";
 
-    public ProposalDao(ResultHandler<Proposal> resultHandler, Executor<Long, Proposal> executor) {
+    public ProposalDao(ResultHandler<Proposal> resultHandler, Executor<Proposal> executor) {
         super(resultHandler, executor);
     }
 
@@ -48,34 +47,18 @@ public class ProposalDao extends AbstractDao<Long, Proposal> {
     }
 
     @Override
-    protected void configureUpdateStatement(Proposal entity, PreparedStatement statement) throws SQLException {
-        statement.setString(0, entity.getTitle());
-        statement.setString(1, entity.getDescription());
-        statement.setLong(2,entity.getSectionId());
-        statement.setLong(3, entity.getParticipantId());
-        String status = entity.getStatus().name();
-        statement.setString(4, status);
-        statement.setLong(5, entity.getId());
-    }
-
-    @Override
-    protected void configureSelectByIdStatement(Long id, PreparedStatement statement) throws SQLException {
-        statement.setLong(0, id);
-    }
-
-    @Override
-    protected void configureSaveStatement(Proposal entity, PreparedStatement statement) throws SQLException {
-        statement.setString(0, entity.getTitle());
-        statement.setString(1, entity.getDescription());
-        statement.setLong(2,entity.getSectionId());
-        statement.setLong(3, entity.getParticipantId());
-        String status = entity.getStatus().name();
+    protected void configureSaveStatement(Proposal proposal, PreparedStatement statement) throws SQLException {
+        statement.setString(0, proposal.getTitle());
+        statement.setString(1, proposal.getDescription());
+        statement.setLong(2,proposal.getSectionId());
+        statement.setLong(3, proposal.getParticipantId());
+        String status = proposal.getStatus().name();
         statement.setString(4, status);
     }
 
     @Override
-    protected void configureDeleteStatement(Proposal entity, PreparedStatement statement) throws SQLException {
-        statement.setLong(0, entity.getId());
-
+    protected void configureUpdateStatement(Proposal proposal, PreparedStatement statement) throws SQLException {
+        configureSaveStatement(proposal, statement);
+        statement.setLong(5, proposal.getId());
     }
 }

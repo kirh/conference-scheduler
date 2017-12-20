@@ -1,6 +1,6 @@
 package by.epam.tc.conference.entity;
 
-public class Proposal implements Identifiable<Long> {
+public class Proposal implements Identifiable {
 
     private Long id;
     private String title;

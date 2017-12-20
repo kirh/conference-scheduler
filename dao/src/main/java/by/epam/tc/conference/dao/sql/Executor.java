@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Executor<K, V> {
+public class Executor<T> {
 
     private final Connection connection;
 
@@ -15,7 +15,7 @@ public class Executor<K, V> {
         this.connection = connection;
     }
 
-    public void executeUpdate(StatementConfigurator<V> configurator, String query, V entity) throws
+    public void executeUpdate(StatementConfigurator<T> configurator, String query, T entity) throws
             DaoException {
         try (PreparedStatement statement = createStatement(query)) {
             configurator.configure(entity, statement);
@@ -25,7 +25,7 @@ public class Executor<K, V> {
         }
     }
 
-    public <T> T execute(StatementConfigurator<K> configurator, String query, Handler<T> resultHandler, K id)
+    public <R> R execute(StatementConfigurator<Long> configurator, String query, Handler<R> resultHandler, Long id)
             throws
             DaoException {
         try (PreparedStatement statement = createStatement(query)) {

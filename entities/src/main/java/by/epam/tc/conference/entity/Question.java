@@ -1,6 +1,6 @@
 package by.epam.tc.conference.entity;
 
-public class Question implements Identifiable<Long> {
+public class Question implements Identifiable {
 
     private Long id;
     private String text;

@@ -1,9 +1,8 @@
 package by.epam.tc.conference.entity;
 
 import java.util.Date;
-import java.util.List;
 
-public class Conference implements Identifiable<Long>{
+public class Conference implements Identifiable {
 
     private Long id;
     private String name;
