@@ -10,12 +10,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.epam.tc.conference</groupId>
-    <artifactId>dao</artifactId>
+    <artifactId>conference-dao</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>by.epam.tc.conference</groupId>
-            <artifactId>entities</artifactId>
+            <artifactId>conference-entities</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>by.epam.tc.conference</groupId>
+            <artifactId>conference-commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

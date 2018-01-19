@@ -1,6 +1,8 @@
 package by.epam.tc.conference.dao;
 
-public class DaoException extends Exception {
+import by.epam.tc.conference.commons.ConferenceException;
+
+public class DaoException extends ConferenceException {
 
     public DaoException(String message) {
         super(message);

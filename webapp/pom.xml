@@ -11,11 +11,15 @@
     <artifactId>webapp</artifactId>
     <packaging>war</packaging>
     <name>conference-webapp</name>
-    <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>by.epam.tc.conference</groupId>
-            <artifactId>dao</artifactId>
+            <artifactId>conference-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>by.epam.tc.conference</groupId>
+            <artifactId>conference-services</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -35,6 +39,26 @@
         </dependency>
     </dependencies>
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>native2ascii-maven-plugin</artifactId>
+                <version>1.0-beta-1</version>
+                <executions>
+                    <execution>
+                        <id>native2ascii-utf8</id>
+                        <goals>
+                            <goal>native2ascii</goal>
+                        </goals>
+                        <configuration>
+                            <encoding>UTF8</encoding>
+                            <includes>local_ru.properties</includes>
+                        </configuration>
+                        <phase>process-resources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
         <finalName>conference-webapp</finalName>
     </build>
 </project>

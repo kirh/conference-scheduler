@@ -1,0 +1,27 @@
+<%@page pageEncoding="UTF-8" %>
+<c:if test="${userPrincipal.admin}">
+    <fmt:message var="locHome" key="home"/>
+    <fmt:message var="locQuestions" key="questions"/>
+    <fmt:message var="locLogout" key="logout"/>
+    <nav>
+        <ul>
+            <li><c:url value="/admin-dashboard" var="dashboard"/>
+                <a href="${dashboard}">
+                    <i class="fa fa-home fa-lg"></i> ${locHome}</a>
+            </li>
+            <li>
+                <c:url value="/question" var="showQuestions">
+                    <c:param name="action" value="showAll"/>
+                </c:url>
+                <a href="${showQuestions}">
+                    <i class="fa fa-question-circle fa-lg" aria-hidden="true"></i> ${locQuestions}
+                </a>
+            </li>
+            <li>
+                <c:url var="logout" value="/logout"/>
+                <a href="${logout}">
+                    <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> ${locLogout}</a>
+            </li>
+        </ul>
+    </nav>
+</c:if>

@@ -1,4 +1,26 @@
+<%@page pageEncoding="UTF-8" %>
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Conference scheduler - ${tittle}</title>
+    <c:url var="styles" value="/static/css/style.css"/>
+    <c:url var="script" value="/static/js/script.js"/>
+    <link rel="stylesheet" href="${styles}"/>
+    <script src="https://use.fontawesome.com/fb0cd42eb1.js"></script>
+    <script src=${script}></script>
+</head>
+<body>
 <header>
     <h1>Conference scheduler</h1>
-    <nav></nav>
+    <select id="language-selector" class="language-selector" onchange="changeToLanguage(this.value)">
+        <c:forEach var="language" items="${applicationScope.languages}">
+        <option value="${language.code}" ${language.code == locale ? "selected" : ""}>${language.displayName}</option>
+        </c:forEach>
+    </select>
 </header>
+<%@include file="admin-navbar.jspf"%>
+<%@include file="user-navbar.jspf"%>

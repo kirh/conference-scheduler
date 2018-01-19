@@ -1,28 +1,137 @@
 @import url('https://fonts.googleapis.com/css?family=Caveat&subset=cyrillic');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
+
+
+html {
+    font-size: 100%;
+}
 
 body {
+    padding-bottom: 4rem;
+}
+
+section {
     margin: auto;
-    max-width: 600px;
+    max-width: 800px;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+a:after {
+    color: inherit;
+}
+
+
+textarea {
+    resize: none;
+}
+
+header, footer {
+    text-align: center;
+    padding: 1em;
+    color: #ffffff;
+    background-color: #08070abb;
 }
 
 header {
-    font-family: 'Caveat', cursive;
-    text-align: center;
-    font-size: 24px;
+    position: relative;
+    height: 250px;
+    background-image: url(../img/header.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
 }
 
-.page-header {
+header::before {
+    top: 0;
+    left: 0;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.4;
+}
+
+footer {
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 0;
+    width: 100%;
+}
+
+header h1 {
+    position: relative;
+    font-family: 'Caveat', cursive;
+    text-shadow: #07130e91 4px 4px 4px;
+    font-size: 4rem;
+    z-index: 1;
+}
+
+.language-selector {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+nav > ul {
     text-align: center;
+}
+
+nav > ul > li {
+    display: inline-block;
+    margin-left: 10px;
+}
+nav > ul > li:hover {
+    color: #09724ffd;
+    cursor: pointer;
 }
 
 table {
+    min-width: 400px;
     border-collapse: separate;
     border-spacing: 0 0.5em;
 }
 
+tr {
+    position: relative;
+}
+
+tr:hover {
+    left: 10px;
+}
+
 td {
-    padding-left: 10px;
+    padding: 10px;
     background-color: #8b94a72c;
+}
+
+tbody  tr:hover td {
+    background-color: #769cc267
+}
+
+.error {
+    color: tomato;
+    font-weight: bolder;
+}
+
+.cell-controls {
+    text-align: right;
+    width: 100px;
+    padding: 0px;
+    margin: 0px;
+    max-width: 100px;
 }
 
 .conference-name {
@@ -33,15 +142,10 @@ td {
     font-style: italic;
 }
 
-a {
-    text-decoration: none;
-}
-
 form {
     max-width: 330px;
     min-width: 180px;
-    margin: 5% auto;
-    position: relative;
+    margin: auto;
 }
 
 .clearfix::after {
@@ -55,6 +159,7 @@ input[type = radio] {
 }
 
 .form-control {
+    box-sizing: border-box;
     display: block;
     margin: 8px 0;
     padding: 5px 20px;
@@ -79,22 +184,30 @@ input[type = radio] {
     box-shadow: 0px 0px 10px #0897608f;
 }
 
+.i-description {
+    min-height: 200px;
+}
+
+a.btn {
+    color: #ffffff;
+}
+
 .btn {
     margin: 5px;
-    padding: 10px 15px;
+    padding: 7px 10px;
     color: #ffffff;
     cursor: pointer;
     border: none;
     background-color: #09724ffd;
-    opacity: 0.8;
+    opacity: 0.75;
     transition: opacity 0.5s;
+    display: inline-block;
 }
 .btn-cancel {
     background-color: #a31e25;
 }
 
 .btn:hover {
-
     opacity: 1;
 }
 
@@ -110,6 +223,28 @@ input[type = radio] {
 
 .container-center {
     text-align: center;
+}
+
+.message-box {
+    position: relative;
+    background-color: #8b94a72c;
+    border-radius: 12px;
+    width: 70%;
+    padding: 10px 10px 25px 10px;
+    margin-bottom: 10px;
+}
+
+.message-info {
+    font-weight: bolder;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+#i-message {
+    display: block;
+    min-width: 300px;
+    height: 50px;
 }
 
 .modal {
