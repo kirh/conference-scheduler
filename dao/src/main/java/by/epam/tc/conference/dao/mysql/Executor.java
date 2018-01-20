@@ -1,25 +1,27 @@
 package by.epam.tc.conference.dao.mysql;
 
 import by.epam.tc.conference.dao.DaoException;
-import by.epam.tc.conference.dao.mysql.connectionpool.ConnectionPoolException;
-import by.epam.tc.conference.dao.mysql.connectionpool.Connector;
+import by.epam.tc.conference.dao.mysql.pool.ConnectionPoolException;
+import by.epam.tc.conference.dao.mysql.pool.Connector;
+import by.epam.tc.conference.dao.mysql.rowmapper.RowMapper;
 import by.epam.tc.conference.entity.Identifiable;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class Executor<T extends Identifiable> {
 
     private final Connector connector;
-    private final ResultHandler<T> resultHandler;
+    private final RowMapper<T> rowMapper;
 
-    public Executor(Connector connector, ResultHandler<T> resultHandler) {
+    public Executor(Connector connector, RowMapper<T> rowMapper) {
         this.connector = connector;
-        this.resultHandler = resultHandler;
+        this.rowMapper = rowMapper;
     }
 
     public void executeUpdate(String query, Object... queryParams) throws
@@ -39,35 +41,47 @@ public class Executor<T extends Identifiable> {
             return getGeneratedId(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Failed to execute update query and get id " + e.getMessage(), e);
+        } finally {
+            connector.closeConnection();
         }
     }
 
     public Optional<T> executeAndFetchOne(String query, Object... queryParams) throws DaoException {
-        return execute(query, resultHandler::fetchOne, queryParams);
+        try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS);
+             ResultSet resultSet = executePrepared(statement)) {
+            if (resultSet.first()) {
+                T object = rowMapper.handle(resultSet);
+                return Optional.of(object);
+            }
+            return Optional.empty();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Failed to execute query " + e.getMessage(), e);
+        } finally {
+            connector.closeConnection();
+        }
     }
 
     public List<T> executeAndFetchAll(String query, Object... queryParams) throws DaoException {
-        return execute(query, resultHandler::fetchAll, queryParams);
+        try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS);
+             ResultSet resultSet = executePrepared(statement)) {
+            List<T> objects = new ArrayList<>();
+            while (resultSet.next()) {
+                T object = rowMapper.handle(resultSet);
+                objects.add(object);
+            }
+            return objects;
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Failed to execute query " + e.getMessage(), e);
+        }
     }
 
-    private Long getGeneratedId(PreparedStatement statement) throws DaoException, SQLException {
+    private Long getGeneratedId(PreparedStatement statement) throws SQLException {
         try (ResultSet keysResultSet = statement.getGeneratedKeys()) {
             if (keysResultSet.next()) {
                 int id = keysResultSet.getInt(1);
                 return Integer.toUnsignedLong(id);
             }
-            throw new DaoException("No generated key found in column ");
-        }
-    }
-
-    private <R> R execute(String query, ResultSetHandler<R> handler, Object... queryParams) throws DaoException {
-        try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS);
-             ResultSet resultSet = executePrepared(statement)) {
-            return handler.handle(resultSet);
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Failed to execute query: " + e.getMessage(), e);
-        } finally {
-            connector.closeConnection();
+            throw new SQLException("No generated key found");
         }
     }
 
