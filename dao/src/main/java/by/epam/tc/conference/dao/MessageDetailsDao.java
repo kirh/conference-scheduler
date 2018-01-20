@@ -1,6 +1,5 @@
-package by.epam.tc.conference.dao.mysql;
+package by.epam.tc.conference.dao;
 
-import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dto.MessageDetails;
 
 import java.util.List;

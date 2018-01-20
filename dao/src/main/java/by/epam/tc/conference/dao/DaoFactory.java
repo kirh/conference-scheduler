@@ -1,8 +1,6 @@
 package by.epam.tc.conference.dao;
 
-import by.epam.tc.conference.dao.mysql.MessageDetailsDao;
 import by.epam.tc.conference.dao.mysql.MysqlDaoFactory;
-import by.epam.tc.conference.dto.ProposalDetails;
 
 public abstract class DaoFactory {
 

@@ -1,9 +1,9 @@
-package by.epam.tc.conference.dao.mysql;
+package by.epam.tc.conference.dao.mysql.impl;
 
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.TransactionManager;
-import by.epam.tc.conference.dao.mysql.connectionpool.ConnectionPoolException;
-import by.epam.tc.conference.dao.mysql.connectionpool.Connector;
+import by.epam.tc.conference.dao.mysql.pool.ConnectionPoolException;
+import by.epam.tc.conference.dao.mysql.pool.Connector;
 
 import java.sql.SQLException;
 

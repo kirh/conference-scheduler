@@ -2,7 +2,7 @@ package by.epam.tc.conference.dao.mysql.impl;
 
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.mysql.Executor;
-import by.epam.tc.conference.dao.mysql.MessageDetailsDao;
+import by.epam.tc.conference.dao.MessageDetailsDao;
 import by.epam.tc.conference.dto.MessageDetails;
 
 import java.util.List;
