@@ -16,26 +16,12 @@ public class QuestionDetailsRowMapper implements RowMapper<QuestionDetails> {
 
     @Override
     public QuestionDetails handle(ResultSet resultSet) throws SQLException {
-        QuestionDetails questionDetails = new QuestionDetails();
-
         long id = resultSet.getLong(ID);
-        questionDetails.setId(id);
-
         String text = resultSet.getString(TEXT);
-        questionDetails.setTitle(text);
-
         long userId = resultSet.getLong(USER_ID);
-        questionDetails.setUserId(userId);
-
         long conferenceId = resultSet.getLong(CONFERENCE_ID);
-        questionDetails.setConferenceId(conferenceId);
-
         String username = resultSet.getString(USERNAME);
-        questionDetails.setUsername(username);
-
         String conferenceName = resultSet.getString(CONFERENCE_NAME);
-        questionDetails.setConferenceName(conferenceName);
-
-        return questionDetails;
+        return new QuestionDetails(id, text, userId, conferenceId, username, conferenceName);
     }
 }

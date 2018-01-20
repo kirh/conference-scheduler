@@ -17,29 +17,13 @@ public class UserRowMapper implements RowMapper<User> {
 
     @Override
     public User handle(ResultSet resultSet) throws SQLException {
-        User user = new User();
-
         long id = resultSet.getLong(ID);
-        user.setId(id);
-
         String username = resultSet.getString(USERNAME);
-        user.setUsername(username);
-
         String password = resultSet.getString(PASSWORD);
-        user.setPassword(password);
-
         String email = resultSet.getString(EMAIL);
-        user.setEmail(email);
-
         String firstName = resultSet.getString(FIRST_NAME);
-        user.setFirstName(firstName);
-
         String lastName = resultSet.getString(LAST_NAME);
-        user.setLastName(lastName);
-
         boolean isAdmin = resultSet.getBoolean(IS_ADMIN);
-        user.setAdmin(isAdmin);
-
-        return user;
+        return new User(id, username, password, email, firstName, lastName, isAdmin);
     }
 }

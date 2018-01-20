@@ -16,29 +16,13 @@ public class MessageDetailRowMapper implements RowMapper<MessageDetails> {
 
     @Override
     public MessageDetails handle(ResultSet resultSet) throws SQLException {
-        MessageDetails messageDetails = new MessageDetails();
-
         long id = resultSet.getLong(ID);
-        messageDetails.setId(id);
-
         String text = resultSet.getString(TEXT);
-        messageDetails.setText(text);
-
         long questionId = resultSet.getLong(QUESTION_ID);
-        messageDetails.setQuestionId(questionId);
-
         long userId = resultSet.getLong(USER_ID);
-        messageDetails.setUserId(userId);
-
         Timestamp createTime = resultSet.getTimestamp(CREATE_TIME);
-        messageDetails.setCreateTime(createTime);
-
         String username = resultSet.getString("u_username");
-        messageDetails.setUsername(username);
-
         boolean sendByAdmin = resultSet.getBoolean("u_is_admin");
-        messageDetails.setSendByAdmin(sendByAdmin);
-
-        return messageDetails;
+        return new MessageDetails(id, text, questionId, userId, username, sendByAdmin);
     }
 }

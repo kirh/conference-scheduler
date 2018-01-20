@@ -17,27 +17,13 @@ public class ProposalRowMapper implements RowMapper<Proposal> {
 
     @Override
     public Proposal handle(ResultSet resultSet) throws SQLException {
-        Proposal proposal = new Proposal();
-
         long id = resultSet.getLong(ID);
-        proposal.setId(id);
-
         String title = resultSet.getString(TITLE);
-        proposal.setTitle(title);
-
         String description = resultSet.getString(DESCRIPTION);
-        proposal.setDescription(description);
-
         long participantId = resultSet.getLong(PARTICIPANT_ID);
-        proposal.setParticipantId(participantId);
-
         long sectionId = resultSet.getLong(SECTION_ID);
-        proposal.setSectionId(sectionId);
-
         String statusLine = resultSet.getString(STATUS);
         ProposalStatus status = ProposalStatus.valueOf(statusLine.toUpperCase());
-        proposal.setStatus(status);
-
-        return proposal;
+        return new Proposal(id, title, description, sectionId, participantId, status);
     }
 }

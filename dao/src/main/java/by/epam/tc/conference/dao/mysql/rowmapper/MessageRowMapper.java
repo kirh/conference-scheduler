@@ -16,23 +16,11 @@ public class MessageRowMapper implements RowMapper<Message> {
 
     @Override
     public Message handle(ResultSet resultSet) throws SQLException {
-        Message message = new Message();
-
         long id = resultSet.getLong(ID);
-        message.setId(id);
-
         String text = resultSet.getString(TEXT);
-        message.setText(text);
-
         long questionId = resultSet.getLong(QUESTION_ID);
-        message.setQuestionId(questionId);
-
         long userId = resultSet.getLong(USER_ID);
-        message.setUserId(userId);
-
         Timestamp createTime = resultSet.getTimestamp(CREATE_TIME);
-        message.setCreateTime(createTime);
-
-        return message;
+        return new Message(id, text, questionId, userId);
     }
 }

@@ -15,10 +15,11 @@ import java.sql.SQLException;
 public interface RowMapper<T extends Identifiable> {
 
     /**
-     *
+     * Maps ResultSet row to identifiable object
      * @param resultSet with cursor in a row containing object parameters to map
      * @return result
-     * @throws SQLException
+     * @throws SQLException if the columnLabel is not valid; if a database access error
+     * occurs or this method is called on a closed result set
      */
 
     T handle(ResultSet resultSet) throws SQLException;

@@ -17,20 +17,10 @@ public class QuestionRowMapper implements RowMapper<Question> {
 
     @Override
     public Question handle(ResultSet resultSet) throws SQLException {
-        Question question = new Question();
-
         long id = resultSet.getLong(ID);
-        question.setId(id);
-
         String text = resultSet.getString(TEXT);
-        question.setTitle(text);
-
         long userId = resultSet.getLong(USER_ID);
-        question.setUserId(userId);
-
         long conferenceId = resultSet.getLong(CONFERENCE_ID);
-        question.setConferenceId(conferenceId);
-
-        return question;
+        return new Question(id, text, userId, conferenceId);
     }
 }

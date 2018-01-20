@@ -13,17 +13,9 @@ public class SectionRowMapper implements RowMapper<Section> {
 
     @Override
     public Section handle(ResultSet resultSet) throws SQLException {
-        Section section = new Section();
-
         long id = resultSet.getLong(ID);
-        section.setId(id);
-
         String topic = resultSet.getString(TOPIC);
-        section.setTopic(topic);
-
         long conferenceId = resultSet.getLong(CONFERENCE_ID);
-        section.setConferenceId(conferenceId);
-
-        return section;
+        return new Section(id, topic, conferenceId);
     }
 }

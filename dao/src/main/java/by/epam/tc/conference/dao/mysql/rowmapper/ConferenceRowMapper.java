@@ -16,26 +16,12 @@ public class ConferenceRowMapper implements RowMapper<Conference> {
 
     @Override
     public Conference handle(ResultSet resultSet) throws SQLException {
-        Conference conference = new Conference();
-
         long id = resultSet.getLong(ID);
-        conference.setId(id);
-
         String name = resultSet.getString(NAME);
-        conference.setName(name);
-
         String description = resultSet.getString("c_description");
-        conference.setDescription(description);
-
         String address = resultSet.getString(ADDRESS);
-        conference.setAddress(address);
-
-        long administratorId = resultSet.getLong(ADMINISTRATOR_ID);
-        conference.setAdministratorId(administratorId);
-
         Date date = resultSet.getDate(DATE);
-        conference.setDate(date);
-
-        return conference;
+        long administratorId = resultSet.getLong(ADMINISTRATOR_ID);
+        return new Conference(id, name, description, address, date, administratorId);
     }
 }
