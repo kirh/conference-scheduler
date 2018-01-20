@@ -21,6 +21,9 @@
                     <c:param name="id" value="${conference.id}"/>
                 </c:url>
                     <td class="conference-name"><a href="${showConference}">${conference.name}</a></td>
+                <td>
+                    <a href="${showConference}"> <fmt:formatDate value="${conference.date}"/></a>
+                </td>
 
                 <td class="cell-controls">
                     <c:url var="editConference" value="/conference">

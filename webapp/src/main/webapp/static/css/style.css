@@ -128,19 +128,36 @@ table tr {
     padding: .35em;
 }
 
-table th {
-    border: none;
-    background-color: #ffffff;
-}
 table th,
 table td {
     padding: .625em;
+    text-align: left;
+}
+
+table th {
+    border: none;
+    background-color: #ffffff;
     text-align: center;
+}
+
+td a{
+    width:auto;
+    height: auto;
+    display:block;
 }
 table th {
     font-size: .85em;
     letter-spacing: .1em;
     text-transform: uppercase;
+}
+
+#questions td {
+    text-align: center;
+}
+
+#conferences td + td {
+    text-align: center;
+
 }
 
 .cell-controls {
@@ -203,7 +220,6 @@ table th {
         width: auto;
         text-align: center;
     }
-
 }
 
 
@@ -232,8 +248,8 @@ tbody  tr:hover td {
 }
 
 .error {
-
-    color: tomato;
+    margin-top: 30px;
+    font-size: 1.5rem;
     font-weight: bolder;
 }
 

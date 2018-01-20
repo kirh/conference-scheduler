@@ -16,7 +16,7 @@ public class UserRowMapper implements RowMapper<User> {
     private static final String IS_ADMIN = "u_is_admin";
 
     @Override
-    public User handle(ResultSet resultSet) throws SQLException {
+    public User map(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ID);
         String username = resultSet.getString(USERNAME);
         String password = resultSet.getString(PASSWORD);

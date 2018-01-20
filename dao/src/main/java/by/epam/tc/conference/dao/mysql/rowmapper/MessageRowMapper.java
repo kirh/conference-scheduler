@@ -15,7 +15,7 @@ public class MessageRowMapper implements RowMapper<Message> {
     private static final String CREATE_TIME = "m_create_time";
 
     @Override
-    public Message handle(ResultSet resultSet) throws SQLException {
+    public Message map(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ID);
         String text = resultSet.getString(TEXT);
         long questionId = resultSet.getLong(QUESTION_ID);

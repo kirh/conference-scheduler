@@ -33,11 +33,15 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${proposals}" var="proposal">
+                    <c:url var="showProposal" value="/proposal">
+                    <c:param name="action" value="show"/>
+                    <c:param name="id" value="${proposal.id}"/>
+                </c:url>
                     <tr>
-                        <td class="conference-name">${proposal.title}</td>
-                        <td>${proposal.conferenceName}</td>
-                        <td>${proposal.sectionName}</td>
-                        <td>${proposal.status}</td>
+                        <td class="conference-name"><a href="${showProposal}">${proposal.title}</a></td>
+                        <td><a href="${showProposal}">${proposal.conferenceName}</a></td>
+                        <td><a href="${showProposal}">${proposal.sectionName}</a></td>
+                        <td><a href="${showProposal}">${proposal.status}</a></td>
                         <td>
                             <c:url var="deleteProposal" value="/proposal">
                                 <c:param name="action" value="delete"/>

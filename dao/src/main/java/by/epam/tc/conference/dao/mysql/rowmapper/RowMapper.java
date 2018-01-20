@@ -22,5 +22,5 @@ public interface RowMapper<T extends Identifiable> {
      * occurs or this method is called on a closed result set
      */
 
-    T handle(ResultSet resultSet) throws SQLException;
+    T map(ResultSet resultSet) throws SQLException;
 }

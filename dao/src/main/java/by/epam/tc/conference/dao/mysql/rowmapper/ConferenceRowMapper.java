@@ -15,7 +15,7 @@ public class ConferenceRowMapper implements RowMapper<Conference> {
     private static final String DATE = "c_datetime";
 
     @Override
-    public Conference handle(ResultSet resultSet) throws SQLException {
+    public Conference map(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ID);
         String name = resultSet.getString(NAME);
         String description = resultSet.getString("c_description");

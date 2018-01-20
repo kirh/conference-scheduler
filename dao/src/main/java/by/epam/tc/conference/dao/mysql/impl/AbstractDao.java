@@ -50,7 +50,7 @@ public abstract class AbstractDao<T extends Identifiable> implements GenericDao<
     }
 
     @Override
-    public List<T> findAll(int perPage, int page) throws DaoException {
+    public List<T> findByPage(int perPage, int page) throws DaoException {
         if (page < 1 || perPage < 1) {
             throw new IllegalArgumentException("page and perPage parameters must be above zero");
         }

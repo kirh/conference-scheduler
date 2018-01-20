@@ -13,6 +13,7 @@
     <h2 class="page-header">${proposal.title}</h2>
     <p>${proposal.description}</p>
     <p>${locStatus}: ${proposal.status}</p>
+    <c:if test="${userPrincipal.admin}">
     <c:url var="updateStatus" value="/proposal">
         <c:param name="action" value="update"/>
         <c:param name="id" value="${proposal.id}"/>
@@ -23,6 +24,7 @@
     <button class="btn btn-cancel" type="button" onclick="confirmAndRedirect('${updateStatus}&status=rejected')">
         <i class="fa fa-ban" title="${locReject}"></i>
     </button>
+    </c:if>
 </section>
 
 <%@include file="fragment/footer.jspf" %>

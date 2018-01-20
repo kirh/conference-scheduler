@@ -16,7 +16,7 @@ public class ProposalDetailsRowMapper implements RowMapper<ProposalDetails>{
     private static final String STATUS = "p_status";
 
     @Override
-    public ProposalDetails handle(ResultSet resultSet) throws SQLException {
+    public ProposalDetails map(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ID);
         String title = resultSet.getString(TITLE);
         String username = resultSet.getString(USERNAME);

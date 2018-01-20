@@ -50,7 +50,7 @@ public class Executor<T extends Identifiable> {
         try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS);
              ResultSet resultSet = executePrepared(statement)) {
             if (resultSet.first()) {
-                T object = rowMapper.handle(resultSet);
+                T object = rowMapper.map(resultSet);
                 return Optional.of(object);
             }
             return Optional.empty();
@@ -66,7 +66,7 @@ public class Executor<T extends Identifiable> {
              ResultSet resultSet = executePrepared(statement)) {
             List<T> objects = new ArrayList<>();
             while (resultSet.next()) {
-                T object = rowMapper.handle(resultSet);
+                T object = rowMapper.map(resultSet);
                 objects.add(object);
             }
             return objects;

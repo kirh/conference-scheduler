@@ -16,7 +16,7 @@ public class QuestionRowMapper implements RowMapper<Question> {
     private static final String CONFERENCE_ID = "q_c_id";
 
     @Override
-    public Question handle(ResultSet resultSet) throws SQLException {
+    public Question map(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ID);
         String text = resultSet.getString(TEXT);
         long userId = resultSet.getLong(USER_ID);

@@ -12,7 +12,7 @@ public class SectionRowMapper implements RowMapper<Section> {
     private static final String CONFERENCE_ID = "s_c_id";
 
     @Override
-    public Section handle(ResultSet resultSet) throws SQLException {
+    public Section map(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ID);
         String topic = resultSet.getString(TOPIC);
         long conferenceId = resultSet.getLong(CONFERENCE_ID);

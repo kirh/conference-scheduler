@@ -10,15 +10,16 @@
 <fmt:message var="locQuestion" key="question"/>
 <fmt:message var="locConference" key="conference"/>
 <fmt:message var="locFrom" key="from"/>
+    <fmt:message var="locQuestions" key="questions"/>
 
 <section>
-    <h2>Questions</h2>
+    <h2>${locQuestions}</h2>
     <c:choose>
         <c:when test="${empty questions}">
             ${locNoQuestions}
         </c:when>
         <c:otherwise>
-            <table class="center">
+            <table id="questions">
                 <thead>
                 <tr>
                     <th>${locQuestion}</th>
@@ -36,9 +37,9 @@
                     </c:url>
                     <tr>
                         <td class="conference-name"><a href="${showQuestion}">${question.title}</a></td>
-                        <td>${question.conferenceName}</td>
+                        <td><a href="${showQuestion}">${question.conferenceName}</a></td>
                         <c:if test="${userPrincipal.admin}">
-                            <td>${question.username}</td>
+                            <td><a href="${showQuestion}">${question.username}</a></td>
                         </c:if>
                     </tr>
                 </c:forEach>

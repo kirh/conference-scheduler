@@ -10,6 +10,7 @@
 <fmt:message key="password" var="locPassword"/>
 <fmt:message key="signin" var="locSignIn"/>
 <fmt:message key="signup" var="locSignUp"/>
+    <fmt:message key="login" var="locLogin"/>
 
 <c:url value="/login" var="process">
     <c:param name="action" value="process"/>

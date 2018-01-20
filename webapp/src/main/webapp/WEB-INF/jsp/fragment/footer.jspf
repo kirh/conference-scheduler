@@ -1,6 +1,6 @@
 <%@page pageEncoding="UTF-8" %>
 <footer>
-    Epam Java Web Development training 2018
+    Java Web Development training 2018
 </footer>
 </body>
 </html>
