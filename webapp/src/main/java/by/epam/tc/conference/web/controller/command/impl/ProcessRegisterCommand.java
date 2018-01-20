@@ -6,36 +6,24 @@ import by.epam.tc.conference.services.ServiceException;
 import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.helper.UserBuilder;
+import by.epam.tc.conference.web.controller.command.helper.Builder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class RegisterCommand extends AbstractCommand {
-
-    private final UserBuilder userBuilder;
+public class ProcessRegisterCommand extends AbstractCommand {
     private final UserService userService;
+    private final Builder<? extends User> builder;
 
-    public RegisterCommand(UserBuilder userBuilder, UserService userService) {
-        this.userBuilder = userBuilder;
+    public ProcessRegisterCommand(UserService userService, Builder<? extends User> builder) {
         this.userService = userService;
+        this.builder = builder;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        String action = request.getParameter("action");
-        String query;
-        if ("process".equals(action)) {
-            query = register(request, response);
-        } else {
-            query = "register";
-        }
-        return query;
-    }
-
-    private String register(HttpServletRequest request, HttpServletResponse response) {
-        User user = userBuilder.build(request);
+        User user = builder.build(request);
         UserPrincipal userPrincipal = null;
         String query;
         try {

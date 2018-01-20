@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServletRequest;
 
 public class UserBuilder implements Builder<User> {
 
-    private static final String USERNAME = "username";
-    private static final String PASSWORD = "password";
-    private static final String EMAIL = "email";
-    private static final String FIRST_NAME = "firstName";
-    private static final String LAST_NAME = "lastName";
-    private static final String IS_ADMIN = "admin";
+    private static final String USERNAME_PARAM = "username";
+    private static final String PASSWORD_PARAM = "password";
+    private static final String EMAIL_PARAM = "email";
+    private static final String FIRST_NAME_PARAM = "firstName";
+    private static final String LAST_NAME_PARAM = "lastName";
+    private static final String IS_ADMIN_PARAM = "admin";
 
     public User build(HttpServletRequest request) {
-        String username = request.getParameter(USERNAME);
-        String password = request.getParameter(PASSWORD);
+        String username = request.getParameter(USERNAME_PARAM);
+        String password = request.getParameter(PASSWORD_PARAM);
         String hashedPassword = Md5Util.encode(password);
-        String email = request.getParameter(EMAIL);
-        String firstName = request.getParameter(FIRST_NAME);
-        String lastName = request.getParameter(LAST_NAME);
-        String isAdminLine = request.getParameter(IS_ADMIN);
+        String email = request.getParameter(EMAIL_PARAM);
+        String firstName = request.getParameter(FIRST_NAME_PARAM);
+        String lastName = request.getParameter(LAST_NAME_PARAM);
+        String isAdminLine = request.getParameter(IS_ADMIN_PARAM);
         Boolean isAdmin = Boolean.valueOf(isAdminLine);
         return new User(username, hashedPassword, email, firstName, lastName, isAdmin);
     }

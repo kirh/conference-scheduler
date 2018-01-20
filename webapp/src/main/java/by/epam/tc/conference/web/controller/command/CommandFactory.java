@@ -8,5 +8,5 @@ public abstract class CommandFactory {
         return FACTORY;
     }
 
-    public abstract Command getCommand(String path);
+    public abstract Command getCommand(String command);
 }

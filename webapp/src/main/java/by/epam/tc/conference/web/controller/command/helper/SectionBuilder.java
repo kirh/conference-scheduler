@@ -6,12 +6,16 @@ import javax.servlet.http.HttpServletRequest;
 
 public class SectionBuilder extends AbstractBuilder<Section> {
 
+    public static final String ID_PARAM = "id";
+    public static final String TOPIC_PARAM = "topic";
+    public static final String CONFERENCE_ID_PARAM = "conferenceId";
+
     @Override
     public Section build(HttpServletRequest request) {
-        String idString = request.getParameter("id");
+        String idString = request.getParameter(ID_PARAM);
         Long id = parseId(idString);
-        String topic = request.getParameter("topic");
-        String conferenceIdString = request.getParameter("conferenceId");
+        String topic = request.getParameter(TOPIC_PARAM);
+        String conferenceIdString = request.getParameter(CONFERENCE_ID_PARAM);
         Long conferenceId = parseId(conferenceIdString);
         return new Section(id, topic, conferenceId);
     }
