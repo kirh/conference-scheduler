@@ -1,8 +1,6 @@
-package by.epam.tc.conference.dao.mysql.connectionpool;
+package by.epam.tc.conference.dao.mysql.pool;
 
 public class ConnectionPoolInitializationException extends RuntimeException {
-
-
 
     public ConnectionPoolInitializationException(String message) {
         super(message);

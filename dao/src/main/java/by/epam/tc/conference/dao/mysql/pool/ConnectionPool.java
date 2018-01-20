@@ -1,4 +1,4 @@
-package by.epam.tc.conference.dao.mysql.connectionpool;
+package by.epam.tc.conference.dao.mysql.pool;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.logging.log4j.LogManager;
@@ -9,19 +9,38 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.locks.ReentrantLock;
 
 public final class ConnectionPool {
 
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
-
     private static final String VALIDATION_QUERY = "/* ping */ SELECT 1";
+    private static final ReentrantLock lock = new ReentrantLock();
+    private volatile static ConnectionPool INSTANCE;
 
-    private MysqlDataSource dataSource = new MysqlDataSource();
+    private final MysqlDataSource dataSource = new MysqlDataSource();
+    private final ThreadLocal<Connection> localConnection = new ThreadLocal<>();
     private BlockingQueue<Connection> availableConnections;
     private BlockingQueue<Connection> givenAwayConnections;
 
-    public ConnectionPool() throws ConnectionPoolException {
-        init();
+    private ConnectionPool() {
+
+    }
+
+    public static ConnectionPool getInstance() {
+        if (INSTANCE == null) {
+            try {
+                lock.lock();
+                if (INSTANCE == null) {
+                    ConnectionPool pool = new ConnectionPool();
+                    pool.init();
+                    INSTANCE = pool;
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+        return INSTANCE;
     }
 
     private void init() {
@@ -46,7 +65,11 @@ public final class ConnectionPool {
     }
 
     public Connection takeConnection() throws ConnectionPoolException {
-        Connection connection = takeFromAvailable();
+        Connection connection = localConnection.get();
+        if (connection == null) {
+            connection = takeFromAvailable();
+            localConnection.set(connection);
+        }
 
         if (validateConnection(connection)) {
             return connection;
@@ -54,12 +77,14 @@ public final class ConnectionPool {
 
         Connection newConnection = createConnection();
         replaceGivenAwayConnection(connection, newConnection);
+        localConnection.set(connection);
         return newConnection;
     }
 
     public void putConnection(Connection connection) {
         boolean removed = givenAwayConnections.remove(connection);
         if (removed) {
+            localConnection.remove();
             availableConnections.add(connection);
         }
     }

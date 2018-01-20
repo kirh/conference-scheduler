@@ -1,4 +1,4 @@
-package by.epam.tc.conference.dao.mysql.connectionpool;
+package by.epam.tc.conference.dao.mysql.pool;
 
 public class ConnectionPoolException extends Exception {
     public ConnectionPoolException() {
