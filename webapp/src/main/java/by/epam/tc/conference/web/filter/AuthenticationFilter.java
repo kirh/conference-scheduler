@@ -21,6 +21,7 @@ public class AuthenticationFilter implements Filter {
     private static final String LOGIN_PAGE = "/login";
     private static final String SIGN_UP_PAGE = "/register";
     private static final String STATIC_PREFIX = "/static/";
+    public static final String CHANGE_LOCALE = "/change-locale";
     private Set<String> uriWhiteSet;
 
     @Override
@@ -29,7 +30,7 @@ public class AuthenticationFilter implements Filter {
         HashSet<String> set = new HashSet<>();
         set.add(LOGIN_PAGE);
         set.add(SIGN_UP_PAGE);
-        set.add("/change-locale");
+        set.add(CHANGE_LOCALE);
         uriWhiteSet = Collections.unmodifiableSet(set);
     }
 
@@ -43,7 +44,11 @@ public class AuthenticationFilter implements Filter {
         if (user == null && !uriWhiteSet.contains(uri) && !uri.startsWith(STATIC_PREFIX)) {
             ((HttpServletResponse) response).sendRedirect(LOGIN_PAGE);
         } else {
+            if (user != null) {
+                populateThreadContext(user);
+            }
             chain.doFilter(request, response);
+            ThreadContext.clearMap();
         }
     }
 
@@ -53,6 +58,7 @@ public class AuthenticationFilter implements Filter {
         ThreadContext.put("username", user.getUsername());
         String role = user.isAdmin() ? "admin" : "participant";
         ThreadContext.put("role", role);
+
     }
 
     private String getUri(HttpServletRequest request) {
