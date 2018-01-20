@@ -22,7 +22,6 @@
             <table class="center">
                 <tr>
                     <th>${locName}</th>
-                    <th>${locDescription}</th>
                     <th>${locDate}</th>
                 </tr>
                 <tbody>

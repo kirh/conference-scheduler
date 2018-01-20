@@ -55,8 +55,8 @@ public class QuestionServiceImpl implements QuestionService {
         try {
             Optional<Question> optionalQuestion = questionDao.findById(id);
             Question question = optionalQuestion.orElseThrow(() ->
-                    new ServiceException("Not Found Question id=" + id));
-            logger.info("Conference id={} returned", id);
+                    new ServiceException("Not Found question id=" + id));
+            logger.info("conference id={} returned", id);
             return question;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);

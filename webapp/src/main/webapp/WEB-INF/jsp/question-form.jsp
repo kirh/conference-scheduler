@@ -18,7 +18,7 @@
         <c:param name="action" value="process"/>
     </c:url>
     <form class="clearfix" action="${addQuestion}" method="post">
-        <input type="hidden" name="conferenceId" value="${fn:escapeXml(param.conferenceId)}"/>
+        <input type="hidden" name="conferenceId" value="${fn:escapeXml(param.conferenceId)}" required/>
         <label for="i-q-title">${locTitle}:</label>
         <input class="form-control" id="i-q-title" type="text" name="title" required/>
         <label for="i-q-text">${locQuestion}:</label>

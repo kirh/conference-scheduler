@@ -74,7 +74,7 @@ public class ProposalServiceImpl implements ProposalService {
             Proposal proposal = optionalProposal.orElseThrow(() ->
                     new ServiceException("There is no conference with id=" + id)
             );
-            logger.info("Conference with id={} returned");
+            logger.info("conference with id={} returned");
             return proposal;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);

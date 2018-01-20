@@ -2,7 +2,7 @@ package by.epam.tc.conference.services.impl;
 
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.MessageDao;
-import by.epam.tc.conference.dao.mysql.MessageDetailsDao;
+import by.epam.tc.conference.dao.MessageDetailsDao;
 import by.epam.tc.conference.dto.MessageDetails;
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.services.MessageService;

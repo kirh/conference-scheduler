@@ -8,8 +8,8 @@
 <%@include file="fragment/header.jspf" %>
 <fmt:message key="${errorKey}" var="locErrorMessage"/>
 <fmt:message var="locInternalError" key="error.internal"/>
-<section>
-    <span class="error container-center">
+<section class="container-center">
+    <span class="error">
         <c:choose>
             <c:when test="${not empty exception}">
                 ${locInternalError}

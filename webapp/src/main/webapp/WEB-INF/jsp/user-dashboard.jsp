@@ -28,6 +28,7 @@
                     <th>${locConference}</th>
                     <th>${locSection}</th>
                     <th>${locStatus}</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>

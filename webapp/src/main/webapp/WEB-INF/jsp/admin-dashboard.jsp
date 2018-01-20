@@ -6,7 +6,6 @@
 
 <%@include file="fragment/header.jspf" %>
 <fmt:message var="locAdminDashboardHeader" key="admin.dashboard.header"/>
-<fmt:message var="locName" key="admin.dashboard.col.name"/>
 <fmt:message var="locEdit" key="edit"/>
 <fmt:message var="locDelete" key="delete"/>
 <fmt:message var="locAddConference" key="admin.dashboard.addconference"/>
@@ -14,9 +13,6 @@
 <section>
     <h2 class="page-header">${locAdminDashboardHeader}</h2>
     <table class="center">
-        <tr>
-            <th>${locName}</th>
-        </tr>
         <tbody>
         <c:forEach items="${conferences}" var="conference">
             <tr>
@@ -51,7 +47,7 @@
         <c:url value="/conference" var="conferenceLink">
             <c:param name="action" value="add"/>
         </c:url>
-        <a class="btn" href="${conferenceLink}">${locAddConference}</a>
+        <a class="btn btn-large" href="${conferenceLink}">${locAddConference}</a>
     </div>
 </section>
 

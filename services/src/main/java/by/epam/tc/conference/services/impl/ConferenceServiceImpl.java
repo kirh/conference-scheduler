@@ -68,7 +68,7 @@ public class ConferenceServiceImpl implements ConferenceService {
             Conference conference = optionalConference.orElseThrow(() ->
                     new ServiceException("There is no conference with id=" + id)
             );
-            logger.debug("Conference with id={} returned", id);
+            logger.debug("conference with id={} returned", id);
             return conference;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);

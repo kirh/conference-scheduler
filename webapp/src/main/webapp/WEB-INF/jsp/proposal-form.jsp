@@ -25,7 +25,7 @@
         <input type="title" class="form-control" id="i-p-title" name="title" required/>
         <label for="i-p-description">${locDescription}:</label>
         <textarea name="description" class="form-control i-description" id="i-p-description" required></textarea>
-        <input type="hidden" name="sectionId" value="${param.sectionId}">
+        <input type="hidden" name="sectionId" value="${param.sectionId}" required>
         <button type="button" class="btn btn-cancel left" onclick="goToPreviousPage()">${locCancel}</button>
         <input type="submit" class="btn right" value="${locSave}"/>
     </form>

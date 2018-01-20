@@ -13,62 +13,93 @@ import by.epam.tc.conference.entity.*;
 
 public class MysqlDaoFactory extends DaoFactory {
 
-    private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
+    private final ConferenceDao conferenceDao;
+    private final UserDao userDao;
+    private final SectionDao sectionDao;
+    private final ProposalDao proposalDao;
+    private final ProposalDetailsDao proposalDetailsDao;
+    private final QuestionDao questionDao;
+    private final QuestionDetailsDao questionDetailsDao;
+    private final MessageDao messageDao;
+    private final MessageDetailsDao messageDetailsDao;
+    private final TransactionManager transactionManager;
 
-    private final Connector connector = new ConnectorImpl(connectionPool);
+    public MysqlDaoFactory() {
+
+        final ConnectionPool connectionPool = ConnectionPool.getInstance();
+        final Connector connector = new ConnectorImpl(connectionPool);
+
+        Executor<Conference> conferenceExecutor = new Executor<>(connector, new ConferenceRowMapper());
+        conferenceDao = new ConferenceDaoImpl(conferenceExecutor);
+
+        Executor<User> userExecutor = new Executor<>(connector, new UserRowMapper());
+        userDao = new UserDaoImpl(userExecutor);
+
+        Executor<Section> sectionExecutor = new Executor<>(connector, new SectionRowMapper());
+        sectionDao = new SectionDaoImpl(sectionExecutor);
+
+        Executor<Proposal> proposalExecutor = new Executor<>(connector, new ProposalRowMapper());
+        proposalDao = new ProposalDaoImpl(proposalExecutor);
+
+        Executor<Question> questionExecutor = new Executor<>(connector, new QuestionRowMapper());
+        questionDao = new QuestionDaoImpl(questionExecutor);
+
+        Executor<Message> messageExecutor = new Executor<>(connector, new MessageRowMapper());
+        messageDao = new MessageDaoImpl(messageExecutor);
+
+        Executor<MessageDetails> messageDetailsExecutor = new Executor<>(connector, new MessageDetailRowMapper());
+        messageDetailsDao = new MessageDetailsDaoImpl(messageDetailsExecutor);
+
+        Executor<QuestionDetails> questionDetailsExecutor = new Executor<>(connector, new QuestionDetailsRowMapper());
+        questionDetailsDao = new QuestionDetailsDaoImpl(questionDetailsExecutor);
+
+        Executor<ProposalDetails> proposalDetailsExecutor = new Executor<>(connector, new ProposalDetailsRowMapper());
+        proposalDetailsDao = new ProposalDetailsDaoImpl(proposalDetailsExecutor);
+
+        transactionManager = new TransactionManagerImpl(connector);
+    }
 
     public ConferenceDao getConferenceDao() {
-        Executor<Conference> conferenceExecutor = new Executor<>(connector, new ConferenceRowMapper());
-        return new ConferenceDaoImpl(conferenceExecutor);
+        return conferenceDao;
     }
 
     public UserDao getUserDao() {
-        Executor<User> userExecutor = new Executor<>(connector, new UserRowMapper());
-        return new UserDaoImpl(userExecutor);
+        return userDao;
     }
 
     public SectionDao getSectionDao() {
-        Executor<Section> sectionExecutor = new Executor<>(connector, new SectionRowMapper());
-        return new SectionDaoImpl(sectionExecutor);
+        return sectionDao;
     }
 
     public ProposalDao getProposalDao() {
-        Executor<Proposal> proposalExecutor = new Executor<>(connector, new ProposalRowMapper());
-        return new ProposalDaoImpl(proposalExecutor);
+        return proposalDao;
     }
 
     public QuestionDao getQuestionDao() {
-        Executor<Question> questionExecutor = new Executor<>(connector, new QuestionRowMapper());
-        return new QuestionDaoImpl(questionExecutor);
+        return questionDao;
     }
 
     public MessageDao getMessageDao() {
-        Executor<Message> messageExecutor = new Executor<>(connector, new MessageRowMapper());
-        return new MessageDaoImpl(messageExecutor);
+        return messageDao;
     }
 
     @Override
     public MessageDetailsDao getMessageDetailsDao() {
-        Executor<MessageDetails> executor = new Executor<>(connector, new MessageDetailRowMapper());
-        return new MessageDetailsDaoImpl(executor);
+        return messageDetailsDao;
     }
 
     @Override
     public QuestionDetailsDao getQuestionDetailsDao() {
-        Executor<QuestionDetails> executor = new Executor<>(connector, new QuestionDetailsRowMapper());
-        return new QuestionDetailsDaoImpl(executor);
+        return questionDetailsDao;
     }
-    
+
     public ProposalDetailsDao getProposalDetailsDao() {
-        Executor<ProposalDetails> executor = new Executor<>(connector, new ProposalDetailsRowMapper());
-        return new ProposalDetailsDaoImpl(executor);
+        return proposalDetailsDao;
     }
-
-
 
     @Override
     public TransactionManager getTransactionManager() {
-        return new TransactionManagerImpl(connector);
+        return transactionManager;
     }
 
 }

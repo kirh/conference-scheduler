@@ -15,7 +15,6 @@
 
 <c:url value="/section" var="process">
     <c:param name="action" value="process"/>
-    <c:param name="conferenceId" value="${empty section ? param.conferenceId : section.conferenceId}"/>
 </c:url>
 
 <section>
@@ -25,10 +24,10 @@
             <input type="hidden" name="id" value="${fn:escapeXml(section.id)}">
         </c:if>
         <label for="i-s-topic">${locTopic}:</label>
-        <input type="title" class="form-control" id="i-s-topic" name="topic" value="${fn:escapeXml(section.topic)}"/>
-        <input type="hidden" class="form-control" name="conferenceId" value="${fn:escapeXml(empty section
-        ? param.conferenceId :
-        section.conferenceId)}"/>
+        <input type="title" class="form-control" id="i-s-topic" name="topic" value="${fn:escapeXml(section.topic)}"
+               required/>
+        <input type="hidden" class="form-control" name="conferenceId" value="${empty section
+        ? fn:escapeXml(param.conferenceId) : section.conferenceId}" required/>
         <button type="button" class="btn btn-cancel left" onclick="goToPreviousPage()">${locCancel}</button>
         <input type="submit" class="btn right" value="${locSave}"/>
     </form>
