@@ -6,7 +6,7 @@ import by.epam.tc.conference.dao.MessageDetailsDao;
 import by.epam.tc.conference.dto.MessageDetails;
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.services.MessageService;
-import by.epam.tc.conference.services.ServiceException;
+import by.epam.tc.conference.services.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

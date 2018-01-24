@@ -26,7 +26,7 @@
     <c:url var="createMessage" value="/question">
         <c:param name="action" value="processMessage"/>
     </c:url>
-    <form class="container-center" action="${createMessage}" method="post">
+    <form class="text-center" action="${createMessage}" method="post">
         <input type="hidden" name="questionId" value="${question.id}" required/>
         <label for="i-message">${locEnterMessage}</label>
         <textarea id="i-message" name="text" required></textarea>

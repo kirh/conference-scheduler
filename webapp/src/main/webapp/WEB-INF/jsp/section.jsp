@@ -18,7 +18,7 @@
         </tr>
         <tbody>
         <c:if test="${empty proposals}">
-            No proposals
+            <tr><td class="text-center" colspan="2">No proposals</td></tr>
         </c:if>
         <c:forEach items="${proposals}" var="proposal">
             <tr>
@@ -33,7 +33,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <div class="container-center">
+    <div class="text-center">
     <button type="button" class="btn btn-cancel" onclick="goToPreviousPage()">Back</button>
     </div>
 </section>

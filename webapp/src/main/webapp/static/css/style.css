@@ -248,8 +248,11 @@ tbody  tr:hover td {
 }
 
 .error {
-    margin-top: 30px;
-    font-size: 1.5rem;
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
     font-weight: bolder;
 }
 
@@ -344,7 +347,7 @@ a.btn {
     margin: auto;
 }
 
-.container-center {
+.text-center {
     text-align: center;
 }
 

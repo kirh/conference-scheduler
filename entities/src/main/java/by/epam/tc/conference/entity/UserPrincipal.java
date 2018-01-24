@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class UserPrincipal implements Serializable{
 
+    private static final long serialVersionUID = 42L;
+
     private Long id;
     private String username;
     private boolean isAdmin;
@@ -59,5 +61,15 @@ public class UserPrincipal implements Serializable{
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (isAdmin ? 1 : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("UserPrincipal{");
+        sb.append("id=").append(id);
+        sb.append(", username='").append(username).append('\'');
+        sb.append(", isAdmin=").append(isAdmin);
+        sb.append('}');
+        return sb.toString();
     }
 }

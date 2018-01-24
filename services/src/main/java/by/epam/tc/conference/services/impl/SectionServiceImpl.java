@@ -4,7 +4,8 @@ import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.SectionDao;
 import by.epam.tc.conference.entity.Section;
 import by.epam.tc.conference.services.SectionService;
-import by.epam.tc.conference.services.ServiceException;
+import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,7 +50,6 @@ public class SectionServiceImpl implements SectionService {
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
-
     }
 
     @Override
@@ -63,11 +63,11 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public Section getSection(Long id) throws ServiceException {
+    public Section getSection(Long id) throws EntityNotFoundException, ServiceException {
         try {
             Optional<Section> optionalSection = sectionDao.findById(id);
             Section section = optionalSection.orElseThrow(() ->
-                    new ServiceException("Not found section with id={}"));
+                    new EntityNotFoundException("Not found section with id={}"));
             logger.debug("Section id={} returned", id);
             return section;
         } catch (DaoException e) {

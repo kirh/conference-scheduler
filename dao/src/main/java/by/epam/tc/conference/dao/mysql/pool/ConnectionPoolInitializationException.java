@@ -2,6 +2,8 @@ package by.epam.tc.conference.dao.mysql.pool;
 
 public class ConnectionPoolInitializationException extends RuntimeException {
 
+    private static final long serialVersionUID = 42L;
+
     public ConnectionPoolInitializationException(String message) {
         super(message);
     }

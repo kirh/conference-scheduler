@@ -2,6 +2,8 @@ package by.epam.tc.conference.entity;
 
 public class Proposal implements Identifiable {
 
+    private static final long serialVersionUID = 42L;
+
     private Long id;
     private String title;
     private String description;
@@ -105,5 +107,18 @@ public class Proposal implements Identifiable {
         result = 31 * result + (participantId != null ? participantId.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Proposal{");
+        sb.append("id=").append(id);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", sectionId=").append(sectionId);
+        sb.append(", participantId=").append(participantId);
+        sb.append(", status=").append(status);
+        sb.append('}');
+        return sb.toString();
     }
 }

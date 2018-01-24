@@ -4,7 +4,8 @@ import by.epam.tc.conference.dao.ConferenceDao;
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.entity.Conference;
 import by.epam.tc.conference.services.ConferenceService;
-import by.epam.tc.conference.services.ServiceException;
+import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -62,11 +63,11 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
-    public Conference getConference(Long id) throws ServiceException {
+    public Conference getConference(Long id) throws EntityNotFoundException, ServiceException {
         try {
             Optional<Conference> optionalConference = conferenceDao.findById(id);
             Conference conference = optionalConference.orElseThrow(() ->
-                    new ServiceException("There is no conference with id=" + id)
+                    new EntityNotFoundException("There is no conference with id=" + id)
             );
             logger.debug("conference with id={} returned", id);
             return conference;

@@ -1,7 +1,8 @@
 package by.epam.tc.conference.web.controller;
 
 import by.epam.tc.conference.web.controller.command.Command;
-import by.epam.tc.conference.web.controller.command.CommandException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import java.io.IOException;
 
 public class FrontController extends HttpServlet {
 
+    private static final Logger logger = LogManager.getLogger(FrontController.class);
     private final Dispatcher dispatcher = new Dispatcher();
     private final RequestHelper helper = new RequestHelper();
 
@@ -31,12 +33,14 @@ public class FrontController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Command command = helper.getCommand(request);
         try {
+            Command command = helper.getCommand(request);
             String query = command.execute(request, response);
             dispatcher.dispatch(query, request, response);
-        } catch (CommandException e) {
-            throw new ServletException(e);
+        } catch (Exception e) {
+            logger.error("Error during processing request " + request.getRequestURI() + request.getQueryString() , e);
+            throw new ServletException("Error during processing request", e);
         }
     }
 }
+

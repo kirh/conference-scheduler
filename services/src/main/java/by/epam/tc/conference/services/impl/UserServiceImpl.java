@@ -5,7 +5,8 @@ import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.UserDao;
 import by.epam.tc.conference.entity.User;
 import by.epam.tc.conference.entity.UserPrincipal;
-import by.epam.tc.conference.services.ServiceException;
+import by.epam.tc.conference.services.exception.AuthenticationException;
+import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public UserPrincipal authenticateUser(String username, String password) throws ServiceException {
         try {
             Optional<User> optionalUser = userDao.findByUserName(username);
-            User user = optionalUser.orElseThrow(() -> new ServiceException("User doesn't exist"));
+            User user = optionalUser.orElseThrow(() -> new AuthenticationException("User doesn't exist"));
 
             String inputPasswordHash = Md5Util.encode(password);
             String storedPasswordHash = user.getPassword();
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
                 logger.debug("User {} authenticated", username);
                 return createUserPrincipal(user);
             } else {
-                throw new ServiceException("Password mismatch");
+                throw new AuthenticationException("Password mismatch");
             }
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
@@ -45,18 +46,17 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserPrincipal createUserPrincipal(User user) {
-        UserPrincipal userPrincipal = new UserPrincipal();
-        userPrincipal.setUsername(user.getUsername());
-        userPrincipal.setAdmin(user.isAdmin());
-        userPrincipal.setId(user.getId());
-        logger.debug("Created userPrincipal id={} username={} isAdmin={}",
-                userPrincipal.getId(), userPrincipal.getUsername(), userPrincipal.isAdmin());
+        Long userId = user.getId();
+        String username = user.getUsername();
+        boolean admin = user.isAdmin();
+        UserPrincipal userPrincipal = new UserPrincipal(userId, username, admin);
+        logger.debug("Created userPrincipal {}", userPrincipal);
         return userPrincipal;
     }
 
     @Override
     public UserPrincipal registerUser(User user) throws ServiceException {
-        boolean isValid = userValidator.validateUser(user);
+        boolean isValid = userValidator.validate(user);
         if (isValid) {
             try {
                 userDao.save(user);

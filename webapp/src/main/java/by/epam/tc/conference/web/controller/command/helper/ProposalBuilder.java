@@ -19,7 +19,7 @@ public class ProposalBuilder extends AbstractBuilder<Proposal> {
         String title = request.getParameter(TITLE_PARAM);
         String description = request.getParameter(DESCRIPTION_PARAM);
         String sectionIdString = request.getParameter(SECTION_ID_PARAM);
-        Long sectionId = parseId(sectionIdString);
+        Long sectionId = Long.valueOf(sectionIdString);
         Long participantId = getUserId(request);
         return new Proposal(id, title, description, sectionId, participantId, ProposalStatus.PENDING);
     }

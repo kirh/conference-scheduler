@@ -11,7 +11,7 @@ import by.epam.tc.conference.dto.ProposalDetails;
 import by.epam.tc.conference.dto.QuestionDetails;
 import by.epam.tc.conference.entity.*;
 
-public class MysqlDaoFactory extends DaoFactory {
+public final class MysqlDaoFactory extends DaoFactory {
 
     private final ConferenceDao conferenceDao;
     private final UserDao userDao;

@@ -13,6 +13,7 @@
 <fmt:message var="locCreateProposal" key="conference.createproposal"/>
 <fmt:message var="locAddSection" key="conference.addsection"/>
 <fmt:message var="locAskQuestion" key="conference.askquestion"/>
+    <fmt:message var="locNoSections" key="section.nosections"/>
 
 <section>
     <h2 class="page-header">${conference.name}</h2>
@@ -24,6 +25,9 @@
             <th colspan="2">${locSections}</th>
         </tr>
         <tbody>
+        <c:if test="${empty sections}">
+            <tr><td class="text-center" colspan="2">${locNoSections}</td></tr>
+        </c:if>
         <c:forEach items="${sections}" var="section">
             <tr>
                 <td class="conference-description" title="view proposals">
@@ -66,7 +70,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <div class="container-center">
+    <div class="text-center">
     <c:if test="${userPrincipal.admin}">
             <c:url value="/section" var="createSection">
                 <c:param name="action" value="create"/>

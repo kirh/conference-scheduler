@@ -7,7 +7,8 @@ import by.epam.tc.conference.dto.ProposalDetails;
 import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.entity.ProposalStatus;
 import by.epam.tc.conference.services.ProposalService;
-import by.epam.tc.conference.services.ServiceException;
+import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -68,11 +69,11 @@ public class ProposalServiceImpl implements ProposalService {
     }
 
     @Override
-    public Proposal getProposal(Long id) throws ServiceException {
+    public Proposal getProposal(Long id) throws EntityNotFoundException, ServiceException {
         try {
             Optional<Proposal> optionalProposal = proposalDao.findById(id);
             Proposal proposal = optionalProposal.orElseThrow(() ->
-                    new ServiceException("There is no conference with id=" + id)
+                    new EntityNotFoundException("There is no conference with id=" + id)
             );
             logger.info("conference with id={} returned");
             return proposal;

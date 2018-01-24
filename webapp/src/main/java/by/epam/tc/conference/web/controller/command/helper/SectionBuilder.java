@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 public class SectionBuilder extends AbstractBuilder<Section> {
 
-    public static final String ID_PARAM = "id";
-    public static final String TOPIC_PARAM = "topic";
-    public static final String CONFERENCE_ID_PARAM = "conferenceId";
+    private static final String ID_PARAM = "id";
+    private static final String TOPIC_PARAM = "topic";
+    private static final String CONFERENCE_ID_PARAM = "conferenceId";
 
     @Override
     public Section build(HttpServletRequest request) {

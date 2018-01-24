@@ -12,15 +12,15 @@ function checkpassword() {
     }
 }
 
-function openEdit() {
-    var modal = document.getElementById("edit-conference");
-    modal.style.display = "block";
-    modal.addEventListener("click", function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    })
-}
+// function openEdit() {
+//     var modal = document.getElementById("edit-conference");
+//     modal.style.display = "block";
+//     modal.addEventListener("click", function(event) {
+//         if (event.target == modal) {
+//             modal.style.display = "none";
+//         }
+//     })
+// }
 
 function calculateAge(birthday) {
     var ageDifMs = Date.now() - birthday.getTime();

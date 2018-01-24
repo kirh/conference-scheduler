@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 public class Message implements Identifiable {
 
+    private static final long serialVersionUID = 42L;
+
     private Long id;
     private String text;
     private Long questionId;
@@ -92,5 +94,17 @@ public class Message implements Identifiable {
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Message{");
+        sb.append("id=").append(id);
+        sb.append(", text='").append(text).append('\'');
+        sb.append(", questionId=").append(questionId);
+        sb.append(", userId=").append(userId);
+        sb.append(", createTime=").append(createTime);
+        sb.append('}');
+        return sb.toString();
     }
 }

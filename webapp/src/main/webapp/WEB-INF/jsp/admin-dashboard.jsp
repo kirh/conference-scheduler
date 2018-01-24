@@ -46,7 +46,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <div class="container-center">
+    <div class="text-center">
         <c:url value="/conference" var="conferenceLink">
             <c:param name="action" value="add"/>
         </c:url>

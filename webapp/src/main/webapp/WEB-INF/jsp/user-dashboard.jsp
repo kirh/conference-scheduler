@@ -4,62 +4,64 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:bundle basename="local">
 
-<%@include file="fragment/header.jspf" %>
+    <%@include file="fragment/header.jspf" %>
 
-<fmt:message var="locDashboardHeader" key="participant.dashboard.header"/>
-<fmt:message var="locNoProposals" key="proposals.noproposals"/>
-<fmt:message var="locTitle" key="title"/>
-<fmt:message var="locConference" key="conference"/>
-<fmt:message var="locSection" key="section"/>
-<fmt:message var="locStatus" key="proposal.status"/>
-<fmt:message var="locDelete" key="delete"/>
+    <fmt:message var="locDashboardHeader" key="participant.dashboard.header"/>
+    <fmt:message var="locNoProposals" key="proposals.noproposals"/>
+    <fmt:message var="locTitle" key="title"/>
+    <fmt:message var="locConference" key="conference"/>
+    <fmt:message var="locSection" key="section"/>
+    <fmt:message var="locStatus" key="proposal.status"/>
+    <fmt:message var="locDelete" key="delete"/>
 
-<section>
-    <h2>${locDashboardHeader}</h2>
-    <c:choose>
-        <c:when test="${empty proposals}">
-            ${locNoProposals}
-        </c:when>
-        <c:otherwise>
-            <table class="center">
-                <thead>
-                <tr>
-                    <th>${locTitle}</th>
-                    <th>${locConference}</th>
-                    <th>${locSection}</th>
-                    <th>${locStatus}</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${proposals}" var="proposal">
-                    <c:url var="showProposal" value="/proposal">
-                    <c:param name="action" value="show"/>
-                    <c:param name="id" value="${proposal.id}"/>
-                </c:url>
+    <section>
+        <h2>${locDashboardHeader}</h2>
+        <c:choose>
+            <c:when test="${empty proposals}">
+                <div class="text-center">
+                        ${locNoProposals}
+                </div>
+            </c:when>
+            <c:otherwise>
+                <table class="center">
+                    <thead>
                     <tr>
-                        <td class="conference-name"><a href="${showProposal}">${proposal.title}</a></td>
-                        <td><a href="${showProposal}">${proposal.conferenceName}</a></td>
-                        <td><a href="${showProposal}">${proposal.sectionName}</a></td>
-                        <td><a href="${showProposal}">${proposal.status}</a></td>
-                        <td>
-                            <c:url var="deleteProposal" value="/proposal">
-                                <c:param name="action" value="delete"/>
-                                <c:param name="id" value="${proposal.id}"/>
-                            </c:url>
-                            <button type="button" class="btn btn-cancel"
-                                    onclick="confirmAndRedirect('${deleteProposal}')"
-                                    title="${locDelete}">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td>
+                        <th>${locTitle}</th>
+                        <th>${locConference}</th>
+                        <th>${locSection}</th>
+                        <th>${locStatus}</th>
+                        <th></th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </c:otherwise>
-    </c:choose>
-</section>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${proposals}" var="proposal">
+                        <c:url var="showProposal" value="/proposal">
+                            <c:param name="action" value="show"/>
+                            <c:param name="id" value="${proposal.id}"/>
+                        </c:url>
+                        <tr>
+                            <td class="conference-name"><a href="${showProposal}">${proposal.title}</a></td>
+                            <td><a href="${showProposal}">${proposal.conferenceName}</a></td>
+                            <td><a href="${showProposal}">${proposal.sectionName}</a></td>
+                            <td><a href="${showProposal}">${proposal.status}</a></td>
+                            <td>
+                                <c:url var="deleteProposal" value="/proposal">
+                                    <c:param name="action" value="delete"/>
+                                    <c:param name="id" value="${proposal.id}"/>
+                                </c:url>
+                                <button type="button" class="btn btn-cancel"
+                                        onclick="confirmAndRedirect('${deleteProposal}')"
+                                        title="${locDelete}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:otherwise>
+        </c:choose>
+    </section>
 
-<%@include file="fragment/footer.jspf" %>
+    <%@include file="fragment/footer.jspf" %>
 </fmt:bundle>

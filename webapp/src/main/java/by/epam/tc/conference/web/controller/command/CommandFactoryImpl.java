@@ -26,6 +26,7 @@ public class CommandFactoryImpl extends CommandFactory {
         Map<String, Command> commands = new HashMap<>();
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
+        commands.put("", new RootPageCommand());
         commands.put("conference?add", (request, response) -> "conference-form");
         ConferenceService conferenceService = serviceFactory.getConferenceService();
         commands.put("conference?delete", new DeleteConferenceCommand(conferenceService));
@@ -38,16 +39,16 @@ public class CommandFactoryImpl extends CommandFactory {
         ProposalService proposalService = serviceFactory.getProposalService();
         commands.put("proposal?delete", new DeleteProposalCommand(proposalService));
         commands.put("proposal?process", new ProcessProposalCommand(proposalService, new ProposalBuilder()));
-        commands.put("proposal?showAll", new ShowAllProposalsCommand(proposalService));
+        commands.put("proposal?showAll", new ShowSectionProposalsCommand(proposalService));
         commands.put("proposal?show", new ShowProposalCommand(proposalService));
-        commands.put("proposal?update", new UpdateProposalCommand(proposalService));
+        commands.put("proposal?update", new UpdateProposalStatusCommand(proposalService));
         QuestionService questionService = serviceFactory.getQuestionService();
         commands.put("question?process", new ProcessQuestionCommand(questionService, new QuestionBuilder(), new MessageBuilder()));
         MessageService messageService = serviceFactory.getMessageService();
         commands.put("question?show", new ShowQuestionCommand(questionService, messageService));
         commands.put("question?showAll", new ShowQuestionsCommand(questionService));
         commands.put("question?create", (request, response) -> "question-form");
-        commands.put("question?processMessage", new ProcessMessageCommand(messageService));
+        commands.put("question?processMessage", new ProcessMessageCommand(messageService, new MessageBuilder()));
         commands.put("section?delete", new DeleteSectionCommand(sectionService));
         commands.put("section?process", new ProcessSectionCommand(new SectionBuilder(), sectionService));
         commands.put("section?update", new UpdateSectionCommand(sectionService));

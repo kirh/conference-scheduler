@@ -19,6 +19,7 @@
         <log4j.version>2.10.0</log4j.version>
         <junit.version>4.12</junit.version>
         <mockito.version>2.13.0</mockito.version>
+        <hamcrest.version>2.0.0.0</hamcrest.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -47,6 +48,12 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
                 <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>java-hamcrest</artifactId>
+                <version>${hamcrest.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Conference implements Identifiable {
 
+    private static final long serialVersionUID = 42L;
+
     private Long id;
     private String name;
     private String description;
@@ -105,5 +107,18 @@ public class Conference implements Identifiable {
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (administratorId != null ? administratorId.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Conference{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", address='").append(address).append('\'');
+        sb.append(", date=").append(date);
+        sb.append(", administratorId=").append(administratorId);
+        sb.append('}');
+        return sb.toString();
     }
 }

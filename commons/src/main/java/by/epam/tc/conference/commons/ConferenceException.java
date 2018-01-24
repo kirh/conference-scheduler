@@ -2,6 +2,8 @@ package by.epam.tc.conference.commons;
 
 public class ConferenceException extends Exception {
 
+    private static final long serialVersionUID = 42L;
+
     public ConferenceException() {
         super();
     }

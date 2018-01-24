@@ -4,6 +4,8 @@ import by.epam.tc.conference.commons.ConferenceException;
 
 public class DaoException extends ConferenceException {
 
+    private static final long serialVersionUID = 42L;
+
     public DaoException(String message) {
         super(message);
     }

@@ -5,7 +5,8 @@ import by.epam.tc.conference.dto.QuestionDetails;
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.entity.Question;
 import by.epam.tc.conference.services.QuestionService;
-import by.epam.tc.conference.services.ServiceException;
+import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,11 +52,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestion(Long id) throws ServiceException {
+    public Question getQuestion(Long id) throws EntityNotFoundException, ServiceException {
         try {
             Optional<Question> optionalQuestion = questionDao.findById(id);
             Question question = optionalQuestion.orElseThrow(() ->
-                    new ServiceException("Not Found question id=" + id));
+                    new EntityNotFoundException("Not Found question id=" + id));
             logger.info("conference id={} returned", id);
             return question;
         } catch (DaoException e) {
