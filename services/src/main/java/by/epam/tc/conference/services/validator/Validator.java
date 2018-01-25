@@ -1,5 +1,18 @@
 package by.epam.tc.conference.services.validator;
 
-public interface Validator<T> {
-    public boolean validate(T object);
+import by.epam.tc.conference.entity.Identifiable;
+
+/**
+ * Validates given {@link Identifiable} object
+ * @param <T>
+ */
+public interface Validator<T extends Identifiable> {
+
+    /**
+     * Validates given {@link Identifiable} object
+     * id == null is valid state
+     * @param object to validate
+     * @return true when given object is valid
+     */
+    boolean validate(T object);
 }
