@@ -2,6 +2,9 @@ package by.epam.tc.conference.dao;
 
 import by.epam.tc.conference.dao.mysql.MysqlDaoFactory;
 
+/**
+ * General factory for data access layer
+ */
 public abstract class DaoFactory {
 
     public static DaoFactory getInstance() {

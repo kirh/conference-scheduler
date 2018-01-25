@@ -10,9 +10,27 @@ import java.util.List;
  */
 public interface ProposalDao extends GenericDao<Proposal> {
 
+    /**
+     * Returns list of proposals to specified conference section
+     * @param id conference section identifier
+     * @return list of proposals to specified conference section
+     * @throws DaoException error during data access occurs
+     */
     List<Proposal> findBySectionId(Long id) throws DaoException;
 
+    /**
+     * Returns list of proposals created by specified participant
+     * @param id participant identifier
+     * @return list of proposals created by specified participant
+     * @throws DaoException error during data access occurs
+     */
     List<Proposal> findByUserId(Long id) throws DaoException;
 
+    /**
+     * Update status of proposal with specified id to given status value
+     * @param id proposal identifier
+     * @param status to set up
+     * @throws DaoException error during data access occurs
+     */
     void updateStatus(Long id, ProposalStatus status) throws DaoException;
 }

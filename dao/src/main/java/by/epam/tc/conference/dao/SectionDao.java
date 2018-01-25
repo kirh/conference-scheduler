@@ -9,6 +9,12 @@ import java.util.List;
  */
 public interface SectionDao extends GenericDao<Section> {
 
+    /**
+     * Finds all sections related to conference with specified id
+     * @param id conference identifier
+     * @return list of sections
+     * @throws DaoException error during data access occurs
+     */
     List<Section> findSectionsByConferenceId(Long id) throws DaoException;
 
 }

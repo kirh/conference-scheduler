@@ -9,5 +9,11 @@ import java.util.Optional;
  */
 public interface UserDao extends GenericDao<User> {
 
-    public Optional<User> findByUserName(String username) throws DaoException;
+    /**
+     * Finds user by given username and returns optional user when found or empty optional otherwise
+     * @param username
+     * @return Optional user if was found or empty optional otherwise
+     * @throws DaoException error during data access occurs
+     */
+    Optional<User> findByUserName(String username) throws DaoException;
 }
