@@ -4,9 +4,6 @@ import by.epam.tc.conference.entity.Question;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class QuestionRowMapper implements RowMapper<Question> {
 
