@@ -5,7 +5,6 @@ import by.epam.tc.conference.services.MessageService;
 import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
-import by.epam.tc.conference.web.controller.command.helper.MessageBuilder;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

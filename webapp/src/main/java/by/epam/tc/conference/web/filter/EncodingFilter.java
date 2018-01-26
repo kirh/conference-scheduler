@@ -1,7 +1,6 @@
 package by.epam.tc.conference.web.filter;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 

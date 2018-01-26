@@ -1,7 +1,6 @@
 package by.epam.tc.conference.services;
 
 import by.epam.tc.conference.dao.*;
-import by.epam.tc.conference.dao.MessageDetailsDao;
 import by.epam.tc.conference.services.impl.*;
 import by.epam.tc.conference.services.validator.*;
 

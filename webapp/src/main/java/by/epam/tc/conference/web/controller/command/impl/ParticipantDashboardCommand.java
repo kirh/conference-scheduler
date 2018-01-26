@@ -1,7 +1,6 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.dto.ProposalDetails;
-import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
