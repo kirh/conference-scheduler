@@ -22,9 +22,10 @@
     <h2 class="page-header">${locCreateProposal}</h2>
     <form class="clearfix" method="POST" action="${process}">
         <label for="i-p-title">${locTitle}:</label>
-        <input type="title" class="form-control" id="i-p-title" name="title" required/>
+        <input type="text" class="form-control" id="i-p-title" name="title" minlength="5" pattern="(\S+\s?)*" required/>
         <label for="i-p-description">${locDescription}:</label>
-        <textarea name="description" class="form-control i-description" id="i-p-description" required></textarea>
+        <textarea name="description" class="form-control i-description" id="i-p-description" minlength="20"
+                  required></textarea>
         <input type="hidden" name="sectionId" value="${param.sectionId}" required>
         <button type="button" class="btn btn-cancel left" onclick="goToPreviousPage()">${locCancel}</button>
         <input type="submit" class="btn right" value="${locSave}"/>

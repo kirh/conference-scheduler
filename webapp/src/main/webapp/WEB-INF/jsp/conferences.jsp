@@ -33,11 +33,9 @@
                                 <c:param name="action" value="show"/>
                                 <c:param name="id" value="${conference.id}"/>
                             </c:url>
-                            <a href="${showConference}">
-                                <td class="conference-name"><a href="${showConference}">${conference.name}</a></td>
-                                <td><a href="${showConference}">${conference.address}</a></td>
-                                <td><a href="${showConference}"><fmt:formatDate value="${conference.date}"/></a></td>
-                            </a>
+                            <td class="conference-name"><a href="${showConference}">${conference.name}</a></td>
+                            <td><a href="${showConference}">${conference.address}</a></td>
+                            <td><a href="${showConference}"><fmt:formatDate value="${conference.date}"/></a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

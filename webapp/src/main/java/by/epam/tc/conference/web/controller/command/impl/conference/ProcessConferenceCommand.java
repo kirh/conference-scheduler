@@ -48,7 +48,8 @@ public class ProcessConferenceCommand extends AbstractCommand{
         }
     }
 
-    private String update(HttpServletRequest request, HttpServletResponse response, Conference conference) throws ServiceException {
+    private String update(HttpServletRequest request, HttpServletResponse response, Conference conference)
+            throws ServiceException, InvalidEntityException, EntityNotFoundException {
         Long userId = getUserId(request);
         if (isOwner(conference, userId)) {
             conferenceService.updateConference(conference);
@@ -58,7 +59,7 @@ public class ProcessConferenceCommand extends AbstractCommand{
         return forbidRequest(request, response);
     }
 
-    private boolean isOwner(Conference conference, long userId) throws ServiceException {
+    private boolean isOwner(Conference conference, long userId) throws ServiceException, EntityNotFoundException {
         Long conferenceId = conference.getId();
         Conference persistedConference = conferenceService.getConference(conferenceId);
         long administratorId = persistedConference.getAdministratorId();

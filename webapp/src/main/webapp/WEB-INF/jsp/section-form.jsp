@@ -24,8 +24,8 @@
             <input type="hidden" name="id" value="${fn:escapeXml(section.id)}">
         </c:if>
         <label for="i-s-topic">${locTopic}:</label>
-        <input type="title" class="form-control" id="i-s-topic" name="topic" value="${fn:escapeXml(section.topic)}"
-               required/>
+        <input type="text" class="form-control" id="i-s-topic" name="topic" value="${fn:escapeXml(section.topic)}"
+               minlength="5" pattern="(\S+\s?)*" required/>
         <input type="hidden" class="form-control" name="conferenceId" value="${empty section
         ? fn:escapeXml(param.conferenceId) : section.conferenceId}" required/>
         <button type="button" class="btn btn-cancel left" onclick="goToPreviousPage()">${locCancel}</button>

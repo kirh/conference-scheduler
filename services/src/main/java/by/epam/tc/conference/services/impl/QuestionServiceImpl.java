@@ -1,6 +1,9 @@
 package by.epam.tc.conference.services.impl;
 
-import by.epam.tc.conference.dao.*;
+import by.epam.tc.conference.dao.DaoException;
+import by.epam.tc.conference.dao.MessageDao;
+import by.epam.tc.conference.dao.QuestionDao;
+import by.epam.tc.conference.dao.QuestionDetailsDao;
 import by.epam.tc.conference.dto.QuestionDetails;
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.entity.Question;
@@ -52,7 +55,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestion(Long id) throws EntityNotFoundException, ServiceException {
+    public Question getQuestion(Long id) throws ServiceException, EntityNotFoundException {
         try {
             Optional<Question> optionalQuestion = questionDao.findById(id);
             Question question = optionalQuestion.orElseThrow(() ->

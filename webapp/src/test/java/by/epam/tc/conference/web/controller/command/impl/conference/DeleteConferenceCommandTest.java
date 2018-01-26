@@ -3,6 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl.conference;
 import by.epam.tc.conference.entity.Conference;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ConferenceService;
+import by.epam.tc.conference.services.exception.EntityNotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
@@ -47,7 +48,7 @@ public class DeleteConferenceCommandTest {
     }
 
     @Test
-    public void shouldDeleteConferenceAndRedirectToDashboardWhenUserCreatedIt() throws ServiceException {
+    public void shouldDeleteConferenceAndRedirectToDashboardWhenUserCreatedIt() throws ServiceException, EntityNotFoundException {
         when(request.getParameter("id")).thenReturn("1");
         Conference conference = new Conference();
         conference.setAdministratorId(CURRENT_USER_ID);
@@ -61,7 +62,7 @@ public class DeleteConferenceCommandTest {
     }
 
     @Test
-    public void shouldForbidRequestWhenUserIsNotAdministratorOfThisConference() throws ServiceException {
+    public void shouldForbidRequestWhenUserIsNotAdministratorOfThisConference() throws ServiceException, EntityNotFoundException {
         when(request.getParameter("id")).thenReturn("1");
         Conference conference = new Conference();
         final Long notCurrentUserId = CURRENT_USER_ID + 1;
@@ -74,7 +75,7 @@ public class DeleteConferenceCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException, EntityNotFoundException {
         when(request.getParameter("id")).thenReturn("1");
         when(conferenceService.getConference(any())).thenThrow(new ServiceException());
 

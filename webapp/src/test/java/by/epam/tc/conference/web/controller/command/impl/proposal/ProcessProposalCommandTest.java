@@ -3,6 +3,8 @@ package by.epam.tc.conference.web.controller.command.impl.proposal;
 import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ProposalService;
+import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
@@ -50,7 +52,7 @@ public class ProcessProposalCommandTest {
     }
 
     @Test
-    public void shouldCreateProposalAndRedirectToDashboardWhenNoIdGiven() throws ServiceException {
+    public void shouldCreateProposalAndRedirectToDashboardWhenNoIdGiven() throws ServiceException, InvalidEntityException {
         when(builder.build(request)).thenReturn(new Proposal());
 
         String view = command.execute(request, response);
@@ -60,7 +62,7 @@ public class ProcessProposalCommandTest {
     }
 
     @Test
-    public void shouldUpdateProposalWhenIdGivenAndUserIsOwner() throws ServiceException {
+    public void shouldUpdateProposalWhenIdGivenAndUserIsOwner() throws ServiceException, EntityNotFoundException, InvalidEntityException {
         Proposal proposal = new Proposal();
         proposal.setId(1L);
         proposal.setParticipantId(CURRENT_USER_ID);
@@ -73,7 +75,7 @@ public class ProcessProposalCommandTest {
     }
 
     @Test
-    public void shouldRedirectToDashboardAfterUpdate() throws ServiceException {
+    public void shouldRedirectToDashboardAfterUpdate() throws ServiceException, InvalidEntityException, EntityNotFoundException {
         Proposal proposal = new Proposal();
         proposal.setId(1L);
         proposal.setParticipantId(CURRENT_USER_ID);
@@ -87,7 +89,7 @@ public class ProcessProposalCommandTest {
     }
 
     @Test
-    public void shouldBeForbiddenRequestWhenUserIsNotTheOwner() throws ServiceException {
+    public void shouldBeForbiddenRequestWhenUserIsNotTheOwner() throws ServiceException, EntityNotFoundException {
         Proposal proposal = new Proposal();
         proposal.setId(1L);
         Long notCurrentUserId = CURRENT_USER_ID + 1;
@@ -101,7 +103,7 @@ public class ProcessProposalCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException, InvalidEntityException {
         when(builder.build(request)).thenReturn(new Proposal());
         doThrow(new ServiceException()).when(proposalService).createProposal(any());
 

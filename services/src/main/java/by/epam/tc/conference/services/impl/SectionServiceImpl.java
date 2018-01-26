@@ -5,7 +5,9 @@ import by.epam.tc.conference.dao.SectionDao;
 import by.epam.tc.conference.entity.Section;
 import by.epam.tc.conference.services.SectionService;
 import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.services.validator.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,9 +18,11 @@ public class SectionServiceImpl implements SectionService {
 
     private static final Logger logger = LogManager.getLogger(SectionServiceImpl.class);
     private final SectionDao sectionDao;
+    private final Validator<Section> validator;
 
-    public SectionServiceImpl(SectionDao sectionDao) {
+    public SectionServiceImpl(SectionDao sectionDao, Validator<Section> validator) {
         this.sectionDao = sectionDao;
+        this.validator = validator;
     }
 
     @Override
@@ -33,8 +37,9 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public void createSection(Section section) throws ServiceException {
+    public void createSection(Section section) throws ServiceException, InvalidEntityException {
         try {
+            validateSection(section);
             sectionDao.save(section);
             logger.info("Created section id={} topic={}", section.getId(), section.getTopic());
         } catch (DaoException e) {
@@ -53,8 +58,9 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public void updateSection(Section section) throws ServiceException {
+    public void updateSection(Section section) throws ServiceException, InvalidEntityException {
         try {
+            validateSection(section);
             sectionDao.update(section);
             logger.info("Updated section id={} topic={}", section.getId(), section.getTopic());
         } catch (DaoException e) {
@@ -63,7 +69,7 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public Section getSection(Long id) throws EntityNotFoundException, ServiceException {
+    public Section getSection(Long id) throws ServiceException, EntityNotFoundException {
         try {
             Optional<Section> optionalSection = sectionDao.findById(id);
             Section section = optionalSection.orElseThrow(() ->
@@ -72,6 +78,13 @@ public class SectionServiceImpl implements SectionService {
             return section;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    private void validateSection(Section section) throws InvalidEntityException {
+        boolean isValid = validator.validate(section);
+        if (!isValid) {
+            throw new InvalidEntityException("Invalid proposal id=" + section.getId());
         }
     }
 }

@@ -50,7 +50,7 @@ public class ProcessProposalCommand extends AbstractCommand {
     }
 
     private String update(HttpServletRequest request, HttpServletResponse response, Proposal proposal) throws
-            ServiceException {
+            ServiceException, InvalidEntityException, EntityNotFoundException {
         Long userId = getUserId(request);
         if (isOwner(proposal, userId)) {
             proposalService.updateProposal(proposal);
@@ -60,7 +60,7 @@ public class ProcessProposalCommand extends AbstractCommand {
         return forbidRequest(request, response);
     }
 
-    private boolean isOwner(Proposal proposal, long userId) throws ServiceException {
+    private boolean isOwner(Proposal proposal, long userId) throws ServiceException, EntityNotFoundException {
         Long id = proposal.getId();
         Proposal persistedProposal = proposalService.getProposal(id);
         long participantId = persistedProposal.getParticipantId();

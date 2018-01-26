@@ -283,7 +283,7 @@ input[type = radio] {
 .form-control {
     box-sizing: border-box;
     display: block;
-    margin: 8px 0;
+    margin: 8px 5px;
     padding: 5px 20px;
     border-radius: 5px;
     border: 1px solid #ced4da;

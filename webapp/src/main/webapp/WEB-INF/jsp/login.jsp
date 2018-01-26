@@ -11,6 +11,8 @@
     <fmt:message key="signin" var="locSignIn"/>
     <fmt:message key="signup" var="locSignUp"/>
     <fmt:message key="login" var="locLogin"/>
+    <fmt:message key="username.title" var="locUsernameTitle"/>
+    <fmt:message key="password.title" var="locPasswordTitle"/>
 
     <c:url value="/login" var="process">
         <c:param name="action" value="process"/>
@@ -24,12 +26,14 @@
         </c:if>
         <form class="clearfix" method="POST" action="${process}">
             <label for="username-input">${locUsername}:</label>
-            <input class="form-control" id="username-input" type="title" name="username" minlength="5" maxlength="16"
-                   pattern="[a-zA-Z]\w+"
+            <input class="form-control" id="username-input" type="text" name="username" minlength="5" maxlength="16"
+                   pattern="^[a-zA-Z][^\W_]+$"
+                   title="${locUsernameTitle}"
                    required/>
             <label for="password-input">${locPassword}:</label>
-            <input class="form-control" type="password" id="password-input" name="password" minlength="6"
+            <input class="form-control" type="password" id="password-input" name="password" minlength="6" maxlength="16"
                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+                   title="${locPasswordTitle}"
                    required/>
             <c:url value="/register" var="showSignUp"/>
             <a href="${showSignUp}">

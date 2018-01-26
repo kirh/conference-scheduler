@@ -3,6 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl;
 import by.epam.tc.conference.entity.User;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.exception.AlreadyExistsException;
+import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.web.controller.SessionAttribute;
@@ -41,6 +42,8 @@ public class ProcessRegisterCommand extends AbstractCommand {
         } catch (ServiceException e) {
             logger.error("Failed to register", e);
             return processInternalError(request, response);
+        } catch (InvalidEntityException e) {
+            return processBadRequest(request, response);
         }
     }
 

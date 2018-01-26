@@ -61,7 +61,7 @@ public class UpdateConferenceCommandTest {
     }
 
     @Test
-    public void shouldBePageNotFoundWhenConferenceWithGivenIdNotExists() throws ServiceException {
+    public void shouldBePageNotFoundWhenConferenceWithGivenIdNotExists() throws ServiceException, EntityNotFoundException {
         when(conferenceService.getConference(any())).thenThrow(new EntityNotFoundException());
 
         String view = command.execute(request, response);
@@ -70,7 +70,7 @@ public class UpdateConferenceCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenErrorUccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenErrorUccurs() throws ServiceException, EntityNotFoundException {
         when(conferenceService.getConference(any())).thenThrow(new ServiceException());
 
         String view = command.execute(request, response);

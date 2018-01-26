@@ -3,6 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl.proposal;
 import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ProposalService;
+import by.epam.tc.conference.services.exception.EntityNotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
@@ -49,7 +50,7 @@ public class DeleteProposalCommandTest {
     }
 
     @Test
-    public void shouldDeleteProposalAndRedirectToDashboardWhenIdGiven() throws ServiceException {
+    public void shouldDeleteProposalAndRedirectToDashboardWhenIdGiven() throws ServiceException, EntityNotFoundException {
         Proposal proposal = new Proposal();
         proposal.setParticipantId(CURRENT_USER_ID);
         when(proposalService.getProposal(1L)).thenReturn(proposal);
@@ -70,7 +71,7 @@ public class DeleteProposalCommandTest {
     }
 
     @Test
-    public void shouldBeForbiddenRequestWhenUserIsNotProposalOwner() throws ServiceException {
+    public void shouldBeForbiddenRequestWhenUserIsNotProposalOwner() throws ServiceException, EntityNotFoundException {
         Proposal proposal = new Proposal();
         Long notCurrentUserId = CURRENT_USER_ID + 1;
         proposal.setParticipantId(notCurrentUserId);
@@ -82,7 +83,7 @@ public class DeleteProposalCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException, EntityNotFoundException {
         when(proposalService.getProposal(any())).thenThrow(new ServiceException());
 
         String view = command.execute(request, response);

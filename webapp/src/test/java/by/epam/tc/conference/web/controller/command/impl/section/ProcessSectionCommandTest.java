@@ -2,6 +2,7 @@ package by.epam.tc.conference.web.controller.command.impl.section;
 
 import by.epam.tc.conference.entity.Section;
 import by.epam.tc.conference.services.SectionService;
+import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
 import org.junit.Test;
@@ -37,7 +38,7 @@ public class ProcessSectionCommandTest {
     private ProcessSectionCommand command;
 
     @Test
-    public void shouldCreateSectionWhenNoIdGiven() throws ServiceException {
+    public void shouldCreateSectionWhenNoIdGiven() throws ServiceException, InvalidEntityException {
         Section section = new Section();
         when(builder.build(request)).thenReturn(section);
 
@@ -47,7 +48,7 @@ public class ProcessSectionCommandTest {
     }
 
     @Test
-    public void shouldUpdateSectionWhenIdGiven() throws ServiceException {
+    public void shouldUpdateSectionWhenIdGiven() throws ServiceException, InvalidEntityException {
         Section section = new Section();
         section.setId(1L);
         when(builder.build(request)).thenReturn(section);

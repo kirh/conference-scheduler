@@ -62,7 +62,7 @@ public interface GenericDao<T extends Identifiable> {
      * Finds object by identifier
      * @param id object identifier
      * @return Optional of object if was found or empty optional otherwise
-     * @throws DaoException
+     * @throws DaoException when access error occurs
      */
     Optional<T> findById(Long id) throws DaoException;
 

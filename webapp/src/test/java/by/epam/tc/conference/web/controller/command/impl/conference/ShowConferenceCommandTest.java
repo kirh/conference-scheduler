@@ -72,7 +72,7 @@ public class ShowConferenceCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException, EntityNotFoundException {
         when(conferenceService.getConference(any())).thenThrow(new ServiceException());
 
         String view = command.execute(request, response);
@@ -81,7 +81,7 @@ public class ShowConferenceCommandTest {
     }
 
     @Test
-    public void shouldBePageNotFoundWhenNoConferenceWithGivenId() throws ServiceException {
+    public void shouldBePageNotFoundWhenNoConferenceWithGivenId() throws ServiceException, EntityNotFoundException {
         when(conferenceService.getConference(any())).thenThrow(new EntityNotFoundException());
 
         String view = command.execute(request, response);

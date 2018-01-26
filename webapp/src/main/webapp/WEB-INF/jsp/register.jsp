@@ -21,6 +21,9 @@
     <fmt:message key="signup" var="locSignUp"/>
     <fmt:message key="cancel" var="locCancel"/>
     <fmt:message key="registration" var="locRegistration"/>
+    <fmt:message key="username.title" var="locUsernameTitle"/>
+    <fmt:message key="password.title" var="locPasswordTitle"/>
+    <fmt:message key="title.nospaces" var="locNoSpaces"/>
     <c:url value="/register" var="process">
         <c:param name="action" value="process"/>
     </c:url>
@@ -33,41 +36,39 @@
     </c:if>
         <form class="clearfix" method="POST" action="${process}">
             <label for="username-input">${locUsername}:</label>
-            <input class="form-control" type="title" name="username" id="username-input"
+            <input class="form-control" type="text" name="username" id="username-input"
                    placeholder="${locUsernamePlaceholder}"
                    minlength="5" maxlength="16"
                    pattern="[a-zA-Z]\w+"
-                   title="Must contain only latin letters, digits and underscore. Begins with latin letter"
+                   title="${locUsernameTitle}"
                    required/>
 
             <label for="password-input">${locPassword}:</label>
             <input class="form-control" type="password" name="password" id="password-input"
                    placeholder="${locPasswordPlaceholder}"
-                   minlength="6"
+                   minlength="5"
                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
-                   title="Must contain at least one letter in uppercase and lowercase and digit"
+                   maxlength="16"
+                   title="${locPasswordTitle}"
                    required/>
             <input class="form-control" type="password" placeholder="${locPasswordRepeatPlaceholder}"
                    id="password-repeat-input"
                    oninput="checkpassword()"
-                   minlength="6" required/>
-
-            <label for="birthday-input">${locBirthday}:</label>
-            <input class="form-control" type="date" name="birthday" id="birthday-input"
-                   onchange="validateBirthday(this)"
-                   required>
+                   minlength="5" required/>
 
             <label for="email-input">${locEmail}:</label>
             <input class="form-control" id="email-input" type="email" name="email" placeholder="Enter Email" required>
 
             <label for="first-name-input">${locFirstName}:</label>
-            <input class="form-control" type="title" name="firstName" id="first-name-input"
+            <input class="form-control" type="text" name="firstName" id="first-name-input" pattern="\S+" minlength="2"
+                   maxlength="20"
                    placeholder="${locFirstName}"
+                   title="${locNoSpaces}"
                    required>
 
             <label for="last-name-input">${locLastName}:</label>
-            <input class="form-control" type="title" name="lastName" id="last-name-input" placeholder="${locLastName}"
-                   required/>
+            <input class="form-control" type="text" name="lastName" id="last-name-input" placeholder="${locLastName}"
+                   pattern="\S+" minlength="2" maxlength="20" title="${locNoSpaces}" required/>
 
             <input type="radio" name="admin" value="false" checked/>${locParticipant}
             <br>

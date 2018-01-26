@@ -1,6 +1,8 @@
 package by.epam.tc.conference.services.exception;
 
-public class EntityNotFoundException extends ServiceException {
+import by.epam.tc.conference.commons.ConferenceException;
+
+public class EntityNotFoundException extends ConferenceException {
 
     public EntityNotFoundException() {
     }

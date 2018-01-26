@@ -45,7 +45,7 @@ public class ProcessRegisterCommandTest {
     }
 
     @Test
-    public void shouldAttemptToRegisterWhenExecute() throws ServiceException, NullPointerException {
+    public void shouldAttemptToRegisterWhenExecute() throws Exception {
         User user = new User();
         when(builder.build(request)).thenReturn(user);
         UserPrincipal principal = new UserPrincipal(1L, "test", false);
@@ -57,7 +57,7 @@ public class ProcessRegisterCommandTest {
     }
 
     @Test
-    public void shouldRedirectToAdminDashboardWhenUserIsAdmin() throws ServiceException {
+    public void shouldRedirectToAdminDashboardWhenUserIsAdmin() throws Exception {
         UserPrincipal admin = new UserPrincipal(1L, "admin", true);
         when(userService.registerUser(any())).thenReturn(admin);
 
@@ -67,7 +67,7 @@ public class ProcessRegisterCommandTest {
     }
 
     @Test
-    public void shouldRedirectToParticipantDashboardWhenUserIsParticipant() throws ServiceException {
+    public void shouldRedirectToParticipantDashboardWhenUserIsParticipant() throws Exception {
         UserPrincipal participant = new UserPrincipal(1L, "participant", false);
         when(userService.registerUser(any())).thenReturn(participant);
 
@@ -78,7 +78,7 @@ public class ProcessRegisterCommandTest {
     }
 
     @Test
-    public void shouldSpecifyErrorAndRedirectToRegisterPageWhenUserAlreadyExists() throws ServiceException {
+    public void shouldSpecifyErrorAndRedirectToRegisterPageWhenUserAlreadyExists() throws Exception {
         when(userService.registerUser(any())).thenThrow(new AlreadyExistsException());
 
         String view = command.execute(request, response);
@@ -88,7 +88,7 @@ public class ProcessRegisterCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws Exception {
         when(userService.registerUser(any())).thenThrow(new ServiceException());
 
         String view = command.execute(request, response);

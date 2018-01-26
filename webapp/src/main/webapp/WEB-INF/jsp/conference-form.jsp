@@ -27,14 +27,14 @@
             <input type="hidden" name="id" value="${fn:escapeXml(conference.id)}"/>
         </c:if>
         <label for="i-c-name">${locName}:</label>
-        <input type="title" class="form-control" id="i-c-name" name="name" minlength="4"
-               value="${fn:escapeXml(conference.name)}" required/>
+        <input type="text" class="form-control" id="i-c-name" name="name" minlength="5"
+               value="${fn:escapeXml(conference.name)}" pattern="(\S+\s?)*" required/>
         <label for="i-c-description">${locDescription}:</label>
-        <textarea class="form-control i-description" id="i-c-description" name="description" minlength="10" required>
+        <textarea class="form-control i-description" id="i-c-description" name="description" minlength="20" required>
             ${not empty conference ? fn:escapeXml(conference.description) : ""}
         </textarea>
         <label for="i-c-address">${locAddress}:</label>
-        <input type="title" class="form-control" id="i-c-address" name="address"
+        <input type="text" class="form-control" id="i-c-address" name="address" pattern="(\S+\s?)*" minlength="5"
                value="${fn:escapeXml(conference.address)}" required/>
         <label for="i-c-date">${locDate}:</label>
         <input type="date" id="i-c-date" class="form-control" name="datetime"

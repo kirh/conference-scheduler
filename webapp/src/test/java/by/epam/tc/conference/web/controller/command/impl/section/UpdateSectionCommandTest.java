@@ -43,7 +43,7 @@ public class UpdateSectionCommandTest {
     }
 
     @Test
-    public void shouldSpecifySectionAttributeForGivenId() throws ServiceException {
+    public void shouldSpecifySectionAttributeForGivenId() throws Exception {
         when(request.getParameter("id")).thenReturn("1");
         Section section = new Section();
         section.setId(1L);

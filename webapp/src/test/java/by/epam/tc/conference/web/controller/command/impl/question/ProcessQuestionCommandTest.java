@@ -50,7 +50,7 @@ public class ProcessQuestionCommandTest {
     }
 
     @Test
-    public void shouldCreateQuestionWhenExecute() throws ServiceException {
+    public void shouldCreateQuestionWhenExecute() throws ServiceException, InvalidEntityException {
         Question question = new Question();
         when(questionBuilder.build(request)).thenReturn(question);
         Message message = new Message();
@@ -62,7 +62,7 @@ public class ProcessQuestionCommandTest {
     }
 
     @Test
-    public void shouldBeBadRequestWhenInvalidDataGiven() throws ServiceException {
+    public void shouldBeBadRequestWhenInvalidDataGiven() throws ServiceException, InvalidEntityException {
         doThrow(new InvalidEntityException()).when(questionService).createQuestion(any(), any());
 
         String view = command.execute(request, response);
@@ -71,7 +71,7 @@ public class ProcessQuestionCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException, InvalidEntityException {
         doThrow(new ServiceException()).when(questionService).createQuestion(any(), any());
 
         String view = command.execute(request, response);

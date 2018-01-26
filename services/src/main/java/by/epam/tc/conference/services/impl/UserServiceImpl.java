@@ -5,7 +5,9 @@ import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.UserDao;
 import by.epam.tc.conference.entity.User;
 import by.epam.tc.conference.entity.UserPrincipal;
+import by.epam.tc.conference.services.exception.AlreadyExistsException;
 import by.epam.tc.conference.services.exception.AuthenticationException;
+import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.validator.UserValidator;
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserPrincipal authenticateUser(String username, String password) throws ServiceException {
+    public UserPrincipal authenticateUser(String username, String password) throws ServiceException, AuthenticationException {
         try {
             Optional<User> optionalUser = userDao.findByUserName(username);
             User user = optionalUser.orElseThrow(() -> new AuthenticationException("User doesn't exist"));
@@ -55,17 +57,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserPrincipal registerUser(User user) throws ServiceException {
+    public UserPrincipal registerUser(User user) throws ServiceException, InvalidEntityException,
+            AlreadyExistsException {
         boolean isValid = userValidator.validate(user);
-        if (isValid) {
-            try {
-                userDao.save(user);
-                logger.info("Registered user id={} username={}", user.getId(), user.getUsername());
-                return createUserPrincipal(user);
-            } catch (DaoException e) {
-                throw new ServiceException(e.getMessage(), e);
-            }
+        if (!isValid) {
+            throw new InvalidEntityException("invalid user: " + user);
         }
-        throw new ServiceException("Invalid user");
+        try {
+            String username = user.getUsername();
+            Optional<User> optionalUserWithSameUsername = userDao.findByUserName(username);
+            if (optionalUserWithSameUsername.isPresent()) {
+                throw new AlreadyExistsException("User with username " + username + "already exists");
+            }
+            userDao.save(user);
+            logger.info("Registered user id={} username={}", user.getId(), user.getUsername());
+            return createUserPrincipal(user);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
     }
 }

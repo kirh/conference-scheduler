@@ -67,7 +67,7 @@ public class ShowProposalCommandTest {
     }
 
     @Test
-    public void shouldBePageNotFoundWhenNoProposalWithSpecifiedIdExists() throws ServiceException {
+    public void shouldBePageNotFoundWhenNoProposalWithSpecifiedIdExists() throws ServiceException, EntityNotFoundException {
         when(proposalService.getProposal(any())).thenThrow(new EntityNotFoundException());
 
         String view = command.execute(request, response);
@@ -76,7 +76,7 @@ public class ShowProposalCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException, EntityNotFoundException {
         when(proposalService.getProposal(any())).thenThrow(new ServiceException());
 
         String view = command.execute(request, response);

@@ -1,6 +1,8 @@
 package by.epam.tc.conference.services.exception;
 
-public class AlreadyExistsException extends ServiceException {
+import by.epam.tc.conference.commons.ConferenceException;
+
+public class AlreadyExistsException extends ConferenceException {
 
     private static final long serialVersionUID = 42L;
 

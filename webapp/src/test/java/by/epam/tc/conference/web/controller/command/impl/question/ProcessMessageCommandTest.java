@@ -39,7 +39,7 @@ public class ProcessMessageCommandTest {
     private ProcessMessageCommand command;
 
     @Test
-    public void shouldCreateMessageAndRedirectToQuestionWhenValidDataGiven() throws ServiceException {
+    public void shouldCreateMessageAndRedirectToQuestionWhenValidDataGiven() throws ServiceException, InvalidEntityException {
         Message message = new Message();
         message.setQuestionId(1L);
         when(builder.build(request)).thenReturn(message);
@@ -51,7 +51,7 @@ public class ProcessMessageCommandTest {
     }
 
     @Test
-    public void shouldBeBadRequestWhenInvalidMessageDataGiven() throws ServiceException {
+    public void shouldBeBadRequestWhenInvalidMessageDataGiven() throws ServiceException, InvalidEntityException {
         doThrow(new InvalidEntityException()).when(messageService).createMessage(any());
 
         String view = command.execute(request, response);
@@ -60,7 +60,7 @@ public class ProcessMessageCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException, InvalidEntityException {
         doThrow(new ServiceException()).when(messageService).createMessage(any());
 
         String view = command.execute(request, response);

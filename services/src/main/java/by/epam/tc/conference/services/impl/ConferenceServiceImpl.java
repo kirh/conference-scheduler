@@ -5,20 +5,28 @@ import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.entity.Conference;
 import by.epam.tc.conference.services.ConferenceService;
 import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.services.validator.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of {@link ConferenceService}
+ * Contains base operation with conferences
+ */
 public class ConferenceServiceImpl implements ConferenceService {
 
     private static final Logger logger = LogManager.getLogger(ConferenceServiceImpl.class);
-    private  final ConferenceDao conferenceDao;
+    private final ConferenceDao conferenceDao;
+    private final Validator<Conference> validator;
 
-    public ConferenceServiceImpl(ConferenceDao conferenceDao) {
+    public ConferenceServiceImpl(ConferenceDao conferenceDao, Validator<Conference> validator) {
         this.conferenceDao = conferenceDao;
+        this.validator = validator;
     }
 
     @Override
@@ -33,8 +41,9 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
-    public void createConference(Conference conference) throws ServiceException {
+    public void createConference(Conference conference) throws InvalidEntityException, ServiceException {
         try {
+            validateConference(conference);
             conferenceDao.save(conference);
             logger.info("Created conference id={} name={}", conference.getId(),  conference.getName());
         } catch (DaoException e) {
@@ -43,8 +52,9 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
-    public void updateConference(Conference conference) throws ServiceException {
+    public void updateConference(Conference conference) throws InvalidEntityException, ServiceException {
         try {
+            validateConference(conference);
             conferenceDao.update(conference);
             logger.info("Updated conference id={} name={}", conference.getId(), conference.getName());
         } catch (DaoException e) {
@@ -76,6 +86,7 @@ public class ConferenceServiceImpl implements ConferenceService {
         }
     }
 
+
     @Override
     public List<Conference> getAllConferences() throws ServiceException {
         List<Conference> conferences = null;
@@ -85,6 +96,19 @@ public class ConferenceServiceImpl implements ConferenceService {
             return conferences;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * When conference is invalid throws {@link InvalidEntityException}
+     * Conference id == null is valid state
+     * @param conference to validate
+     * @throws InvalidEntityException when conference invalid
+     */
+    private void validateConference(Conference conference) throws InvalidEntityException {
+        boolean isValidConference = validator.validate(conference);
+        if (!isValidConference) {
+            throw new InvalidEntityException("Invalid conference " + conference);
         }
     }
 }

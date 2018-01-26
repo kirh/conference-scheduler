@@ -20,9 +20,9 @@
     <form class="clearfix" action="${addQuestion}" method="post">
         <input type="hidden" name="conferenceId" value="${fn:escapeXml(param.conferenceId)}" required/>
         <label for="i-q-title">${locTitle}:</label>
-        <input class="form-control" id="i-q-title" type="text" name="title" required/>
+        <input class="form-control" id="i-q-title" type="text" name="title" minlength="5" pattern="(\S+\s?)*" required/>
         <label for="i-q-text">${locQuestion}:</label>
-        <input class="form-control" id="i-q-text" type="text" name="text" required/>
+        <input class="form-control" id="i-q-text" type="text" name="text" minlength="5" pattern="(\S+\s?)*" required/>
         <button type="button" class="btn btn-cancel left" onclick="goToPreviousPage()">${locCancel}</button>
         <input class="btn right" type="submit" value="${locSend}"/>
     </form>

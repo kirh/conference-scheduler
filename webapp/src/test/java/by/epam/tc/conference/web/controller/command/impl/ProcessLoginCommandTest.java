@@ -46,7 +46,7 @@ public class ProcessLoginCommandTest {
     }
 
     @Test
-    public void shouldAttemptToLoginWhenUsernameAndPasswordNotBlank() throws ServiceException {
+    public void shouldAttemptToLoginWhenUsernameAndPasswordNotBlank() throws Exception {
         UserPrincipal user = new UserPrincipal();
         when(userService.authenticateUser(any(), any())).thenReturn(user);
 
@@ -56,7 +56,7 @@ public class ProcessLoginCommandTest {
     }
 
     @Test
-    public void shouldSpecifyUserPrincipalSessionAttributeWhenLoggedInSuccessful() throws ServiceException {
+    public void shouldSpecifyUserPrincipalSessionAttributeWhenLoggedInSuccessful() throws Exception {
         UserPrincipal user = new UserPrincipal();
         when(userService.authenticateUser(any(), any())).thenReturn(user);
 
@@ -66,7 +66,7 @@ public class ProcessLoginCommandTest {
     }
 
     @Test
-    public void shouldRedirectToAdminDashboardWhenUserIsAdmin() throws ServiceException {
+    public void shouldRedirectToAdminDashboardWhenUserIsAdmin() throws Exception {
         UserPrincipal admin = new UserPrincipal(1L, "admin", true);
         when(userService.authenticateUser(any(), any())).thenReturn(admin);
 
@@ -76,7 +76,7 @@ public class ProcessLoginCommandTest {
     }
 
     @Test
-    public void shouldRedirectToParticipantDashboardWhenUserIsParticipant() throws ServiceException {
+    public void shouldRedirectToParticipantDashboardWhenUserIsParticipant() throws Exception {
         UserPrincipal participant = new UserPrincipal(1L, "participant", false);
         when(userService.authenticateUser(any(), any())).thenReturn(participant);
 
@@ -86,7 +86,7 @@ public class ProcessLoginCommandTest {
     }
 
     @Test
-    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException {
+    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws Exception {
         when(userService.authenticateUser(any(), any())).thenThrow(new ServiceException());
 
         String view = command.execute(request, response);
