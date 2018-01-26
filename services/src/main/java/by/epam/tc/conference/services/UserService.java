@@ -7,9 +7,27 @@ import by.epam.tc.conference.services.exception.AuthenticationException;
 import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
 
+/**
+ * Base user operations
+ */
 public interface UserService {
 
+    /**
+     * Authenticates user with provided username and password
+     * @param username to authenticate
+     * @param password related to given username
+     * @return UserPrincipal that represents current user
+     * @throws AuthenticationException when user with such username doesn't exist or password mismatch
+     * @throws ServiceException when error during data access occurs
+     */
     UserPrincipal authenticateUser(String username, String password) throws AuthenticationException, ServiceException;
 
-    UserPrincipal registerUser(User user) throws InvalidEntityException, AlreadyExistsException, ServiceException;
+    /**
+     * Creates new user
+     * @param user contains user information
+     * @return UserPrincipal that represents registered user
+     * @throws InvalidEntityException when user is invalid
+     * @throws ServiceException when error during data access occurs
+     */
+    UserPrincipal registerUser(User user) throws InvalidEntityException, ServiceException, AlreadyExistsException;
 }
