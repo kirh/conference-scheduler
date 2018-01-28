@@ -2,14 +2,20 @@ package by.epam.tc.conference.web.controller.command.impl.section;
 
 import by.epam.tc.conference.services.SectionService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DeleteSectionCommand extends AbstractCommand {
 
+    private static final Logger logger = LogManager.getLogger(DeleteSectionCommand.class);
     private static final String SECTION_ID_PARAM = "id";
+    private static final String REDIRECT_TO_PREVIOUS_PAGE = "redirect:";
+
     private final SectionService sectionService;
 
     public DeleteSectionCommand(SectionService sectionService) {
@@ -17,16 +23,15 @@ public class DeleteSectionCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        Long id = parseIdParameter(request, SECTION_ID_PARAM);
-        if (id == null) {
-            return processBadRequest(request, response);
-        }
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
-            sectionService.deleteSection(id);
-            return "redirect:";
+            Long sectionId = parseIdParameter(request, SECTION_ID_PARAM);
+            logger.debug("Deleting section id={}", sectionId);
+            Long userId = getUserId(request);
+            sectionService.deleteSection(sectionId, userId);
+            return REDIRECT_TO_PREVIOUS_PAGE;
         } catch (ServiceException e) {
-            return processInternalError(request, response);
+            throw CommandException.from(e, "Failed to delete section");
         }
     }
 }

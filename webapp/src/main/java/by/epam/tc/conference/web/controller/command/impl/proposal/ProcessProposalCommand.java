@@ -2,9 +2,8 @@ package by.epam.tc.conference.web.controller.command.impl.proposal;
 
 import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.services.ProposalService;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
-import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import by.epam.tc.conference.web.controller.command.impl.conference.ProcessConferenceCommand;
@@ -28,42 +27,19 @@ public class ProcessProposalCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        logger.traceEntry();
-        Proposal proposal = builder.build(request);
-        String query;
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
+            logger.debug("Processing proposal");
+            Proposal proposal = builder.build(request);
             if (proposal.getId() == null) {
                 proposalService.createProposal(proposal);
-                query = REDIRECT_PARTICIPANT_DASHBOARD_QUERY;
             } else {
-                query = update(request, response, proposal);
+                Long userId = getUserId(request);
+                proposalService.updateProposal(proposal, userId);
             }
-            return logger.traceExit(query);
-        } catch (InvalidEntityException | EntityNotFoundException e) {
-            logger.debug("Failed to process proposal {}", proposal, e);
-            return processBadRequest(request, response);
-        } catch (ServiceException e) {
-            logger.error("Internal Error. Failed to process proposal {}", proposal, e);
-            return processInternalError(request, response);
-        }
-    }
-
-    private String update(HttpServletRequest request, HttpServletResponse response, Proposal proposal) throws
-            ServiceException, InvalidEntityException, EntityNotFoundException {
-        Long userId = getUserId(request);
-        if (isOwner(proposal, userId)) {
-            proposalService.updateProposal(proposal);
             return REDIRECT_PARTICIPANT_DASHBOARD_QUERY;
+        } catch (ServiceException e) {
+            throw CommandException.from(e, "Failed to process proposal");
         }
-        logger.debug("Failed to update proposal id={}, user id={} is not the owner", proposal.getId(), userId);
-        return forbidRequest(request, response);
-    }
-
-    private boolean isOwner(Proposal proposal, long userId) throws ServiceException, EntityNotFoundException {
-        Long id = proposal.getId();
-        Proposal persistedProposal = proposalService.getProposal(id);
-        long participantId = persistedProposal.getParticipantId();
-        return participantId == userId;
     }
 }

@@ -3,8 +3,8 @@ package by.epam.tc.conference.web.controller.command.impl.question;
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.entity.Question;
 import by.epam.tc.conference.services.QuestionService;
-import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
@@ -29,20 +29,15 @@ public class ProcessQuestionCommand extends AbstractCommand {
 
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        logger.traceEntry();
-        Question question = questionBuilder.build(request);
-        Message message = messageBuilder.build(request);
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
+            logger.debug("Processing question");
+            Question question = questionBuilder.build(request);
+            Message message = messageBuilder.build(request);
             questionService.createQuestion(question, message);
-            String query = "redirect:/conference?action=show&id=" + question.getConferenceId();
-            return logger.traceExit(query);
-        } catch (InvalidEntityException e) {
-            logger.debug("Failed to process question {} {}", question, message, e);
-            return processBadRequest(request, response);
+            return "redirect:/conference?action=show&id=" + question.getConferenceId();
         } catch (ServiceException e) {
-            logger.debug("Failed to process question {} {}", question, message, e);
-            return processInternalError(request, response);
+            throw CommandException.from(e, "Failed to process question");
         }
     }
 }

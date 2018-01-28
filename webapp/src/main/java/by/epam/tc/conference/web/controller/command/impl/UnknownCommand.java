@@ -1,18 +1,22 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
+import by.epam.tc.conference.web.controller.ErrorMessage;
+import by.epam.tc.conference.web.controller.command.Command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UnknownCommand extends AbstractCommand {
+public class UnknownCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(UnknownCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         logger.traceEntry();
-        return processPageNotFound(request, response);
+        request.setAttribute("error", ErrorMessage.NOT_FOUND);
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "error";
     }
 }

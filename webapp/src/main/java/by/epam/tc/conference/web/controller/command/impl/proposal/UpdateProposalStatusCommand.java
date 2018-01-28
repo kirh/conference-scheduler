@@ -3,6 +3,8 @@ package by.epam.tc.conference.web.controller.command.impl.proposal;
 import by.epam.tc.conference.entity.ProposalStatus;
 import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.ErrorMessage;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,25 +24,25 @@ public class UpdateProposalStatusCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        logger.traceEntry();
-        Long id = parseIdParameter(request, PROPOSAL_ID_PARAM);
-        String statusString = request.getParameter(PROPOSAL_STATUS_PARAM);
-        if (id == null) {
-            return processBadRequest(request, response);
-        }
-        ProposalStatus status;
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
-            status = ProposalStatus.valueOf(statusString.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            return processBadRequest(request, response);
-        }
-
-        try {
-            proposalService.updateStatus(id, status);
-            return "redirect:/proposal?action=show&id=" + id;
+            Long proposalId = parseIdParameter(request, PROPOSAL_ID_PARAM);
+            ProposalStatus status = parseStatus(request);
+            logger.debug("Update proposal id={} status to {}", proposalId, status);
+            Long userId = getUserId(request);
+            proposalService.updateStatus(proposalId, status, userId);
+            return "redirect:/proposal?action=show&id=" + proposalId;
         } catch (ServiceException e) {
-            return processInternalError(request, response);
+            throw CommandException.from(e, "Failed to update status");
+        }
+    }
+
+    private ProposalStatus parseStatus(HttpServletRequest request) throws CommandException {
+        try {
+            String statusString = request.getParameter(PROPOSAL_STATUS_PARAM);
+            return ProposalStatus.valueOf(statusString.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage(), HttpServletResponse.SC_BAD_REQUEST, ErrorMessage.BAD_REQUEST);
         }
     }
 }

@@ -2,8 +2,8 @@ package by.epam.tc.conference.web.controller.command.impl.question;
 
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.services.MessageService;
-import by.epam.tc.conference.services.exception.InvalidEntityException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
@@ -24,18 +24,14 @@ public class ProcessMessageCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        logger.traceEntry();
-        Message message = builder.build(request);
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
+            logger.debug("Processing message");
+            Message message = builder.build(request);
             messageService.createMessage(message);
             return "redirect:/question?action=show&id=" + message.getQuestionId();
-        } catch (InvalidEntityException e) {
-            logger.debug("Failed to process message {}", message, e);
-            return processBadRequest(request, response);
         } catch (ServiceException e) {
-            logger.error("Failed to process message {}", message, e);
-            return processInternalError(request, response);
+            throw CommandException.from(e, "Failed to process message");
         }
     }
 }

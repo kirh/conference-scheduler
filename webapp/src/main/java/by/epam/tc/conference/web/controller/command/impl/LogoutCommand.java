@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 public class LogoutCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(LogoutCommand.class);
+    private static final String REDIRECT_TO_LOGIN = "redirect:/login";
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         logger.traceEntry();
         HttpSession session = request.getSession();
         session.invalidate();
         logger.debug("Logged out");
-        return "redirect:/login";
+        return REDIRECT_TO_LOGIN;
     }
 }

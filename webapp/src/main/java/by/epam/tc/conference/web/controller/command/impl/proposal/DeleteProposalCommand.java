@@ -1,10 +1,8 @@
 package by.epam.tc.conference.web.controller.command.impl.proposal;
 
-import by.epam.tc.conference.entity.Proposal;
-import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ProposalService;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,32 +22,15 @@ public class DeleteProposalCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        logger.traceEntry();
-        Long id = parseIdParameter(request, PROPOSAL_ID_PARAM);
-        if (id == null) {
-            logger.debug("Failed to delete proposal. Incorrect proposal id");
-            return processBadRequest(request, response);
-        }
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
-            Proposal proposal = proposalService.getProposal(id);
-            long participantId = proposal.getParticipantId();
-            UserPrincipal user = getUser(request);
-            long userId = user.getId();
-            String query;
-            if (participantId == userId) {
-                proposalService.deleteProposal(id);
-                query = REDIRECT_USER_DASHBOARD;
-            } else {
-                logger.debug("Failed to delete proposal id={}. Request forbidden. User id={} is not the owner", id);
-                query = forbidRequest(request, response);
-            }
-            return query;
-        } catch (ServiceException e) {
-            logger.error("Failed to delete proposal id={}", id, e);
-            return processInternalError(request, response);
-        } catch (EntityNotFoundException e) {
+            Long proposalId = parseIdParameter(request, PROPOSAL_ID_PARAM);
+            logger.debug("Deleting proposal id={}", proposalId);
+            Long userId = getUserId(request);
+            proposalService.deleteProposal(proposalId, userId);
             return REDIRECT_USER_DASHBOARD;
+        } catch (ServiceException e) {
+            throw CommandException.from(e, "Failed to delete proposal");
         }
     }
 }

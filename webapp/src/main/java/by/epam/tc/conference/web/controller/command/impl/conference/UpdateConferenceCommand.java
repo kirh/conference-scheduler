@@ -2,8 +2,8 @@ package by.epam.tc.conference.web.controller.command.impl.conference;
 
 import by.epam.tc.conference.entity.Conference;
 import by.epam.tc.conference.services.ConferenceService;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import by.epam.tc.conference.web.controller.command.impl.proposal.UpdateProposalStatusCommand;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +17,8 @@ public class UpdateConferenceCommand extends AbstractCommand {
     private static final Logger logger = LogManager.getLogger(UpdateProposalStatusCommand.class);
     private static final String CONFERENCE_ID_PARAM = "id";
     private static final String CONFERENCE_ATTRIBUTE = "conference";
+    private static final String CONFERENCE_FORM_VIEW = "conference-form";
+
     private final ConferenceService conferenceService;
 
     public UpdateConferenceCommand(ConferenceService conferenceService) {
@@ -24,23 +26,15 @@ public class UpdateConferenceCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        logger.traceEntry();
-        Long conferenceId = parseIdParameter(request, CONFERENCE_ID_PARAM);
-        if (conferenceId == null) {
-            logger.debug("Failed to update conference. Incorrect conference id");
-            return processBadRequest(request, response);
-        }
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
+            Long conferenceId = parseIdParameter(request, CONFERENCE_ID_PARAM);
+            logger.debug("Loading edit page for conference id={}", conferenceId);
             Conference conference = conferenceService.getConference(conferenceId);
             request.setAttribute(CONFERENCE_ATTRIBUTE, conference);
-            return "conference-form";
-        } catch (EntityNotFoundException e) {
-            logger.debug("Failed to update conference id='{}'", conferenceId, e);
-            return processPageNotFound(request, response);
+            return CONFERENCE_FORM_VIEW;
         } catch (ServiceException e) {
-            logger.error("Internal error. Failed to update conference id='{}'", conferenceId, e);
-            return processInternalError(request, response);
+            throw CommandException.from(e, "Failed to load edit page");
         }
     }
 }

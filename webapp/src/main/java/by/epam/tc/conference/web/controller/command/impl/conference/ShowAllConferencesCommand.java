@@ -3,6 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl.conference;
 import by.epam.tc.conference.entity.Conference;
 import by.epam.tc.conference.services.ConferenceService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,16 +23,14 @@ public class ShowAllConferencesCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        logger.traceEntry();
-        String query;
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
+            logger.debug("Show all conferences");
             List<Conference> conferences = conferenceService.getAllConferences();
             request.setAttribute(CONFERENCES_ATTRIBUTE, conferences);
             return  "conferences";
         } catch (ServiceException e) {
-            logger.error("Internal error. Could not show all conferences", e);
-            return processInternalError(request, response);
+            throw CommandException.from(e, "Failed to show all conferences");
         }
     }
 }

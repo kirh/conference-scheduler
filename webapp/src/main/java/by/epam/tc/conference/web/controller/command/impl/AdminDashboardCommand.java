@@ -1,9 +1,9 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.entity.Conference;
-import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ConferenceService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,6 +15,8 @@ public class AdminDashboardCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(AdminDashboardCommand.class);
     private static final String CONFERENCES_ATTRIBUTE = "conferences";
+    private static final String ADMIN_DASHBOARD_VIEW = "admin-dashboard";
+
     private final ConferenceService conferenceService;
 
     public AdminDashboardCommand(ConferenceService conferenceService) {
@@ -22,17 +24,15 @@ public class AdminDashboardCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        logger.traceEntry();
-        UserPrincipal user = getUser(request);
-        Long id = user.getId();
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
-            List<Conference> conferences = conferenceService.findConferencesByAdministratorId(id);
+            logger.debug("loading admin dashboard");
+            Long userId = getUserId(request);
+            List<Conference> conferences = conferenceService.findConferencesByAdministratorId(userId);
             request.setAttribute(CONFERENCES_ATTRIBUTE, conferences);
-            return logger.traceExit("admin-dashboard");
+            return ADMIN_DASHBOARD_VIEW;
         } catch (ServiceException e) {
-            logger.error("Failed to load admin-dashboard. Internal error", e);
-            return processInternalError(request, response);
+            throw CommandException.from(e, "Failed to load admin-dashboard");
         }
     }
 }

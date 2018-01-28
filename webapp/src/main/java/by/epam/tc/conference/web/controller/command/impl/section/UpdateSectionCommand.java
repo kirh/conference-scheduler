@@ -2,8 +2,8 @@ package by.epam.tc.conference.web.controller.command.impl.section;
 
 import by.epam.tc.conference.entity.Section;
 import by.epam.tc.conference.services.SectionService;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +15,9 @@ public class UpdateSectionCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(UpdateSectionCommand.class);
     private static final String SECTION_ID_PARAM = "id";
+    private static final String SECTION_FORM_VIEW = "section-form";
+    private static final String SECTION_ATTRIBUTE = "section";
+
     private final SectionService sectionService;
 
     public UpdateSectionCommand(SectionService sectionService) {
@@ -22,21 +25,15 @@ public class UpdateSectionCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        Long id = parseIdParameter(request, SECTION_ID_PARAM);
-        if (id == null) {
-            return processBadRequest(request, response);
-        }
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
-            Section section = sectionService.getSection(id);
-            request.setAttribute("section", section);
-            return "section-form";
+            Long sectionId = parseIdParameter(request, SECTION_ID_PARAM);
+            logger.debug("Loading edit page for section id={}", sectionId);
+            Section section = sectionService.getSection(sectionId);
+            request.setAttribute(SECTION_ATTRIBUTE, section);
+            return SECTION_FORM_VIEW;
         } catch (ServiceException e) {
-            logger.error("Failed to update section id={}", id, e);
-            return processInternalError(request, response);
-        } catch (EntityNotFoundException e) {
-            logger.error("Failed to update section id={}", id, e);
-            return processPageNotFound(request, response);
+            throw CommandException.from(e, "Failed to load edit page");
         }
     }
 }

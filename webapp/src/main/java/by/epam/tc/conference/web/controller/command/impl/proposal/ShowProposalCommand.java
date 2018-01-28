@@ -2,8 +2,8 @@ package by.epam.tc.conference.web.controller.command.impl.proposal;
 
 import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.services.ProposalService;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,24 +23,15 @@ public class ShowProposalCommand extends AbstractCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        Long id = parseIdParameter(request, PROPOSAL_ID_PARAM);
-        if (id == null) {
-            logger.debug("Failed to show proposal. Incorrect id");
-            return processBadRequest(request, response);
-        }
-
-        String query;
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
+            Long id = parseIdParameter(request, PROPOSAL_ID_PARAM);
+            logger.debug("Show proposal id={}", id);
             Proposal proposal = proposalService.getProposal(id);
             request.setAttribute(PROPOSAL_ATTRIBUTE, proposal);
-            return  "proposal";
-        } catch (EntityNotFoundException e) {
-            logger.debug("Failed to show proposal id={}", id, e);
-            return processPageNotFound(request, response);
+            return "proposal";
         } catch (ServiceException e) {
-            logger.error("Error occurred in attempt to show proposal", e);
-            return processInternalError(request, response);
+            throw CommandException.from(e, "Failed to show proposal");
         }
     }
 }
