@@ -6,7 +6,7 @@ import by.epam.tc.conference.dao.MessageDetailsDao;
 import by.epam.tc.conference.dto.MessageDetails;
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.services.MessageService;
-import by.epam.tc.conference.services.exception.InvalidEntityException;
+import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.services.validator.Validator;
 import org.apache.logging.log4j.LogManager;
@@ -28,11 +28,11 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public void createMessage(Message message) throws ServiceException, InvalidEntityException {
+    public void createMessage(Message message) throws ServiceException {
         try {
             boolean isValid = validator.validate(message);
             if (!isValid) {
-                throw new InvalidEntityException("invalid message: " + message);
+                throw new InvalidDataException("invalid message: " + message);
             }
             messageDao.save(message);
             logger.info("Created message id={}", message.getId());
@@ -42,10 +42,10 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public List<MessageDetails> findMessagesByQuestionId(Long id) throws ServiceException {
+    public List<MessageDetails> findMessagesByQuestionId(long questionId) throws ServiceException {
         try {
-            List<MessageDetails> messages = messageDetailsDao.findMessagesByQuestionId(id);
-            logger.info("Found {} messageDetails for question with id={}", messages.size(), id);
+            List<MessageDetails> messages = messageDetailsDao.findMessagesByQuestionId(questionId);
+            logger.info("Found {} messageDetails for question with id={}", messages.size(), questionId);
             return messages;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);

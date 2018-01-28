@@ -4,8 +4,9 @@ import by.epam.tc.conference.dao.ConferenceDao;
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.entity.Conference;
 import by.epam.tc.conference.services.ConferenceService;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
-import by.epam.tc.conference.services.exception.InvalidEntityException;
+import by.epam.tc.conference.services.exception.NoAuthorityException;
+import by.epam.tc.conference.services.exception.NotFoundException;
+import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.services.validator.Validator;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +31,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
-    public List<Conference> findConferencesByAdministratorId(Long administratorId) throws ServiceException {
+    public List<Conference> findConferencesByAdministratorId(long administratorId) throws ServiceException {
         try {
             List<Conference> conferences = conferenceDao.findConferencesByUserId(administratorId);
             logger.debug("Found {} conferences with administrator id = {}", conferences.size(), administratorId);
@@ -41,7 +42,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
-    public void createConference(Conference conference) throws InvalidEntityException, ServiceException {
+    public void createConference(Conference conference) throws ServiceException {
         try {
             validateConference(conference);
             conferenceDao.save(conference);
@@ -52,34 +53,44 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
-    public void updateConference(Conference conference) throws InvalidEntityException, ServiceException {
+    public void updateConference(Conference conference, long userId) throws ServiceException {
         try {
             validateConference(conference);
+            Long conferenceId = conference.getId();
+            if (!hasAuthority(conferenceId, userId)) {
+                throw new NoAuthorityException("Failed to update conference id=" + conferenceId + " user id=" + userId + " " +
+                        "has " +
+                        "no authority");
+            }
             conferenceDao.update(conference);
             logger.info("Updated conference id={} name={}", conference.getId(), conference.getName());
         } catch (DaoException e) {
-            throw new ServiceException("Failed to update conference");
+            throw new ServiceException(e.getMessage(), e);
         }
     }
 
     @Override
-    public void deleteConferenceById(Long id) throws ServiceException {
+    public void deleteConferenceById(long id, long userId) throws ServiceException {
         try {
+            if (!hasAuthority(id, userId)) {
+                throw new NoAuthorityException("Failed to delete conference id=" + id + " user id=" + userId + " has " +
+                        "no authority");
+            }
             conferenceDao.deleteById(id);
             logger.info("Deleted conference id={}", id);
         } catch (DaoException e) {
-            throw new ServiceException("Failed to delete conference " + e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
         }
     }
 
     @Override
-    public Conference getConference(Long id) throws EntityNotFoundException, ServiceException {
+    public Conference getConference(long conferenceId) throws ServiceException {
         try {
-            Optional<Conference> optionalConference = conferenceDao.findById(id);
+            Optional<Conference> optionalConference = conferenceDao.findById(conferenceId);
             Conference conference = optionalConference.orElseThrow(() ->
-                    new EntityNotFoundException("There is no conference with id=" + id)
+                    new NotFoundException("There is no conference with id=" + conferenceId)
             );
-            logger.debug("conference with id={} returned", id);
+            logger.debug("conference with id={} returned", conferenceId);
             return conference;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
@@ -100,15 +111,32 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     /**
-     * When conference is invalid throws {@link InvalidEntityException}
+     * When conference is invalid throws {@link InvalidDataException}
      * Conference id == null is valid state
      * @param conference to validate
-     * @throws InvalidEntityException when conference invalid
+     * @throws InvalidDataException when conference invalid
      */
-    private void validateConference(Conference conference) throws InvalidEntityException {
+    private void validateConference(Conference conference) throws InvalidDataException {
         boolean isValidConference = validator.validate(conference);
         if (!isValidConference) {
-            throw new InvalidEntityException("Invalid conference " + conference);
+            throw new InvalidDataException("Invalid conference " + conference);
         }
+    }
+
+    /**
+     * Checks if user has authority to manage specified conference
+     * @param conferenceId conference identifier
+     * @param userId user identifier
+     * @return true if user can manage conference
+     * @throws DaoException when error during data access occurs
+     */
+    private boolean hasAuthority(long conferenceId, long userId) throws DaoException {
+        Optional<Conference> optionalConference = conferenceDao.findById(conferenceId);
+        if (!optionalConference.isPresent()) {
+            return false;
+        }
+        Conference conference = optionalConference.get();
+        Long administratorId = conference.getAdministratorId();
+        return administratorId == userId;
     }
 }

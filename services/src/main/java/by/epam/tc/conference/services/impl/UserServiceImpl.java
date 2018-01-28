@@ -1,39 +1,41 @@
 package by.epam.tc.conference.services.impl;
 
-import by.epam.tc.conference.commons.Md5Util;
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.UserDao;
 import by.epam.tc.conference.entity.User;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.exception.AlreadyExistsException;
 import by.epam.tc.conference.services.exception.AuthenticationException;
-import by.epam.tc.conference.services.exception.InvalidEntityException;
+import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.services.UserService;
-import by.epam.tc.conference.services.validator.UserValidator;
+import by.epam.tc.conference.services.validator.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
     private final UserDao userDao;
-    private final UserValidator userValidator;
+    private final Validator<User> validator;
+    private final Function<String, String> passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao, UserValidator userValidator) {
+    public UserServiceImpl(UserDao userDao, Validator<User> validator, Function<String,String> passwordEncoder) {
         this.userDao = userDao;
-        this.userValidator = userValidator;
+        this.validator = validator;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public UserPrincipal authenticateUser(String username, String password) throws ServiceException, AuthenticationException {
+    public UserPrincipal authenticateUser(String username, String password) throws ServiceException {
         try {
-            Optional<User> optionalUser = userDao.findByUserName(username);
+            Optional<User> optionalUser = userDao.findByUsername(username);
             User user = optionalUser.orElseThrow(() -> new AuthenticationException("User doesn't exist"));
 
-            String inputPasswordHash = Md5Util.encode(password);
+            String inputPasswordHash = passwordEncoder.apply(password);
             String storedPasswordHash = user.getPassword();
 
             if (inputPasswordHash.equals(storedPasswordHash)) {
@@ -57,15 +59,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserPrincipal registerUser(User user) throws ServiceException, InvalidEntityException,
-            AlreadyExistsException {
-        boolean isValid = userValidator.validate(user);
+    public UserPrincipal registerUser(User user) throws ServiceException {
+        boolean isValid = validator.validate(user);
         if (!isValid) {
-            throw new InvalidEntityException("invalid user: " + user);
+            throw new InvalidDataException("invalid user: " + user);
         }
         try {
             String username = user.getUsername();
-            Optional<User> optionalUserWithSameUsername = userDao.findByUserName(username);
+            Optional<User> optionalUserWithSameUsername = userDao.findByUsername(username);
             if (optionalUserWithSameUsername.isPresent()) {
                 throw new AlreadyExistsException("User with username " + username + "already exists");
             }

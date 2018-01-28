@@ -8,7 +8,7 @@ import by.epam.tc.conference.dto.QuestionDetails;
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.entity.Question;
 import by.epam.tc.conference.services.QuestionService;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.NotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,10 +44,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionDetails> findQuestionsByAdministratorId(Long id) throws ServiceException {
+    public List<QuestionDetails> findQuestionsByAdministratorId(long administratorId) throws ServiceException {
         try {
-            List<QuestionDetails> questions = questionDetailsDao.findQuestionsByAdminId(id);
-            logger.info("Found {} questionDetails for administratod id={}", questions.size(), id);
+            List<QuestionDetails> questions = questionDetailsDao.findQuestionsByAdminId(administratorId);
+            logger.info("Found {} questionDetails for administratod id={}", questions.size(), administratorId);
             return questions;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
@@ -55,12 +55,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestion(Long id) throws ServiceException, EntityNotFoundException {
+    public Question getQuestion(long questionId) throws ServiceException {
         try {
-            Optional<Question> optionalQuestion = questionDao.findById(id);
+            Optional<Question> optionalQuestion = questionDao.findById(questionId);
             Question question = optionalQuestion.orElseThrow(() ->
-                    new EntityNotFoundException("Not Found question id=" + id));
-            logger.info("conference id={} returned", id);
+                    new NotFoundException("Not Found question id=" + questionId));
+            logger.info("conference id={} returned", questionId);
             return question;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
@@ -68,10 +68,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionDetails> findQuestionsByParticipantId(Long id) throws ServiceException {
+    public List<QuestionDetails> findQuestionsByParticipantId(long participantId) throws ServiceException {
         try {
-            List<QuestionDetails> questions = questionDetailsDao.findQuestionsByParticipantId(id);
-            logger.info("Found {} questionDetails for participant id={}", questions.size(), id);
+            List<QuestionDetails> questions = questionDetailsDao.findQuestionsByParticipantId(participantId);
+            logger.info("Found {} questionDetails for participant id={}", questions.size(), participantId);
             return questions;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
