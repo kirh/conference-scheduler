@@ -11,7 +11,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.ReentrantLock;
 
-public final class ConnectionPool {
+public class ConnectionPool {
 
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
     private static final String VALIDATION_QUERY = "/* ping */ SELECT 1";
@@ -19,7 +19,6 @@ public final class ConnectionPool {
     private volatile static ConnectionPool INSTANCE;
 
     private final MysqlDataSource dataSource = new MysqlDataSource();
-    private final ThreadLocal<Connection> localConnection = new ThreadLocal<>();
     private BlockingQueue<Connection> availableConnections;
     private BlockingQueue<Connection> givenAwayConnections;
 
@@ -32,9 +31,11 @@ public final class ConnectionPool {
             try {
                 lock.lock();
                 if (INSTANCE == null) {
+                    logger.debug("Starting connection pool");
                     ConnectionPool pool = new ConnectionPool();
                     pool.init();
                     INSTANCE = pool;
+                    logger.debug("Connection pool started successful");
                 }
             } finally {
                 lock.unlock();
@@ -44,6 +45,7 @@ public final class ConnectionPool {
     }
 
     private void init() {
+        logger.debug("Reading connection parameters");
         DBResourceManager resourceManager = DBResourceManager.getInstance();
         String url = resourceManager.getValue(DBParameter.DB_URL);
         dataSource.setURL(url);
@@ -55,37 +57,37 @@ public final class ConnectionPool {
         Integer capacity = Integer.valueOf(poolSize);
         givenAwayConnections = new ArrayBlockingQueue<>(capacity);
         availableConnections = new ArrayBlockingQueue<>(capacity);
+        logger.debug("Populating pool with connections");
         for (int i = 0; i < capacity; i++) {
             try {
                 availableConnections.add(createConnection());
             } catch (ConnectionPoolException e) {
-                throw new ConnectionPoolInitializationException("Error during initialization " + e.getMessage());
+                throw new ConnectionPoolException("Error during initialization " + e.getMessage());
             }
         }
     }
 
     public Connection takeConnection() throws ConnectionPoolException {
-        Connection connection = localConnection.get();
-        if (connection == null) {
-            connection = takeFromAvailable();
-            localConnection.set(connection);
-        }
+        Connection connection = takeFromAvailable();
 
         if (validateConnection(connection)) {
+            logger.debug("Connection was taken from pool");
             return connection;
         }
 
         Connection newConnection = createConnection();
         replaceGivenAwayConnection(connection, newConnection);
-        localConnection.set(connection);
+        logger.debug("Connection reopened and taken from pool");
         return newConnection;
     }
 
     public void putConnection(Connection connection) {
         boolean removed = givenAwayConnections.remove(connection);
         if (removed) {
-            localConnection.remove();
             availableConnections.add(connection);
+            logger.debug("Connection returned");
+        } else {
+            logger.debug("Attempt to return unknown connection");
         }
     }
 
@@ -130,6 +132,16 @@ public final class ConnectionPool {
             } catch (SQLException e) {
                 // ignored
             }
+        }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        for (Connection connection : availableConnections) {
+            closeConnection(connection);
+        }
+        for (Connection connection : givenAwayConnections) {
+            closeConnection(connection);
         }
     }
 }

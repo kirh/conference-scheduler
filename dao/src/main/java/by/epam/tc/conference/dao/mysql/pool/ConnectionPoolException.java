@@ -1,6 +1,9 @@
 package by.epam.tc.conference.dao.mysql.pool;
 
-public class ConnectionPoolException extends Exception {
+/**
+ * Wrapper for checked exceptions in connection pool
+ */
+public class ConnectionPoolException extends RuntimeException {
 
     private static final long serialVersionUID = 42L;
 
