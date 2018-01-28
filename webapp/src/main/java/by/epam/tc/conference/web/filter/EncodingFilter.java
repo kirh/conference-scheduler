@@ -3,7 +3,9 @@ package by.epam.tc.conference.web.filter;
 import javax.servlet.*;
 import java.io.IOException;
 
-
+/**
+ * Specifies request encoding
+ */
 public class EncodingFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

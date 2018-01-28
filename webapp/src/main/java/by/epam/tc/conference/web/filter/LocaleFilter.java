@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Checks user for locale. If locales wasn't specified, then attempts to resolve it.
+ */
 public class LocaleFilter implements Filter {
 
     private static final String ATTRIBUTE_LOCALE = "locale";
@@ -40,7 +43,6 @@ public class LocaleFilter implements Filter {
             if (Languages.contains(acceptedLanguage)) {
                 language = acceptedLanguage;
             }
-
             if (language == null) {
                 language = Languages.DEFAULT.getCode();
             }

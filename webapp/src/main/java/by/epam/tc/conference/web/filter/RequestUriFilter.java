@@ -4,6 +4,9 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * Forwards all requests to front controller
+ */
 public class RequestUriFilter implements Filter {
 
     private static final String STATIC_URI_PREFIX = "/static";

@@ -16,12 +16,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * When user wasn't authenticated and requested page not allowed then he will be redirected to login page
+ */
 public class AuthenticationFilter implements Filter {
 
     private static final String LOGIN_PAGE = "/login";
     private static final String SIGN_UP_PAGE = "/register";
     private static final String STATIC_PREFIX = "/static/";
-    public static final String CHANGE_LOCALE = "/change-locale";
+    private static final String CHANGE_LOCALE = "/change-locale";
     private Set<String> uriWhiteSet;
 
     @Override
@@ -69,7 +72,7 @@ public class AuthenticationFilter implements Filter {
             String uri = URLDecoder.decode(uriEncoded, StandardCharsets.UTF_8.displayName());
             return uri.substring(contextPath.length());
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException();
+            throw new AssertionError("UTF-8 is unknown");
         }
     }
 
