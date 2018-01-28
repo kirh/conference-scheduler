@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,7 +36,7 @@ public class UnknownCommandTest {
     public void shouldSpecifyErrorMessage() {
         command.execute(request, response);
 
-        verify(request).setAttribute("error", "error.not-found");
+        verify(request).setAttribute(RequestDispatcher.ERROR_MESSAGE, "error.not-found");
     }
 
     @Test
