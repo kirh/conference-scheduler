@@ -2,8 +2,9 @@ package by.epam.tc.conference.web.controller.command.impl.proposal;
 
 import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.services.ProposalService;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.NotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -42,7 +42,7 @@ public class ShowProposalCommandTest {
     }
 
     @Test
-    public void shouldSpecifyProposalWhenValidIdGiven() {
+    public void shouldSpecifyProposalWhenValidIdGiven() throws CommandException {
         when(request.getParameter("id")).thenReturn("1");
 
         command.execute(request, response);
@@ -51,36 +51,9 @@ public class ShowProposalCommandTest {
     }
 
     @Test
-    public void shouldReturnProposalViewWhenSuccesful() {
+    public void shouldReturnProposalViewWhenSuccesful() throws CommandException {
         String view = command.execute(request, response);
 
         assertThat(view, is("proposal"));
-    }
-
-    @Test
-    public void shouldBeBadRequestWhenInvalidIdGiven() {
-        when(request.getParameter("id")).thenReturn("invalid id");
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatBadRequest(request, response, view);
-    }
-
-    @Test
-    public void shouldBePageNotFoundWhenNoProposalWithSpecifiedIdExists() throws ServiceException, EntityNotFoundException {
-        when(proposalService.getProposal(any())).thenThrow(new EntityNotFoundException());
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatPageNotFound(request, response, view);
-    }
-
-    @Test
-    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException, EntityNotFoundException {
-        when(proposalService.getProposal(any())).thenThrow(new ServiceException());
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatInternalError(request, response, view);
     }
 }

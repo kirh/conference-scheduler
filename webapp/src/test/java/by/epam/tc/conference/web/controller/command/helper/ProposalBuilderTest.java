@@ -12,7 +12,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -27,21 +26,17 @@ public class ProposalBuilderTest {
 
     @Test
     public void shouldBuildProposalFromGivenRequestWithParams() {
-        long id = 1;
-        String title = "some title";
-        String description = "some description";
-        long sectionId = 2;
-        long participantId = 3;
 
-        when(request.getParameter("id")).thenReturn(String.valueOf(id));
-        when(request.getParameter("title")).thenReturn(String.valueOf(title));
-        when(request.getParameter("description")).thenReturn(String.valueOf(description));
-        when(request.getParameter("sectionId")).thenReturn(String.valueOf(sectionId));
+        when(request.getParameter("id")).thenReturn("1");
+        when(request.getParameter("title")).thenReturn("some title");
+        when(request.getParameter("description")).thenReturn("some description");
+        when(request.getParameter("sectionId")).thenReturn("2");
         UserPrincipal user = new UserPrincipal();
-        user.setId(participantId);
+        user.setId(3L);
         when(getUser()).thenReturn(user);
 
-        Proposal expected = new Proposal(id, title, description, sectionId, participantId, ProposalStatus.PENDING);
+        Proposal expected = new Proposal(1L, "some title", "some description", 2L, 3L,
+                ProposalStatus.PENDING);
         Proposal actual = builder.build(request);
 
         assertThat(actual, is(expected));

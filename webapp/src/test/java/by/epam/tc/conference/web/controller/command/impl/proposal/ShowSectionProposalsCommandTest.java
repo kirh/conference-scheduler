@@ -1,7 +1,10 @@
 package by.epam.tc.conference.web.controller.command.impl.proposal;
 
+import by.epam.tc.conference.dto.ProposalDetails;
+import by.epam.tc.conference.services.ProposalDetailsService;
 import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +32,7 @@ public class ShowSectionProposalsCommandTest {
     private HttpServletResponse response;
 
     @Mock
-    private ProposalService proposalService;
+    private ProposalDetailsService proposalDetailsService;
 
     @InjectMocks
     private ShowSectionProposalsCommand command;
@@ -39,29 +42,14 @@ public class ShowSectionProposalsCommandTest {
         when(request.getParameter("sectionId")).thenReturn("1");
     }
 
-    @Test
-    public void shouldBeBadRequestWhenInvalidSectionId() {
-        when(request.getParameter("sectionId")).thenReturn("invalid id");
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatBadRequest(request, response, view);
-    }
 
     @Test
-    public void shouldSpecifyProposalsAndReturnSectionViewWhenValidId() {
+    public void shouldSpecifyProposalsAndReturnSectionViewWhenValidId() throws CommandException {
         String view = command.execute(request, response);
 
         verify(request).setAttribute(eq("proposals"), anyList());
         assertThat(view, is("section"));
     }
 
-    @Test
-    public void shouldBeInternalExceptionWhenErrorOccurs() throws ServiceException {
-        when(proposalService.findProposalsDetailsBySectionId(any())).thenThrow(new ServiceException());
 
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatInternalError(request, response, view);
-    }
 }

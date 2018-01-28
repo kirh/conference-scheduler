@@ -4,6 +4,7 @@ import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.QuestionService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -36,7 +37,7 @@ public class ShowQuestionsCommandTest {
 
 
     @Test
-    public void shouldSpecifyQuestionsForAdminWhenUserIsAdmin() throws ServiceException {
+    public void shouldSpecifyQuestionsForAdminWhenUserIsAdmin() throws ServiceException, CommandException {
         UserPrincipal admin = new UserPrincipal(1L, "admin", true);
         when(getUser()).thenReturn(admin);
 
@@ -47,7 +48,7 @@ public class ShowQuestionsCommandTest {
     }
 
     @Test
-    public void shouldSpecifyQuestionsForParticipantWhenUserIsParticipant() throws ServiceException {
+    public void shouldSpecifyQuestionsForParticipantWhenUserIsParticipant() throws ServiceException, CommandException {
         UserPrincipal participant = new UserPrincipal(1L, "participant", false);
         when(getUser()).thenReturn(participant);
 
@@ -58,7 +59,7 @@ public class ShowQuestionsCommandTest {
     }
 
     @Test
-    public void shouldReturnQuestionsViewWhenSuccessful() {
+    public void shouldReturnQuestionsViewWhenSuccessful() throws CommandException {
         UserPrincipal participant = new UserPrincipal(1L, "participant", false);
         when(getUser()).thenReturn(participant);
 

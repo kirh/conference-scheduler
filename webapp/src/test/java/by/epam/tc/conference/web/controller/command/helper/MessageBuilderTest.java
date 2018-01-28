@@ -26,11 +26,12 @@ public class MessageBuilderTest {
 
     @Test
     public void shouldBuildMessageFromRequestParams() {
-        when(request.getParameter("text")).thenReturn("some text");
-        when(request.getParameter("questionId")).thenReturn("1");
         UserPrincipal user = new UserPrincipal();
         user.setId(1L);
+
         when(getUser()).thenReturn(user);
+        when(request.getParameter("text")).thenReturn("some text");
+        when(request.getParameter("questionId")).thenReturn("1");
 
         Message expected = new Message("some text", 1L, 1L);
         Message actual = builder.build(request);

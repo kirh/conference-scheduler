@@ -3,6 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl.question;
 import by.epam.tc.conference.entity.Question;
 import by.epam.tc.conference.services.MessageService;
 import by.epam.tc.conference.services.QuestionService;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,26 +39,25 @@ public class ShowQuestionCommandTest {
     private ShowQuestionCommand command;
 
     @Test
-    public void shouldBeBadRequestWhenInvalidQuestionIdGiven() {
-        when(request.getParameter("id")).thenReturn("invalid id");
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatBadRequest(request, response, view);
-    }
-
-    @Test
-    public void shouldSpecifyQuestionAndMessagesWhenValidQuestionIdGiven() {
+    public void shouldSpecifyQuestionWhenValidQuestionIdGiven() throws CommandException {
         when(request.getParameter("id")).thenReturn("1");
 
         command.execute(request, response);
 
         verify(request).setAttribute(eq("question"), any(Question.class));
+    }
+
+    @Test
+    public void shouldSpecifydMessagesWhenValidQuestionIdGiven() throws CommandException {
+        when(request.getParameter("id")).thenReturn("1");
+
+        command.execute(request, response);
+
         verify(request).setAttribute(eq("messages"), anyList());
     }
 
     @Test
-    public void shouldReturnQuestionViewWhenSuccessful() {
+    public void shouldReturnQuestionViewWhenSuccessful() throws CommandException {
         when(request.getParameter("id")).thenReturn("1");
 
         String view = command.execute(request, response);

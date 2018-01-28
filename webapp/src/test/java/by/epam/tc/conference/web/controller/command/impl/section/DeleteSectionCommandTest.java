@@ -1,8 +1,12 @@
 package by.epam.tc.conference.web.controller.command.impl.section;
 
+import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.SectionService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -21,7 +25,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteSectionCommandTest {
 
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private HttpServletRequest request;
 
     @Mock
@@ -31,28 +35,25 @@ public class DeleteSectionCommandTest {
     private SectionService sectionService;
 
     @InjectMocks
-    DeleteSectionCommand command;
+    private DeleteSectionCommand command;
 
-    @Test
-    public void shouldBeBadRequestWhenInvalidIdGiven() {
-        when(request.getParameter("id")).thenReturn("invalid id");
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatBadRequest(request, response, view);
+    @Before
+    public void setUp() throws Exception {
+        UserPrincipal user = new UserPrincipal(1L, "participant", false);
+        when(request.getSession().getAttribute(SessionAttribute.USER_PRINCIPAL)).thenReturn(user);
     }
 
     @Test
-    public void shouldDeleteSectionWithGivenId() throws ServiceException {
+    public void shouldDeleteSectionWithGivenId() throws ServiceException, CommandException {
         when(request.getParameter("id")).thenReturn("1");
 
         command.execute(request, response);
 
-        verify(sectionService).deleteSection(1L);
+        verify(sectionService).deleteSection(1L,1L);
     }
 
     @Test
-    public void shouldRedirectToPreviousPageAfterDelete() {
+    public void shouldRedirectToPreviousPageAfterDelete() throws CommandException {
         when(request.getParameter("id")).thenReturn("1");
 
         String view = command.execute(request, response);

@@ -66,31 +66,14 @@ public class ProcessLoginCommandTest {
     }
 
     @Test
-    public void shouldRedirectToAdminDashboardWhenUserIsAdmin() throws Exception {
+    public void shouldRedirectToRootPageWhenProcessedSuccessful() throws Exception {
         UserPrincipal admin = new UserPrincipal(1L, "admin", true);
         when(userService.authenticateUser(any(), any())).thenReturn(admin);
 
         String view = command.execute(request, response);
 
-        assertThat(view, is("redirect:/admin-dashboard"));
+        assertThat(view, is("redirect:/"));
     }
 
-    @Test
-    public void shouldRedirectToParticipantDashboardWhenUserIsParticipant() throws Exception {
-        UserPrincipal participant = new UserPrincipal(1L, "participant", false);
-        when(userService.authenticateUser(any(), any())).thenReturn(participant);
 
-        String view = command.execute(request, response);
-
-        assertThat(view, is("redirect:/user-dashboard"));
-    }
-
-    @Test
-    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws Exception {
-        when(userService.authenticateUser(any(), any())).thenThrow(new ServiceException());
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatInternalError(request, response, view);
-    }
 }

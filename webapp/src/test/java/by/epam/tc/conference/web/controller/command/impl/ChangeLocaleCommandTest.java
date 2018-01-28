@@ -3,6 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl;
 import by.epam.tc.conference.web.controller.Languages;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -33,7 +34,7 @@ public class ChangeLocaleCommandTest {
     private Command command = new ChangeLocaleCommand();
 
     @Test
-    public void shouldSpecifyLocaleAndRedirectToPreviousPageWhenValidLanguageGiven() {
+    public void shouldSpecifyLocaleAndRedirectToPreviousPageWhenValidLanguageGiven() throws CommandException {
         String validLanguage = Languages.ENGLISH.getCode();
         when(request.getParameter("lang")).thenReturn(validLanguage);
 
@@ -44,12 +45,10 @@ public class ChangeLocaleCommandTest {
         assertThat(dispatcherQuery, is("redirect:"));
     }
 
-    @Test
-    public void shouldBeBadRequestWhenInvalidLanguageGiven() {
+    @Test(expected = CommandException.class)
+    public void shouldBeExceptionWhenInvalidLanguageGiven() throws CommandException {
         when(request.getParameter("lang")).thenReturn("invalid language");
 
-        String view = command.execute(request, response);
-
-        assertThatBadRequest(request, response, view);
+        command.execute(request, response);
     }
 }

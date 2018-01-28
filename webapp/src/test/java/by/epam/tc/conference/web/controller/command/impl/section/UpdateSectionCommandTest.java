@@ -3,6 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl.section;
 import by.epam.tc.conference.entity.Section;
 import by.epam.tc.conference.services.SectionService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,15 +35,6 @@ public class UpdateSectionCommandTest {
     private UpdateSectionCommand command;
 
     @Test
-    public void shouldBeBadRequestWhenInvalidIdGiven() {
-        when(request.getParameter("id")).thenReturn("invalid id");
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatBadRequest(request, response, view);
-    }
-
-    @Test
     public void shouldSpecifySectionAttributeForGivenId() throws Exception {
         when(request.getParameter("id")).thenReturn("1");
         Section section = new Section();
@@ -54,7 +46,7 @@ public class UpdateSectionCommandTest {
     }
 
     @Test
-    public void shouldReturnSectionFormViewWhenSuccessful() {
+    public void shouldReturnSectionFormViewWhenSuccessful() throws CommandException {
         when(request.getParameter("id")).thenReturn("1");
 
         String view = command.execute(request, response);

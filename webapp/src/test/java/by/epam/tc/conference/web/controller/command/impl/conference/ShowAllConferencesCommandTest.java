@@ -2,6 +2,7 @@ package by.epam.tc.conference.web.controller.command.impl.conference;
 
 import by.epam.tc.conference.services.ConferenceService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -34,25 +34,16 @@ public class ShowAllConferencesCommandTest {
     private ShowAllConferencesCommand command;
 
     @Test
-    public void shouldSpecifyConferencesAttribute() {
+    public void shouldSpecifyConferencesAttribute() throws CommandException {
         command.execute(request, response);
 
         verify(request).setAttribute(eq("conferences"), anyList());
     }
 
     @Test
-    public void shouldReturnConferencesViewWhenNoErrors() {
+    public void shouldReturnConferencesViewWhenNoErrors() throws CommandException {
         String view = command.execute(request, response);
 
         assertThat(view, is("conferences"));
-    }
-
-    @Test
-    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException {
-        when(conferenceService.getAllConferences()).thenThrow(new ServiceException());
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatInternalError(request, response, view);
     }
 }

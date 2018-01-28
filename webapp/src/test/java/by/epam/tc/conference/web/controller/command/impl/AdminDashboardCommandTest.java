@@ -5,6 +5,7 @@ import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ConferenceService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +46,7 @@ public class AdminDashboardCommandTest {
     }
 
     @Test
-    public void shouldSpecifyConferencesWhenExecute() throws ServiceException {
+    public void shouldSpecifyConferencesWhenExecute() throws CommandException, ServiceException {
         List<Conference> conferences = new ArrayList<>();
         when(conferenceService.findConferencesByAdministratorId(1L)).thenReturn(conferences);
 
@@ -55,19 +56,10 @@ public class AdminDashboardCommandTest {
     }
 
     @Test
-    public void shouldReturnAdminDashboardViewWhenExecute() {
+    public void shouldReturnAdminDashboardViewWhenExecute() throws CommandException {
 
         String view = command.execute(request, response);
 
         assertThat(view, is("admin-dashboard"));
-    }
-
-    @Test
-    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException {
-        when(conferenceService.findConferencesByAdministratorId(anyLong())).thenThrow(new ServiceException());
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatInternalError(request, response, view);
     }
 }

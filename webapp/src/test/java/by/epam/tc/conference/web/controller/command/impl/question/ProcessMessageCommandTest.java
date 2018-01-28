@@ -2,8 +2,9 @@ package by.epam.tc.conference.web.controller.command.impl.question;
 
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.services.MessageService;
-import by.epam.tc.conference.services.exception.InvalidEntityException;
+import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
 import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Test;
@@ -15,7 +16,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -39,7 +39,7 @@ public class ProcessMessageCommandTest {
     private ProcessMessageCommand command;
 
     @Test
-    public void shouldCreateMessageAndRedirectToQuestionWhenValidDataGiven() throws ServiceException, InvalidEntityException {
+    public void shouldCreateMessageAndRedirectToQuestionWhenValidDataGiven() throws ServiceException, CommandException {
         Message message = new Message();
         message.setQuestionId(1L);
         when(builder.build(request)).thenReturn(message);
@@ -48,23 +48,5 @@ public class ProcessMessageCommandTest {
 
         verify(messageService).createMessage(message);
         assertThat(view, is("redirect:/question?action=show&id=1"));
-    }
-
-    @Test
-    public void shouldBeBadRequestWhenInvalidMessageDataGiven() throws ServiceException, InvalidEntityException {
-        doThrow(new InvalidEntityException()).when(messageService).createMessage(any());
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatBadRequest(request, response, view);
-    }
-
-    @Test
-    public void shouldBeInternalErrorWhenErrorOccurs() throws ServiceException, InvalidEntityException {
-        doThrow(new ServiceException()).when(messageService).createMessage(any());
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatInternalError(request, response, view);
     }
 }

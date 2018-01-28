@@ -2,9 +2,11 @@ package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.dto.ProposalDetails;
 import by.epam.tc.conference.entity.UserPrincipal;
+import by.epam.tc.conference.services.ProposalDetailsService;
 import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.controller.command.CommandException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +38,7 @@ public class ParticipantDashboardCommandTest {
     private HttpServletResponse response;
 
     @Mock
-    private ProposalService proposalService;
+    private ProposalDetailsService proposalDetailsService;
 
     @InjectMocks
     private ParticipantDashboardCommand command;
@@ -48,9 +50,9 @@ public class ParticipantDashboardCommandTest {
     }
 
     @Test
-    public void shouldSpecifyProposalsAttributeWhenExecute() throws ServiceException {
+    public void shouldSpecifyProposalsAttributeWhenExecute() throws ServiceException, CommandException {
         List<ProposalDetails> proposals = new ArrayList<>();
-        when(proposalService.findProposalsDetailsByParticipantId(1L)).thenReturn(proposals);
+        when(proposalDetailsService.findProposalsDetailsByParticipantId(1L)).thenReturn(proposals);
 
         command.execute(request, response);
 
@@ -58,18 +60,9 @@ public class ParticipantDashboardCommandTest {
     }
 
     @Test
-    public void shouldReturnParticipantDashboardViewWhenExecute() {
+    public void shouldReturnParticipantDashboardViewWhenExecute() throws CommandException {
         String view = command.execute(request, response);
 
         assertThat(view, is("user-dashboard"));
-    }
-
-    @Test
-    public void shouldBeInternalErrorWhenServiceExceptionOccurs() throws ServiceException {
-        when(proposalService.findProposalsDetailsByParticipantId(anyLong())).thenThrow(new ServiceException());
-
-        String view = command.execute(request, response);
-
-        CommandTestHelper.assertThatInternalError(request, response, view);
     }
 }

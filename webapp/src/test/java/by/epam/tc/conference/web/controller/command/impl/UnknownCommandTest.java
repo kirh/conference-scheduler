@@ -26,8 +26,22 @@ public class UnknownCommandTest {
 
     @Test
     public void shouldBePageNotFoundWhenExecute() {
+        command.execute(request, response);
+
+        verify(response).setStatus(HttpServletResponse.SC_NOT_FOUND);
+    }
+
+    @Test
+    public void shouldSpecifyErrorMessage() {
+        command.execute(request, response);
+
+        verify(request).setAttribute("error", "error.not-found");
+    }
+
+    @Test
+    public void shouldReturnErrorView() {
         String view = command.execute(request, response);
 
-        CommandTestHelper.assertThatPageNotFound(request, response, view);
+        assertThat(view, is("error"));
     }
 }
