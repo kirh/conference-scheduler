@@ -3,6 +3,7 @@ package by.epam.tc.conference.web.tag;
 import by.epam.tc.conference.web.controller.ErrorMessage;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
@@ -25,7 +26,7 @@ public class ErrorTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-        String error = (String) request.getAttribute("error");
+        String error = (String) request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
         initLocalizationContext(request);
         String errorMessage;
         if (error != null) {

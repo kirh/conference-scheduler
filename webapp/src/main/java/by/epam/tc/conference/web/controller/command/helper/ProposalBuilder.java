@@ -7,18 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ProposalBuilder extends AbstractBuilder<Proposal> {
 
-    private static final String ID_PARAM = "id";
-    private static final String TITLE_PARAM = "title";
-    private static final String DESCRIPTION_PARAM = "description";
-    private static final String SECTION_ID_PARAM = "sectionId";
+    private static final java.lang.String ID_PARAM = "id";
+    private static final java.lang.String TITLE_PARAM = "title";
+    private static final java.lang.String DESCRIPTION_PARAM = "description";
+    private static final java.lang.String SECTION_ID_PARAM = "sectionId";
 
     @Override
     public Proposal build(HttpServletRequest request) {
-        String idString = request.getParameter(ID_PARAM);
+        java.lang.String idString = request.getParameter(ID_PARAM);
         Long id = parseId(idString);
-        String title = request.getParameter(TITLE_PARAM);
-        String description = request.getParameter(DESCRIPTION_PARAM);
-        String sectionIdString = request.getParameter(SECTION_ID_PARAM);
+        java.lang.String title = request.getParameter(TITLE_PARAM);
+        java.lang.String description = request.getParameter(DESCRIPTION_PARAM);
+        java.lang.String sectionIdString = request.getParameter(SECTION_ID_PARAM);
         Long sectionId = Long.valueOf(sectionIdString);
         Long participantId = getUserId(request);
         return new Proposal(id, title, description, sectionId, participantId, ProposalStatus.PENDING);

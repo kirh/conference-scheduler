@@ -21,6 +21,15 @@ function checkpassword() {
 //         }
 //     })
 // }
+function validateConferenceDate(input) {
+    var dateString = input.value;
+    var date = Date.parse(dateString);
+    if (date <= Date.now()) {
+        input.setCustomValidity("Should be date in future")
+    } else {
+        input.setCustomValidity("");
+    }
+}
 
 function calculateAge(birthday) {
     var ageDifMs = Date.now() - birthday.getTime();

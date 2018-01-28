@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Represents logic for mapping ResultSet row to identifiable object
+ * Contains logic for mapping ResultSet row to identifiable object
  *
  * @param <T> the type of result object
  */

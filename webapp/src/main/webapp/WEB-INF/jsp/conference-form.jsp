@@ -38,7 +38,7 @@
                value="${fn:escapeXml(conference.address)}" required/>
         <label for="i-c-date">${locDate}:</label>
         <input type="date" id="i-c-date" class="form-control" name="datetime"
-               value="${fn:escapeXml(conference.date)}" required/>
+               value="${fn:escapeXml(conference.date)}" onchange="validateConferenceDate(this)" required/>
         <button type="button" class="btn btn-cancel left" onclick="goToPreviousPage()">${locCancel}</button>
         <input type="submit" class="btn right" value="${locSave}"/>
     </form>
