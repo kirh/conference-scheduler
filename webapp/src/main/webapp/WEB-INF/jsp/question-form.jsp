@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:bundle basename="local">
+<fmt:bundle basename="i18n">
 
 <%@include file="fragment/header.jspf" %>
 <fmt:message var="locAskQuestion" key="conference.askquestion"/>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:bundle basename="local">
+<fmt:bundle basename="i18n">
 
     <%@include file="fragment/header.jspf" %>
 
@@ -28,7 +28,7 @@
         <c:param name="action" value="process"/>
     </c:url>
     <section>
-        <h2>Registration</h2>
+        <h2>${locRegistration}</h2>
         <<c:if test="${not empty error}">
             <span class="error">
                     <fmt:message key="${error}"/>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmtL" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:bundle basename="local">
+<fmt:bundle basename="i18n">
 
 <%@include file="fragment/header.jspf" %>
 
