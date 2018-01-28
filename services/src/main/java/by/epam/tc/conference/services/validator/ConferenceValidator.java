@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
  */
 public class ConferenceValidator extends AbstractValidator<Conference> {
 
-    private static final Pattern AT_LEAST_FIVE_LETTERS_PATTERN = Pattern.compile("(\\S\\s*){5,}");
-    private static final Pattern AT_LEAST_TWENTY_LETTERS_PATTERN = Pattern.compile("(\\S\\s*){20,}");
+    private static final Pattern AT_LEAST_FIVE_LETTERS_PATTERN = Pattern.compile("(?:\\S\\s?){5,}");
+    private static final Pattern AT_LEAST_TWENTY_LETTERS_PATTERN = Pattern.compile(".{20,}", Pattern.DOTALL);
 
     @Override
     public boolean validate(Conference conference) {
@@ -32,11 +32,13 @@ public class ConferenceValidator extends AbstractValidator<Conference> {
 
         String description = conference.getDescription();
         if (!isMatches(description, AT_LEAST_TWENTY_LETTERS_PATTERN)) {
+            System.out.println("invalid description");
             return false;
         }
 
         Date date = conference.getDate();
-        if (date.compareTo(new Date()) < 0) {
+        Date now = new Date();
+        if (date.compareTo(now) < 0) {
             return false;
         }
 

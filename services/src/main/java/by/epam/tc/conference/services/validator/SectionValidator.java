@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public class SectionValidator extends AbstractValidator<Section> {
 
-    private static final Pattern AT_LEAST_FIVE_LETTERS_PATTERN = Pattern.compile("(\\S\\s*){5,}");
+    private static final Pattern AT_LEAST_FIVE_LETTERS_PATTERN = Pattern.compile("(?:\\S\\s?){5,}");
 
     @Override
     public boolean validate(Section section) {

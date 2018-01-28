@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public class QuestionValidator extends AbstractValidator<Question> {
 
-    private static final Pattern AT_LEAST_FIVE_LETTERS_PATTERN = Pattern.compile("(\\S\\s*){5,}");
+    private static final Pattern AT_LEAST_FIVE_LETTERS_PATTERN = Pattern.compile("(?:\\S\\s?){5,}");
 
     @Override
     public boolean validate(Question question) {
@@ -25,7 +25,7 @@ public class QuestionValidator extends AbstractValidator<Question> {
 
         Long conferenceId = question.getConferenceId();
         Long userId = question.getUserId();
-        if (!isValidId(conferenceId) || isValidId(userId)) {
+        if (!isValidId(conferenceId) || !isValidId(userId)) {
             return false;
         }
 

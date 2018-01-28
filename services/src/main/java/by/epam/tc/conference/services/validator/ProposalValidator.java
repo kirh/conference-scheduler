@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
  */
 public class ProposalValidator extends AbstractValidator<Proposal> {
 
-    private static final Pattern AT_LEAST_FIVE_LETTERS_PATTERN = Pattern.compile("\\s*(\\S\\s*){5,}");
-    private static final Pattern AT_LEST_TWENTY_LETTERS_PATTERN = Pattern.compile("\\s*(\\S\\s*){20,}");
+    private static final Pattern AT_LEAST_FIVE_LETTERS_PATTERN = Pattern.compile("(?:\\S\\s*){5,}");
+    private static final Pattern AT_LEST_TWENTY_LETTERS_PATTERN = Pattern.compile(".{20,}");
 
     @Override
     public boolean validate(Proposal proposal) {
