@@ -69,7 +69,7 @@ public class SectionDaoImpl extends AbstractDao<Section> implements SectionDao {
     }
 
     @Override
-    public List<Section> findSectionsByConferenceId(Long id) throws DaoException {
+    public List<Section> findSectionsByConferenceId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_BY_SECTION_ID, id);
     }
 }

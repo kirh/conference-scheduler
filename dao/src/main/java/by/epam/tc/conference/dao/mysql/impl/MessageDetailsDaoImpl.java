@@ -21,7 +21,7 @@ public class MessageDetailsDaoImpl implements MessageDetailsDao {
     }
 
     @Override
-    public List<MessageDetails> findMessagesByQuestionId(Long id) throws DaoException {
+    public List<MessageDetails> findMessagesByQuestionId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_BY_QUESTION_SQL, id);
     }
 }

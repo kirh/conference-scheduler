@@ -79,7 +79,7 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
     }
 
     @Override
-    public List<Conference> findConferencesByUserId(Long id) throws DaoException {
+    public List<Conference> findConferencesByUserId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_BY_USER_ID, id);
     }
 }

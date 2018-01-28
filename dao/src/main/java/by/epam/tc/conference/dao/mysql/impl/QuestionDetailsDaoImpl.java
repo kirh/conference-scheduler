@@ -24,12 +24,12 @@ public class QuestionDetailsDaoImpl implements QuestionDetailsDao {
     }
 
     @Override
-    public List<QuestionDetails> findQuestionsByAdminId(Long id) throws DaoException {
+    public List<QuestionDetails> findQuestionsByAdminId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_BY_ADMINISTRATOR_ID_SQL, id);
     }
 
     @Override
-    public List<QuestionDetails> findQuestionsByParticipantId(Long id) throws DaoException {
+    public List<QuestionDetails> findQuestionsByParticipantId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_BY_PARTICIPANT_ID_SQL, id);
     }
 }

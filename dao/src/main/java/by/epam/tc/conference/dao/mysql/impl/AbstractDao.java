@@ -35,7 +35,7 @@ public abstract class AbstractDao<T extends Identifiable> implements GenericDao<
     }
 
     @Override
-    public void deleteById(Long id) throws DaoException {
+    public void deleteById(long id) throws DaoException {
         executor.executeUpdate(getDeleteQuery(), id);
     }
 
@@ -45,7 +45,7 @@ public abstract class AbstractDao<T extends Identifiable> implements GenericDao<
     }
 
     @Override
-    public Optional<T> findById(Long id) throws DaoException {
+    public Optional<T> findById(long id) throws DaoException {
         return executor.executeAndFetchOne(getSelectByIdQuery(), id);
     }
 

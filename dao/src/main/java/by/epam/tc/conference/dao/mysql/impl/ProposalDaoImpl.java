@@ -80,17 +80,17 @@ public class ProposalDaoImpl extends AbstractDao<Proposal> implements ProposalDa
 
 
     @Override
-    public List<Proposal> findBySectionId(Long id) throws DaoException {
+    public List<Proposal> findBySectionId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_BY_SECTION_ID, id);
     }
 
     @Override
-    public List<Proposal> findByUserId(Long id) throws DaoException {
+    public List<Proposal> findByUserId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_BY_USER_ID, id);
     }
 
     @Override
-    public void updateStatus(Long id, ProposalStatus status) throws DaoException {
+    public void updateStatus(long id, ProposalStatus status) throws DaoException {
         executor.executeUpdate(UPDATE_STATUS_SQL, status.name(), id);
     }
 }

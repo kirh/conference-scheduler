@@ -25,12 +25,12 @@ public class ProposalDetailsDaoImpl implements ProposalDetailsDao {
     }
 
     @Override
-    public List<ProposalDetails> findProposalsByUserId(Long id) throws DaoException {
+    public List<ProposalDetails> findProposalsByUserId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_DETAILS_BY_PARTICIPANT_ID_SQL, id);
     }
 
     @Override
-    public List<ProposalDetails> findProposalsBySectionId(Long id) throws DaoException {
+    public List<ProposalDetails> findProposalsBySectionId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_DETAILS_BY_SECTION_ID_SQL, id);
     }
 }
