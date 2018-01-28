@@ -40,7 +40,7 @@ public interface GenericDao<T extends Identifiable> {
      * @param id entity identifier
      * @throws DaoException when access error occurs
      */
-    void deleteById(Long id) throws DaoException;
+    void deleteById(long id) throws DaoException;
 
     /**
      * Returns list of all objects from underlying persistence data storage
@@ -64,6 +64,6 @@ public interface GenericDao<T extends Identifiable> {
      * @return Optional of object if was found or empty optional otherwise
      * @throws DaoException when access error occurs
      */
-    Optional<T> findById(Long id) throws DaoException;
+    Optional<T> findById(long id) throws DaoException;
 
 }

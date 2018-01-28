@@ -15,5 +15,5 @@ public interface ConferenceDao extends GenericDao<Conference> {
      * @return conferences
      * @throws DaoException when error during data access occurs
      */
-    List<Conference> findConferencesByUserId(Long id) throws DaoException;
+    List<Conference> findConferencesByUserId(long id) throws DaoException;
 }

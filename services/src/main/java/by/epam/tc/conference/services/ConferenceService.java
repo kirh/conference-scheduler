@@ -1,8 +1,8 @@
 package by.epam.tc.conference.services;
 
 import by.epam.tc.conference.entity.Conference;
-import by.epam.tc.conference.services.exception.InvalidEntityException;
-import by.epam.tc.conference.services.exception.EntityNotFoundException;
+import by.epam.tc.conference.services.exception.InvalidDataException;
+import by.epam.tc.conference.services.exception.NotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
 
 import java.util.List;
@@ -18,39 +18,42 @@ public interface ConferenceService {
      * @return list of conferences created by administrator with given id
      * @throws ServiceException when error during data access occurs
      */
-    List<Conference> findConferencesByAdministratorId(Long administratorId) throws ServiceException;
+    List<Conference> findConferencesByAdministratorId(long administratorId) throws ServiceException;
 
     /**
      * Saves conference to underlying persistence data storage and supplies with id
      * @param conference to save
-     * @throws InvalidEntityException when invalid conference given
+     * @throws InvalidDataException when invalid conference given
      * @throws ServiceException when error during data access occurs
      */
-    void createConference(Conference conference) throws InvalidEntityException, ServiceException;
+    void createConference(Conference conference) throws ServiceException;
 
     /**
      * Updates conference with the same id to given conference property values
      * @param conference to update
-     * @throws InvalidEntityException when invalid conference given
+     * @param userId user who wants to update conference
+     * @throws InvalidDataException when invalid conference given
      * @throws ServiceException when error during data access occurs
      */
-    void updateConference(Conference conference) throws InvalidEntityException, ServiceException;
+    void updateConference(Conference conference, long userId) throws
+            ServiceException;
 
     /**
      * Removes conference with specified id
-     * @param id conference to delete identifier
+     * @param conferenceId conference to delete identifier
+     * @param userId user who wants to delete conference
      * @throws ServiceException when error during data access occurs
      */
-    void deleteConferenceById(Long id) throws ServiceException;
+    void deleteConferenceById(long conferenceId, long userId) throws ServiceException;
 
     /**
      * Returns conference with specified id
-     * @param id conference to get identifier
+     * @param conferenceId conference to get identifier
      * @return conference with specified id
-     * @throws EntityNotFoundException when no conference with given id was found
+     * @throws NotFoundException when no conference with given id was found
      * @throws ServiceException when error during data access occurs
      */
-    Conference getConference(Long id) throws EntityNotFoundException, ServiceException;
+    Conference getConference(long conferenceId) throws ServiceException;
 
     /**
      * Returns list of all upcoming conferences

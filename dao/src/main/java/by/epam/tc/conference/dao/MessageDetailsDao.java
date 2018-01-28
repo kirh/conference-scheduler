@@ -16,6 +16,6 @@ public interface MessageDetailsDao {
      * @return List of message details for messages related to specified question
      * @throws DaoException error during data access occurs
      */
-    List<MessageDetails> findMessagesByQuestionId(Long id) throws DaoException;
+    List<MessageDetails> findMessagesByQuestionId(long id) throws DaoException;
 
 }

@@ -15,7 +15,7 @@ public interface QuestionDetailsDao {
      * @return list of question details
      * @throws DaoException error during data access occurs
      */
-    List<QuestionDetails> findQuestionsByAdminId(Long id) throws DaoException;
+    List<QuestionDetails> findQuestionsByAdminId(long id) throws DaoException;
 
     /**
      * Finds details for questions asked by specified participant
@@ -23,6 +23,6 @@ public interface QuestionDetailsDao {
      * @return list of question details
      * @throws DaoException error during data access occurs
      */
-    List<QuestionDetails> findQuestionsByParticipantId(Long id) throws DaoException;
+    List<QuestionDetails> findQuestionsByParticipantId(long id) throws DaoException;
 
 }

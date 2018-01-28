@@ -16,7 +16,7 @@ public interface ProposalDao extends GenericDao<Proposal> {
      * @return list of proposals to specified conference section
      * @throws DaoException error during data access occurs
      */
-    List<Proposal> findBySectionId(Long id) throws DaoException;
+    List<Proposal> findBySectionId(long id) throws DaoException;
 
     /**
      * Returns list of proposals created by specified participant
@@ -24,7 +24,7 @@ public interface ProposalDao extends GenericDao<Proposal> {
      * @return list of proposals created by specified participant
      * @throws DaoException error during data access occurs
      */
-    List<Proposal> findByUserId(Long id) throws DaoException;
+    List<Proposal> findByUserId(long id) throws DaoException;
 
     /**
      * Update status of proposal with specified id to given status value
@@ -32,5 +32,5 @@ public interface ProposalDao extends GenericDao<Proposal> {
      * @param status to set up
      * @throws DaoException error during data access occurs
      */
-    void updateStatus(Long id, ProposalStatus status) throws DaoException;
+    void updateStatus(long id, ProposalStatus status) throws DaoException;
 }

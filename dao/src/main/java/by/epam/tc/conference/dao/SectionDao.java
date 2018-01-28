@@ -15,6 +15,6 @@ public interface SectionDao extends GenericDao<Section> {
      * @return list of sections
      * @throws DaoException error during data access occurs
      */
-    List<Section> findSectionsByConferenceId(Long id) throws DaoException;
+    List<Section> findSectionsByConferenceId(long id) throws DaoException;
 
 }

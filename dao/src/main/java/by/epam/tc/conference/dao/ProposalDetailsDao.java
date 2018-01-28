@@ -15,7 +15,7 @@ public interface ProposalDetailsDao {
      * @return list of proposals created by specified user
      * @throws DaoException error during data access occurs
      */
-    List<ProposalDetails> findProposalsByUserId(Long id) throws DaoException;
+    List<ProposalDetails> findProposalsByUserId(long id) throws DaoException;
 
     /**
      * Return list of proposals applied to specified section
@@ -23,6 +23,6 @@ public interface ProposalDetailsDao {
      * @return list of proposals applied to specified section
      * @throws DaoException Return list of proposals created by specified user
      */
-    List<ProposalDetails> findProposalsBySectionId(Long id) throws DaoException;
+    List<ProposalDetails> findProposalsBySectionId(long id) throws DaoException;
 
 }
