@@ -28,7 +28,7 @@ public class Executor<T extends Identifiable> {
             DaoException {
         try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS)) {
             statement.executeUpdate();
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException("Failed to execute update query: " + e.getMessage(), e);
         } finally {
             connector.closeConnection();
@@ -39,7 +39,7 @@ public class Executor<T extends Identifiable> {
         try (PreparedStatement statement = createStatement(query, queryParams, Statement.RETURN_GENERATED_KEYS)) {
             statement.executeUpdate();
             return getGeneratedId(statement);
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException("Failed to execute update query and get id " + e.getMessage(), e);
         } finally {
             connector.closeConnection();
@@ -49,7 +49,7 @@ public class Executor<T extends Identifiable> {
     public Optional<T> executeAndFetchOne(String query, Object... queryParams) throws DaoException {
         try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS);
              ResultSet resultSet = executePrepared(statement)) {
-            if (resultSet.first()) {
+            if (resultSet.next()) {
                 T object = rowMapper.map(resultSet);
                 return Optional.of(object);
             }
@@ -70,8 +70,10 @@ public class Executor<T extends Identifiable> {
                 objects.add(object);
             }
             return objects;
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException("Failed to execute query " + e.getMessage(), e);
+        } finally {
+            connector.closeConnection();
         }
     }
 
