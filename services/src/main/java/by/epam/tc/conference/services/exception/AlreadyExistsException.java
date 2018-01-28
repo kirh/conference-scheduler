@@ -1,8 +1,9 @@
 package by.epam.tc.conference.services.exception;
 
-import by.epam.tc.conference.commons.ConferenceException;
-
-public class AlreadyExistsException extends ConferenceException {
+/**
+ * Thrown when failed to create entity cause it already exists
+ */
+public class AlreadyExistsException extends ServiceException {
 
     private static final long serialVersionUID = 42L;
 

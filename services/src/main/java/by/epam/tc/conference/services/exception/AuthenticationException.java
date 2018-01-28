@@ -1,8 +1,9 @@
 package by.epam.tc.conference.services.exception;
 
-import by.epam.tc.conference.commons.ConferenceException;
-
-public class AuthenticationException extends ConferenceException {
+/**
+ * Thrown when failed to authenticate with given credentials
+ */
+public class AuthenticationException extends ServiceException {
 
     private static final long serialVersionUID = 42L;
 
