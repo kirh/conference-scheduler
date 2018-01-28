@@ -2,7 +2,10 @@ package by.epam.tc.conference.dao.mysql.pool;
 
 import java.util.ResourceBundle;
 
-public class DBResourceManager {
+/**
+ * Provides access to db connection parameters
+ */
+public final class DBResourceManager {
 
     private static final DBResourceManager instance = new DBResourceManager();
     private ResourceBundle bundle = ResourceBundle.getBundle("db");
