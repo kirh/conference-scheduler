@@ -42,13 +42,21 @@ public class QuestionDetails extends Question {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
         QuestionDetails that = (QuestionDetails) o;
 
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) {
+            return false;
+        }
         return conferenceName != null ? conferenceName.equals(that.conferenceName) : that.conferenceName == null;
     }
 

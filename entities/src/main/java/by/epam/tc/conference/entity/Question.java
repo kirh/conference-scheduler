@@ -61,14 +61,24 @@ public class Question implements Identifiable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Question question = (Question) o;
 
-        if (id != null ? !id.equals(question.id) : question.id != null) return false;
-        if (title != null ? !title.equals(question.title) : question.title != null) return false;
-        if (userId != null ? !userId.equals(question.userId) : question.userId != null) return false;
+        if (id != null ? !id.equals(question.id) : question.id != null) {
+            return false;
+        }
+        if (title != null ? !title.equals(question.title) : question.title != null) {
+            return false;
+        }
+        if (userId != null ? !userId.equals(question.userId) : question.userId != null) {
+            return false;
+        }
         return conferenceId != null ? conferenceId.equals(question.conferenceId) : question.conferenceId == null;
     }
 

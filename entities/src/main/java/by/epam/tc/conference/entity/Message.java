@@ -19,7 +19,6 @@ public class Message implements Identifiable {
         this.text = text;
         this.questionId = questionId;
         this.userId = userId;
-        this.createTime = createTime;
     }
 
     public Message(Long id, String text, Long questionId, Long userId) {
@@ -27,7 +26,6 @@ public class Message implements Identifiable {
         this.text = text;
         this.questionId = questionId;
         this.userId = userId;
-        this.createTime = createTime;
     }
 
     @Override
@@ -74,15 +72,27 @@ public class Message implements Identifiable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Message message = (Message) o;
 
-        if (id != null ? !id.equals(message.id) : message.id != null) return false;
-        if (text != null ? !text.equals(message.text) : message.text != null) return false;
-        if (questionId != null ? !questionId.equals(message.questionId) : message.questionId != null) return false;
-        if (userId != null ? !userId.equals(message.userId) : message.userId != null) return false;
+        if (id != null ? !id.equals(message.id) : message.id != null) {
+            return false;
+        }
+        if (text != null ? !text.equals(message.text) : message.text != null) {
+            return false;
+        }
+        if (questionId != null ? !questionId.equals(message.questionId) : message.questionId != null) {
+            return false;
+        }
+        if (userId != null ? !userId.equals(message.userId) : message.userId != null) {
+            return false;
+        }
         return createTime != null ? createTime.equals(message.createTime) : message.createTime == null;
     }
 

@@ -42,13 +42,21 @@ public class MessageDetails extends Message {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
         MessageDetails that = (MessageDetails) o;
 
-        if (sendByAdmin != that.sendByAdmin) return false;
+        if (sendByAdmin != that.sendByAdmin) {
+            return false;
+        }
         return username != null ? username.equals(that.username) : that.username == null;
     }
 

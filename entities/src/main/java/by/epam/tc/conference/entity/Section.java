@@ -50,13 +50,21 @@ public class Section implements Identifiable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Section section = (Section) o;
 
-        if (id != null ? !id.equals(section.id) : section.id != null) return false;
-        if (topic != null ? !topic.equals(section.topic) : section.topic != null) return false;
+        if (id != null ? !id.equals(section.id) : section.id != null) {
+            return false;
+        }
+        if (topic != null ? !topic.equals(section.topic) : section.topic != null) {
+            return false;
+        }
         return conferenceId != null ? conferenceId.equals(section.conferenceId) : section.conferenceId == null;
     }
 

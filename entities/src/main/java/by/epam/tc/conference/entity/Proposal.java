@@ -83,18 +83,30 @@ public class Proposal implements Identifiable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Proposal proposal = (Proposal) o;
 
-        if (id != null ? !id.equals(proposal.id) : proposal.id != null) return false;
-        if (title != null ? !title.equals(proposal.title) : proposal.title != null) return false;
-        if (description != null ? !description.equals(proposal.description) : proposal.description != null)
+        if (id != null ? !id.equals(proposal.id) : proposal.id != null) {
             return false;
-        if (sectionId != null ? !sectionId.equals(proposal.sectionId) : proposal.sectionId != null) return false;
-        if (participantId != null ? !participantId.equals(proposal.participantId) : proposal.participantId != null)
+        }
+        if (title != null ? !title.equals(proposal.title) : proposal.title != null) {
             return false;
+        }
+        if (description != null ? !description.equals(proposal.description) : proposal.description != null) {
+            return false;
+        }
+        if (sectionId != null ? !sectionId.equals(proposal.sectionId) : proposal.sectionId != null) {
+            return false;
+        }
+        if (participantId != null ? !participantId.equals(proposal.participantId) : proposal.participantId != null) {
+            return false;
+        }
         return status == proposal.status;
     }
 

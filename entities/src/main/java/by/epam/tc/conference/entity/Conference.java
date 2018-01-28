@@ -24,7 +24,7 @@ public class Conference implements Identifiable {
         this.administratorId = administratorId;
     }
 
-    public Conference(Long id, String name ,String description, String address, Date date, Long administratorId) {
+    public Conference(Long id, String name , String description, String address, Date date, Long administratorId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -85,16 +85,30 @@ public class Conference implements Identifiable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Conference that = (Conference) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) {
+            return false;
+        }
+        if (name != null ? !name.equals(that.name) : that.name != null) {
+            return false;
+        }
+        if (description != null ? !description.equals(that.description) : that.description != null) {
+            return false;
+        }
+        if (address != null ? !address.equals(that.address) : that.address != null) {
+            return false;
+        }
+        if (date != null ? !date.equals(that.date) : that.date != null) {
+            return false;
+        }
         return administratorId != null ? administratorId.equals(that.administratorId) : that.administratorId == null;
     }
 

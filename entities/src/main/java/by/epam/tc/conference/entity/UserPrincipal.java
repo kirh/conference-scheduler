@@ -45,13 +45,21 @@ public class UserPrincipal implements Serializable{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         UserPrincipal that = (UserPrincipal) o;
 
-        if (isAdmin != that.isAdmin) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (isAdmin != that.isAdmin) {
+            return false;
+        }
+        if (id != null ? !id.equals(that.id) : that.id != null) {
+            return false;
+        }
         return username != null ? username.equals(that.username) : that.username == null;
     }
 

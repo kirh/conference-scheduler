@@ -8,13 +8,13 @@ public class ProposalDetails implements Identifiable {
     private static final long serialVersionUID = 42L;
 
     private Long id;
-    private String title;
-    private String username;
-    private String conferenceName;
-    private String sectionName;
+    private java.lang.String title;
+    private java.lang.String username;
+    private java.lang.String conferenceName;
+    private java.lang.String sectionName;
     private ProposalStatus status;
 
-    public ProposalDetails(Long id, String title, String username, String conferenceName, String sectionName, ProposalStatus status) {
+    public ProposalDetails(Long id, java.lang.String title, java.lang.String username, java.lang.String conferenceName, java.lang.String sectionName, ProposalStatus status) {
         this.id = id;
         this.title = title;
         this.username = username;
@@ -33,35 +33,35 @@ public class ProposalDetails implements Identifiable {
         this.id = id;
     }
 
-    public String getTitle() {
+    public java.lang.String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(java.lang.String title) {
         this.title = title;
     }
 
-    public String getUsername() {
+    public java.lang.String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(java.lang.String username) {
         this.username = username;
     }
 
-    public String getConferenceName() {
+    public java.lang.String getConferenceName() {
         return conferenceName;
     }
 
-    public void setConferenceName(String conferenceName) {
+    public void setConferenceName(java.lang.String conferenceName) {
         this.conferenceName = conferenceName;
     }
 
-    public String getSectionName() {
+    public java.lang.String getSectionName() {
         return sectionName;
     }
 
-    public void setSectionName(String sectionName) {
+    public void setSectionName(java.lang.String sectionName) {
         this.sectionName = sectionName;
     }
 
@@ -75,17 +75,30 @@ public class ProposalDetails implements Identifiable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         ProposalDetails that = (ProposalDetails) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (conferenceName != null ? !conferenceName.equals(that.conferenceName) : that.conferenceName != null)
+        if (id != null ? !id.equals(that.id) : that.id != null) {
             return false;
-        if (sectionName != null ? !sectionName.equals(that.sectionName) : that.sectionName != null) return false;
+        }
+        if (title != null ? !title.equals(that.title) : that.title != null) {
+            return false;
+        }
+        if (username != null ? !username.equals(that.username) : that.username != null) {
+            return false;
+        }
+        if (conferenceName != null ? !conferenceName.equals(that.conferenceName) : that.conferenceName != null) {
+            return false;
+        }
+        if (sectionName != null ? !sectionName.equals(that.sectionName) : that.sectionName != null) {
+            return false;
+        }
         return status == that.status;
     }
 
