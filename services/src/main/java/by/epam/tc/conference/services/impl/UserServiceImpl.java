@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
             String username = user.getUsername();
             Optional<User> optionalUserWithSameUsername = userDao.findByUsername(username);
             if (optionalUserWithSameUsername.isPresent()) {
-                throw new AlreadyExistsException("User with username " + username + "already exists");
+                throw new AlreadyExistsException("User with username " + username + " already exists");
             }
             userDao.save(user);
             logger.info("Registered user id={} username={}", user.getId(), user.getUsername());
