@@ -19,7 +19,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Tag to display errors
+ * Tag to display errors.
  */
 public class ErrorTag extends TagSupport {
 

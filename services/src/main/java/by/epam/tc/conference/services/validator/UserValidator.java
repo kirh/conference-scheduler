@@ -5,7 +5,7 @@ import by.epam.tc.conference.entity.User;
 import java.util.regex.Pattern;
 
 /**
- * Logic to validate {@link User}
+ * Logic to validate {@link User}.
  * Implements {@link Validator}
  */
 public class UserValidator extends AbstractValidator<User> {

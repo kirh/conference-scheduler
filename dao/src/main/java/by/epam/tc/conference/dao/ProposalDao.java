@@ -12,6 +12,7 @@ public interface ProposalDao extends GenericDao<Proposal> {
 
     /**
      * Returns list of proposals to specified conference section
+     *
      * @param id conference section identifier
      * @return list of proposals to specified conference section
      * @throws DaoException error during data access occurs
@@ -20,6 +21,7 @@ public interface ProposalDao extends GenericDao<Proposal> {
 
     /**
      * Returns list of proposals created by specified participant
+     *
      * @param id participant identifier
      * @return list of proposals created by specified participant
      * @throws DaoException error during data access occurs
@@ -28,7 +30,8 @@ public interface ProposalDao extends GenericDao<Proposal> {
 
     /**
      * Update status of proposal with specified id to given status value
-     * @param id proposal identifier
+     *
+     * @param id     proposal identifier
      * @param status to set up
      * @throws DaoException error during data access occurs
      */

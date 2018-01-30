@@ -20,8 +20,9 @@ public abstract class AbstractCommand implements Command {
         return getUser(request).getId();
     }
 
-    protected Long parseIdParameter(HttpServletRequest request, java.lang.String parameterName) throws CommandException {
-        java.lang.String idString = request.getParameter(parameterName);
+    protected Long parseIdParameter(HttpServletRequest request, String parameterName)
+            throws CommandException {
+        String idString = request.getParameter(parameterName);
         try {
             return Long.valueOf(idString);
         } catch (NumberFormatException e) {
@@ -30,7 +31,7 @@ public abstract class AbstractCommand implements Command {
         }
     }
 
-    private Object getSessionAttribute(HttpServletRequest request, java.lang.String attributeName){
+    private Object getSessionAttribute(HttpServletRequest request, String attributeName) {
         HttpSession session = request.getSession();
         return session.getAttribute(attributeName);
     }

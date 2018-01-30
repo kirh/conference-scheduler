@@ -4,11 +4,11 @@ import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.UserDao;
 import by.epam.tc.conference.entity.User;
 import by.epam.tc.conference.entity.UserPrincipal;
+import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.exception.AlreadyExistsException;
 import by.epam.tc.conference.services.exception.AuthenticationException;
 import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
-import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.validator.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     private final Validator<User> validator;
     private final Function<String, String> passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao, Validator<User> validator, Function<String,String> passwordEncoder) {
+    public UserServiceImpl(UserDao userDao, Validator<User> validator, Function<String, String> passwordEncoder) {
         this.userDao = userDao;
         this.validator = validator;
         this.passwordEncoder = passwordEncoder;

@@ -6,15 +6,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Common logic for validators
- * @param <T>
+ * Common logic for validators.
+ *
+ * @param <T> the type of object to validate
  */
 public abstract class AbstractValidator<T extends Identifiable> implements Validator<T> {
 
     /**
-     * Checks text against given pattern
+     * Checks text against given pattern.
      *
-     * @param text to check
+     * @param text    to check
      * @param pattern to match
      * @return true if text matches pattern
      */
@@ -27,7 +28,8 @@ public abstract class AbstractValidator<T extends Identifiable> implements Valid
     }
 
     /**
-     * Validates given id value
+     * Validates given id value.
+     *
      * @param id to validate
      * @return true when id is not null and greater then zero
      */

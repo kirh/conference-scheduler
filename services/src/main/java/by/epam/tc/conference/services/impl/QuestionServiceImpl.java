@@ -1,15 +1,18 @@
 package by.epam.tc.conference.services.impl;
 
 import by.epam.tc.conference.dao.DaoException;
-import by.epam.tc.conference.dao.MessageDao;
 import by.epam.tc.conference.dao.QuestionDao;
 import by.epam.tc.conference.dao.QuestionDetailsDao;
 import by.epam.tc.conference.dto.QuestionDetails;
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.entity.Question;
+import by.epam.tc.conference.services.MessageService;
 import by.epam.tc.conference.services.QuestionService;
+import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.NotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.services.transaction.Transactional;
+import by.epam.tc.conference.services.validator.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,23 +24,31 @@ public class QuestionServiceImpl implements QuestionService {
     private static final Logger logger = LogManager.getLogger(QuestionServiceImpl.class);
     private final QuestionDao questionDao;
     private final QuestionDetailsDao questionDetailsDao;
-    private final MessageDao messageDao;
+    private final MessageService messageService;
+    private final Validator<Question> validator;
 
-    public QuestionServiceImpl(QuestionDao questionDao, QuestionDetailsDao questionDetailsDao, MessageDao messageDao) {
+
+    public QuestionServiceImpl(QuestionDao questionDao, QuestionDetailsDao questionDetailsDao, MessageService
+            messageService, Validator<Question> validator) {
         this.questionDao = questionDao;
         this.questionDetailsDao = questionDetailsDao;
-        this.messageDao = messageDao;
+        this.messageService = messageService;
+        this.validator = validator;
     }
 
 
     @Override
+    @Transactional
     public void createQuestion(Question question, Message message) throws ServiceException {
         try {
+            if (!validator.validate(question)) {
+                throw new InvalidDataException("Invalid question");
+            }
             questionDao.save(question);
             Long questionId = question.getId();
-            message.setQuestionId(questionId);
-            messageDao.save(message);
             logger.info("Created question id={}", question.getId());
+            message.setQuestionId(questionId);
+            messageService.createMessage(message);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

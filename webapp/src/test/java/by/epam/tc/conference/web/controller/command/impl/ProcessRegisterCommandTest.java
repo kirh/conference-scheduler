@@ -4,7 +4,6 @@ import by.epam.tc.conference.entity.User;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.exception.AlreadyExistsException;
-import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,12 +66,12 @@ public class ProcessRegisterCommandTest {
     }
 
     @Test
-    public void shouldSpecifyErrorAndRedirectToRegisterPageWhenUserAlreadyExists() throws Exception {
+    public void shouldSpecifyErrorAndReturnRegisterViewWhenUserAlreadyExists() throws Exception {
         when(userService.registerUser(any())).thenThrow(new AlreadyExistsException());
 
         String view = command.execute(request, response);
 
         verify(request).setAttribute("error", "register.error.already-exists");
-        assertThat(view, is("redirect:/register"));
+        assertThat(view, is("register"));
     }
 }

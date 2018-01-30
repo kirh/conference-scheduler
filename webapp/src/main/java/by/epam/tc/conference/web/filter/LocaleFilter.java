@@ -43,9 +43,9 @@ public class LocaleFilter implements Filter {
             if (Languages.contains(acceptedLanguage)) {
                 language = acceptedLanguage;
             }
-            if (language == null) {
-                language = Languages.DEFAULT.getCode();
-            }
+        }
+        if (language == null) {
+            language = Languages.DEFAULT.getCode();
         }
         return Locale.forLanguageTag(language);
     }
