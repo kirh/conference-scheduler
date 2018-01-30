@@ -35,6 +35,7 @@ public class FrontController extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            logRequest(request);
             Command command = helper.getCommand(request);
             String query = command.execute(request, response);
             dispatcher.dispatch(query, request, response);
@@ -48,6 +49,13 @@ public class FrontController extends HttpServlet {
             logger.error("Error code = 500", e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ErrorMessage.INTERNAL);
         }
+    }
+
+    private void logRequest(HttpServletRequest request) {
+        String pathInfo = request.getPathInfo();
+        String method = request.getMethod();
+        String queryString = request.getQueryString();
+        logger.debug("{}{}{}", method, pathInfo, queryString == null ? "" : "?" + queryString);
     }
 }
 
