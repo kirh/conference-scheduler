@@ -115,14 +115,13 @@ public class ProposalDetails implements Identifiable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ProposalDetails{");
-        sb.append("id=").append(id);
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", username='").append(username).append('\'');
-        sb.append(", conferenceName='").append(conferenceName).append('\'');
-        sb.append(", sectionName='").append(sectionName).append('\'');
-        sb.append(", status=").append(status);
-        sb.append('}');
-        return sb.toString();
+        return "ProposalDetails{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", username='" + username + '\'' +
+                ", conferenceName='" + conferenceName + '\'' +
+                ", sectionName='" + sectionName + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

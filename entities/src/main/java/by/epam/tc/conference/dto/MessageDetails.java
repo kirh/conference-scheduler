@@ -70,10 +70,9 @@ public class MessageDetails extends Message {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("MessageDetails{");
-        sb.append("username='").append(username).append('\'');
-        sb.append(", sendByAdmin=").append(sendByAdmin);
-        sb.append('}');
-        return sb.toString();
+        return "MessageDetails{" +
+                "username='" + username + '\'' +
+                ", sendByAdmin=" + sendByAdmin +
+                "} " + super.toString();
     }
 }

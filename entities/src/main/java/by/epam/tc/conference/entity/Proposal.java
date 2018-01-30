@@ -123,14 +123,13 @@ public class Proposal implements Identifiable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Proposal{");
-        sb.append("id=").append(id);
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", sectionId=").append(sectionId);
-        sb.append(", participantId=").append(participantId);
-        sb.append(", status=").append(status);
-        sb.append('}');
-        return sb.toString();
+        return "Proposal{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", sectionId=" + sectionId +
+                ", participantId=" + participantId +
+                ", status=" + status +
+                '}';
     }
 }

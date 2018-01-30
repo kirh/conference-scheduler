@@ -24,7 +24,7 @@ public class Conference implements Identifiable {
         this.administratorId = administratorId;
     }
 
-    public Conference(Long id, String name , String description, String address, Date date, Long administratorId) {
+    public Conference(Long id, String name, String description, String address, Date date, Long administratorId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -125,14 +125,13 @@ public class Conference implements Identifiable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Conference{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", address='").append(address).append('\'');
-        sb.append(", date=").append(date);
-        sb.append(", administratorId=").append(administratorId);
-        sb.append('}');
-        return sb.toString();
+        return "Conference{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", address='" + address + '\'' +
+                ", date=" + date +
+                ", administratorId=" + administratorId +
+                '}';
     }
 }

@@ -73,11 +73,10 @@ public class UserPrincipal implements Serializable{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserPrincipal{");
-        sb.append("id=").append(id);
-        sb.append(", username='").append(username).append('\'');
-        sb.append(", isAdmin=").append(isAdmin);
-        sb.append('}');
-        return sb.toString();
+        return "UserPrincipal{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", isAdmin=" + isAdmin +
+                '}';
     }
 }

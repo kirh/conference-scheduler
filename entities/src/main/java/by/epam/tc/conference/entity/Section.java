@@ -78,11 +78,10 @@ public class Section implements Identifiable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Section{");
-        sb.append("id=").append(id);
-        sb.append(", topic='").append(topic).append('\'');
-        sb.append(", conferenceId=").append(conferenceId);
-        sb.append('}');
-        return sb.toString();
+        return "Section{" +
+                "id=" + id +
+                ", topic='" + topic + '\'' +
+                ", conferenceId=" + conferenceId +
+                '}';
     }
 }

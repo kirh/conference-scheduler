@@ -70,10 +70,9 @@ public class QuestionDetails extends Question {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("QuestionDetails{");
-        sb.append("username='").append(username).append('\'');
-        sb.append(", conferenceName='").append(conferenceName).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "QuestionDetails{" +
+                "username='" + username + '\'' +
+                ", conferenceName='" + conferenceName + '\'' +
+                "} " + super.toString();
     }
 }

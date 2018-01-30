@@ -108,13 +108,12 @@ public class Message implements Identifiable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Message{");
-        sb.append("id=").append(id);
-        sb.append(", text='").append(text).append('\'');
-        sb.append(", questionId=").append(questionId);
-        sb.append(", userId=").append(userId);
-        sb.append(", createTime=").append(createTime);
-        sb.append('}');
-        return sb.toString();
+        return "Message{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", questionId=" + questionId +
+                ", userId=" + userId +
+                ", createTime=" + createTime +
+                '}';
     }
 }
