@@ -16,7 +16,7 @@ public class ConnectionPool {
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
     private static final String VALIDATION_QUERY = "/* ping */ SELECT 1";
     private static final ReentrantLock lock = new ReentrantLock();
-    private volatile static ConnectionPool INSTANCE;
+    private static volatile ConnectionPool INSTANCE;
 
     private final MysqlDataSource dataSource = new MysqlDataSource();
     private BlockingQueue<Connection> availableConnections;
@@ -46,14 +46,14 @@ public class ConnectionPool {
 
     private void init() {
         logger.debug("Reading connection parameters");
-        DBResourceManager resourceManager = DBResourceManager.getInstance();
-        String url = resourceManager.getValue(DBParameter.DB_URL);
+        DbResourceManager resourceManager = DbResourceManager.getInstance();
+        String url = resourceManager.getValue(DbParameter.DB_URL);
         dataSource.setURL(url);
-        String user = resourceManager.getValue(DBParameter.USER);
+        String user = resourceManager.getValue(DbParameter.USER);
         dataSource.setUser(user);
-        String password = resourceManager.getValue(DBParameter.PASSWORD);
+        String password = resourceManager.getValue(DbParameter.PASSWORD);
         dataSource.setPassword(password);
-        String poolSize = resourceManager.getValue(DBParameter.POOL_SIZE);
+        String poolSize = resourceManager.getValue(DbParameter.POOL_SIZE);
         Integer capacity = Integer.valueOf(poolSize);
         givenAwayConnections = new ArrayBlockingQueue<>(capacity);
         availableConnections = new ArrayBlockingQueue<>(capacity);

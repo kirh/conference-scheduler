@@ -1,7 +1,7 @@
 package by.epam.tc.conference.services.exception;
 
 /**
- * Thrown when failed to authenticate with given credentials
+ * Thrown when failed to authenticate with given credentials.
  */
 public class AuthenticationException extends ServiceException {
 

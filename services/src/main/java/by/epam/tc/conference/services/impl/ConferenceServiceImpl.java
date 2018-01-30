@@ -4,9 +4,9 @@ import by.epam.tc.conference.dao.ConferenceDao;
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.entity.Conference;
 import by.epam.tc.conference.services.ConferenceService;
+import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.NoAuthorityException;
 import by.epam.tc.conference.services.exception.NotFoundException;
-import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.services.validator.Validator;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Implementation of {@link ConferenceService}
+ * Implementation of {@link ConferenceService}.
  * Contains base operation with conferences
  */
 public class ConferenceServiceImpl implements ConferenceService {
@@ -46,7 +46,7 @@ public class ConferenceServiceImpl implements ConferenceService {
         try {
             validateConference(conference);
             conferenceDao.save(conference);
-            logger.info("Created conference id={} name={}", conference.getId(),  conference.getName());
+            logger.info("Created conference id={} name={}", conference.getId(), conference.getName());
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
@@ -58,9 +58,8 @@ public class ConferenceServiceImpl implements ConferenceService {
             validateConference(conference);
             Long conferenceId = conference.getId();
             if (!hasAuthority(conferenceId, userId)) {
-                throw new NoAuthorityException("Failed to update conference id=" + conferenceId + " user id=" + userId + " " +
-                        "has " +
-                        "no authority");
+                throw new NoAuthorityException("Failed to update conference id=" + conferenceId + " user id="
+                        + userId + " has no authority");
             }
             conferenceDao.update(conference);
             logger.info("Updated conference id={} name={}", conference.getId(), conference.getName());
@@ -73,8 +72,8 @@ public class ConferenceServiceImpl implements ConferenceService {
     public void deleteConferenceById(long id, long userId) throws ServiceException {
         try {
             if (!hasAuthority(id, userId)) {
-                throw new NoAuthorityException("Failed to delete conference id=" + id + " user id=" + userId + " has " +
-                        "no authority");
+                throw new NoAuthorityException("Failed to delete conference id=" + id + " user id="
+                        + userId + " has no authority");
             }
             conferenceDao.deleteById(id);
             logger.info("Deleted conference id={}", id);
@@ -100,9 +99,8 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     @Override
     public List<Conference> getAllConferences() throws ServiceException {
-        List<Conference> conferences = null;
         try {
-            conferences = conferenceDao.findAll();
+            List<Conference> conferences = conferenceDao.findAll();
             logger.debug("Found {} conferences", conferences.size());
             return conferences;
         } catch (DaoException e) {
@@ -111,8 +109,9 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     /**
-     * When conference is invalid throws {@link InvalidDataException}
+     * When conference is invalid throws {@link InvalidDataException}.
      * Conference id == null is valid state
+     *
      * @param conference to validate
      * @throws InvalidDataException when conference invalid
      */
@@ -124,9 +123,10 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     /**
-     * Checks if user has authority to manage specified conference
+     * Checks if user has authority to manage specified conference.
+     *
      * @param conferenceId conference identifier
-     * @param userId user identifier
+     * @param userId       user identifier
      * @return true if user can manage conference
      * @throws DaoException when error during data access occurs
      */

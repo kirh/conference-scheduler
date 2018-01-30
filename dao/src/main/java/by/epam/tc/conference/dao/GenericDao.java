@@ -7,6 +7,7 @@ import java.util.Optional;
 
 /**
  * Contains logic to perform base crud operations on Identifiable objects
+ *
  * @param <T> the type of Identifiable
  */
 
@@ -14,6 +15,7 @@ public interface GenericDao<T extends Identifiable> {
 
     /**
      * Save entity to persistence data storage
+     *
      * @param entity to save
      * @throws DaoException when access error occurs
      */
@@ -22,6 +24,7 @@ public interface GenericDao<T extends Identifiable> {
     /**
      * Updates entity in persistence data storage
      * Id property should be specified.
+     *
      * @param entity to update
      * @throws DaoException when access error occurs
      */
@@ -30,6 +33,7 @@ public interface GenericDao<T extends Identifiable> {
     /**
      * Delete entity in underlying persistence data storage.
      * Id property should be specified.
+     *
      * @param entity to delete
      * @throws DaoException when access error occurs
      */
@@ -37,6 +41,7 @@ public interface GenericDao<T extends Identifiable> {
 
     /**
      * Delete entity by identifier from underlying persistence data storage
+     *
      * @param id entity identifier
      * @throws DaoException when access error occurs
      */
@@ -44,6 +49,7 @@ public interface GenericDao<T extends Identifiable> {
 
     /**
      * Returns list of all objects from underlying persistence data storage
+     *
      * @return list of all objects from underlying persistence data storage
      * @throws DaoException when access error occurs
      */
@@ -51,8 +57,9 @@ public interface GenericDao<T extends Identifiable> {
 
     /**
      * Finds all objects from underlying persistence data storage by page, sorting by id.
+     *
      * @param perPage objects
-     * @param page number
+     * @param page    number
      * @return list of objects
      * @throws DaoException when access error occurs
      */
@@ -60,6 +67,7 @@ public interface GenericDao<T extends Identifiable> {
 
     /**
      * Finds object by identifier
+     *
      * @param id object identifier
      * @return Optional of object if was found or empty optional otherwise
      * @throws DaoException when access error occurs

@@ -2,14 +2,13 @@ package by.epam.tc.conference.dao.mysql.impl;
 
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.TransactionManager;
-import by.epam.tc.conference.dao.mysql.pool.ConnectionPoolException;
 import by.epam.tc.conference.dao.mysql.pool.Connector;
 
 import java.sql.SQLException;
 
 public class TransactionManagerImpl implements TransactionManager {
 
-    private Connector connector;
+    private final Connector connector;
 
     public TransactionManagerImpl(Connector connector) {
         this.connector = connector;
@@ -19,7 +18,7 @@ public class TransactionManagerImpl implements TransactionManager {
     public void startTransaction() throws DaoException {
         try {
             connector.startTransaction();
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException("Failed to start transaction: " + e.getMessage(), e);
         }
     }

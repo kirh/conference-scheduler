@@ -11,6 +11,7 @@ public interface QuestionDetailsDao {
 
     /**
      * Finds details for questions related to administrator's conferences
+     *
      * @param id administrator identifier
      * @return list of question details
      * @throws DaoException error during data access occurs
@@ -19,6 +20,7 @@ public interface QuestionDetailsDao {
 
     /**
      * Finds details for questions asked by specified participant
+     *
      * @param id participant identifier
      * @return list of question details
      * @throws DaoException error during data access occurs

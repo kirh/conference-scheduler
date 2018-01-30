@@ -12,6 +12,7 @@ public interface MessageDetailsDao {
 
     /**
      * Returns list of message details for messages related to specified question
+     *
      * @param id question
      * @return List of message details for messages related to specified question
      * @throws DaoException error during data access occurs

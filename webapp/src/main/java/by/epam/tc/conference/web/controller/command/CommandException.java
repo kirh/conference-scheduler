@@ -9,6 +9,9 @@ import by.epam.tc.conference.web.controller.ErrorMessage;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Thrown when exception during command processing occurs. Contains http error code and message for user.
+ */
 public class CommandException extends ConferenceException {
 
     private static final long serialVersionUID = 42L;
@@ -17,32 +20,40 @@ public class CommandException extends ConferenceException {
 
     private final String errorMessage;
 
+    /**
+     * Constructs new exception
+     *
+     * @param message      the detail message
+     * @param errorCode    http error code
+     * @param errorMessage message for user
+     */
     public CommandException(String message, int errorCode, String errorMessage) {
         super(message);
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * Constructs new exception with specified cause.
+     *
+     * @param message      the detail message
+     * @param errorCode    http error code
+     * @param errorMessage message for user
+     * @param cause        the cause
+     */
     public CommandException(String message, int errorCode, String errorMessage, Throwable cause) {
         super(message, cause);
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }
 
-    public CommandException(int errorCode, String errorMessage, Throwable cause) {
-        super(cause);
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-    }
-
-    public int getErrorCode() {
-        return errorCode;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
+    /**
+     * Factory method for constructing CommandException from {@seeServiceException} with
+     * standard error code and user error message values.
+     * @param serviceException exception to wrap
+     * @param message the details message
+     * @return CommandException with standard values
+     */
     public static CommandException from(ServiceException serviceException, String message) {
         if (serviceException instanceof InvalidDataException) {
             return new CommandException(message, HttpServletResponse.SC_BAD_REQUEST, ErrorMessage.BAD_REQUEST, serviceException);
@@ -55,5 +66,13 @@ public class CommandException extends ConferenceException {
             return new CommandException(message, HttpServletResponse.SC_NOT_FOUND, ErrorMessage.NOT_FOUND, serviceException);
         }
         return new CommandException(message, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ErrorMessage.NOT_FOUND, serviceException);
+    }
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

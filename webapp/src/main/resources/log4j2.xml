@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--suppress XmlUnboundNsPrefix, XmlUnboundNsPrefix -->
 <Configuration status="WARN">
     <Appenders>
+        <File name="logFile" fileName="${env:CATALINA_HOME}/logs/conference-app/${date:MM-dd-yyyy}.log">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} %X %-5level %logger{-4} - %msg %ex{short.message}%n</Pattern>
+            </PatternLayout>
+        </File>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} %X %-5level %logger{-4} - %msg%n"/>
         </Console>
@@ -8,6 +14,7 @@
     <Loggers>
         <Root level="debug">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="logFile"/>
         </Root>
     </Loggers>
 </Configuration>

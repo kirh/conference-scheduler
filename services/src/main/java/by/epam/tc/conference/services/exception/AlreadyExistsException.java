@@ -1,7 +1,7 @@
 package by.epam.tc.conference.services.exception;
 
 /**
- * Thrown when failed to create entity cause it already exists
+ * Thrown when failed to create entity cause it already exists.
  */
 public class AlreadyExistsException extends ServiceException {
 

@@ -7,8 +7,10 @@ import by.epam.tc.conference.dao.mysql.MysqlDaoFactory;
  */
 public abstract class DaoFactory {
 
+    private static final DaoFactory INSTANCE = new MysqlDaoFactory();
+
     public static DaoFactory getInstance() {
-        return new MysqlDaoFactory();
+        return INSTANCE;
     }
 
     public abstract ConferenceDao getConferenceDao();

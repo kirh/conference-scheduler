@@ -8,12 +8,12 @@ import by.epam.tc.conference.services.exception.ServiceException;
 import java.util.List;
 
 /**
- * Contains base operation with conferences
+ * Contains base operation with conferences.
  */
 public interface ConferenceService {
 
     /**
-     * Returns all conferences for administrator with specified id
+     * Returns all conferences for administrator with specified id.
      * @param administratorId administrator identifier to search conferences
      * @return list of conferences created by administrator with given id
      * @throws ServiceException when error during data access occurs
@@ -21,7 +21,7 @@ public interface ConferenceService {
     List<Conference> findConferencesByAdministratorId(long administratorId) throws ServiceException;
 
     /**
-     * Saves conference to underlying persistence data storage and supplies with id
+     * Saves conference to underlying persistence data storage and supplies with id.
      * @param conference to save
      * @throws InvalidDataException when invalid conference given
      * @throws ServiceException when error during data access occurs
@@ -29,7 +29,7 @@ public interface ConferenceService {
     void createConference(Conference conference) throws ServiceException;
 
     /**
-     * Updates conference with the same id to given conference property values
+     * Updates conference with the same id to given conference property values.
      * @param conference to update
      * @param userId user who wants to update conference
      * @throws InvalidDataException when invalid conference given
@@ -39,7 +39,7 @@ public interface ConferenceService {
             ServiceException;
 
     /**
-     * Removes conference with specified id
+     * Removes conference with specified id.
      * @param conferenceId conference to delete identifier
      * @param userId user who wants to delete conference
      * @throws ServiceException when error during data access occurs
@@ -47,7 +47,7 @@ public interface ConferenceService {
     void deleteConferenceById(long conferenceId, long userId) throws ServiceException;
 
     /**
-     * Returns conference with specified id
+     * Returns conference with specified id.
      * @param conferenceId conference to get identifier
      * @return conference with specified id
      * @throws NotFoundException when no conference with given id was found
@@ -56,7 +56,7 @@ public interface ConferenceService {
     Conference getConference(long conferenceId) throws ServiceException;
 
     /**
-     * Returns list of all upcoming conferences
+     * Returns list of all upcoming conferences.
      * @return list of all upcoming conferences
      * @throws ServiceException when error during data access occurs
      */

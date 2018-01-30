@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * When user wasn't authenticated and requested page not allowed then he will be redirected to login page
+ * When user wasn't authenticated and requested page not allowed then he will be redirected to login page.
  */
 public class AuthenticationFilter implements Filter {
 

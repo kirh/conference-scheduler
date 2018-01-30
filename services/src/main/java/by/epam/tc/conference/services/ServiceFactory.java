@@ -38,13 +38,14 @@ public class ServiceFactory {
         ProposalDetailsDao proposalDetailsDao = daoFactory.getProposalDetailsDao();
         proposalDetailsService = new ProposalDetailsServiceImpl(proposalDetailsDao);
 
-        QuestionDao questionDao = daoFactory.getQuestionDao();
-        QuestionDetailsDao questionDetailsDao = daoFactory.getQuestionDetailsDao();
-        MessageDao messageDao = daoFactory.getMessageDao();
-        questionService = new QuestionServiceImpl(questionDao, questionDetailsDao, messageDao);
 
+        MessageDao messageDao = daoFactory.getMessageDao();
         MessageDetailsDao messageDetailsDao = daoFactory.getMessageDetailsDao();
         messageService = new MessageServiceImpl(messageDao, messageDetailsDao, new MessageValidator());
+
+        QuestionDao questionDao = daoFactory.getQuestionDao();
+        QuestionDetailsDao questionDetailsDao = daoFactory.getQuestionDetailsDao();
+        questionService = new QuestionServiceImpl(questionDao, questionDetailsDao, messageService, new QuestionValidator());
     }
 
     public static ServiceFactory getInstance() {

@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 public final class DbResourceManager {
 
     private static final DbResourceManager instance = new DbResourceManager();
-    private final ResourceBundle bundle = ResourceBundle.getBundle("dbcloud");
+    private final ResourceBundle bundle = ResourceBundle.getBundle("db");
 
     private DbResourceManager() {
 

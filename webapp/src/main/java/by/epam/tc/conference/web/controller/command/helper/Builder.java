@@ -5,7 +5,7 @@ import by.epam.tc.conference.entity.Identifiable;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Represents logic to build Identifiable object from request parameters
+ * Represents logic to build Identifiable object from request parameters.
  *
  * @param <T> the type of result object
  */
@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 public interface Builder<T extends Identifiable> {
 
     /**
-     * Builds object from request parameters. If request parameter for property name was not specified
+     * Builds object from request parameters. If request parameter for property
+     * name was not specified.
      * then result property value will be null
      *
      * @param request with specified parameters to build Identifiable object
