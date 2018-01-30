@@ -3,7 +3,7 @@ package by.epam.tc.conference.dao.mysql.pool;
 import java.util.ResourceBundle;
 
 /**
- * Provides access to db connection parameters
+ * Provides access to db connection parameters.
  */
 public final class DbResourceManager {
 
