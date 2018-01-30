@@ -16,7 +16,7 @@
     <h2>${locQuestions}</h2>
     <c:choose>
         <c:when test="${empty questions}">
-            ${locNoQuestions}
+            <p class="text-center">${locNoQuestions}</p>
         </c:when>
         <c:otherwise>
             <table id="questions">

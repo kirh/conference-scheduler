@@ -29,7 +29,7 @@
     <form class="text-center" action="${createMessage}" method="post">
         <input type="hidden" name="questionId" value="${question.id}" required/>
         <label for="i-message">${locEnterMessage}</label>
-        <textarea id="i-message" name="text" minlength="5" pattern="(\S+\s?)*" required></textarea>
+        <textarea id="i-message" name="text" minlength="5" required></textarea>
         <input class="btn" type="submit" value="${locSend}"/>
     </form>
 </section>

@@ -29,11 +29,11 @@
     </c:url>
     <section>
         <h2>${locRegistration}</h2>
-        <<c:if test="${not empty error}">
+        <c:if test="${not empty error}">
             <span class="error">
                     <fmt:message key="${error}"/>
             </span>
-    </c:if>
+        </c:if>
         <form class="clearfix" method="POST" action="${process}">
             <label for="username-input">${locUsername}:</label>
             <input class="form-control" type="text" name="username" id="username-input"

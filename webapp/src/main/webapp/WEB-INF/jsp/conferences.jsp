@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:bundle basename="i18n">
-
     <%@include file="fragment/header.jspf" %>
     <fmt:message var="locNoConferences" key="conferences.noconferences"/>
     <fmt:message var="locName" key="name"/>
@@ -11,8 +10,6 @@
     <fmt:message var="locDate" key="date"/>
     <fmt:message var="locWhere" key="conference.where"/>
     <fmt:message var="locConferences" key="conferences"/>
-
-
     <section>
         <h2 class="page-header">${locConferences}</h2>
         <c:choose>
