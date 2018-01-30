@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class ProcessRegisterCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(ProcessRegisterCommand.class);
-    private static final String REDIRECT_REGISTER = "redirect:/register";
+    private static final String REGISTER_VIEW = "register";
     private static final String REDIRECT_ROOT = "redirect:/";
     private final UserService userService;
     private final Builder<? extends User> builder;
@@ -43,7 +43,7 @@ public class ProcessRegisterCommand implements Command {
         } catch (AlreadyExistsException e) {
             logger.debug("Failed to register", e);
             request.setAttribute("error", ErrorMessage.USER_ALREADY_EXISTS);
-            return REDIRECT_REGISTER;
+            return REGISTER_VIEW;
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to register");
         }
