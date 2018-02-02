@@ -8,13 +8,13 @@ public class ProposalDetails implements Identifiable {
     private static final long serialVersionUID = 42L;
 
     private Long id;
-    private java.lang.String title;
-    private java.lang.String username;
-    private java.lang.String conferenceName;
-    private java.lang.String sectionName;
+    private String title;
+    private String username;
+    private String conferenceName;
+    private String sectionName;
     private ProposalStatus status;
 
-    public ProposalDetails(Long id, java.lang.String title, java.lang.String username, java.lang.String conferenceName, java.lang.String sectionName, ProposalStatus status) {
+    public ProposalDetails(Long id, String title, String username, String conferenceName, String sectionName, ProposalStatus status) {
         this.id = id;
         this.title = title;
         this.username = username;
@@ -33,35 +33,35 @@ public class ProposalDetails implements Identifiable {
         this.id = id;
     }
 
-    public java.lang.String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(java.lang.String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public java.lang.String getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(java.lang.String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public java.lang.String getConferenceName() {
+    public String getConferenceName() {
         return conferenceName;
     }
 
-    public void setConferenceName(java.lang.String conferenceName) {
+    public void setConferenceName(String conferenceName) {
         this.conferenceName = conferenceName;
     }
 
-    public java.lang.String getSectionName() {
+    public String getSectionName() {
         return sectionName;
     }
 
-    public void setSectionName(java.lang.String sectionName) {
+    public void setSectionName(String sectionName) {
         this.sectionName = sectionName;
     }
 
