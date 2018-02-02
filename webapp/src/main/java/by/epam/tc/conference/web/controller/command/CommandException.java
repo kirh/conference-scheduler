@@ -55,17 +55,19 @@ public class CommandException extends ConferenceException {
      * @return CommandException with standard values
      */
     public static CommandException from(ServiceException serviceException, String message) {
+        final String fullMessage = serviceException.getMessage() + " " + message;
         if (serviceException instanceof InvalidDataException) {
-            return new CommandException(message, HttpServletResponse.SC_BAD_REQUEST, ErrorMessage.BAD_REQUEST, serviceException);
+            return new CommandException(fullMessage, HttpServletResponse.SC_BAD_REQUEST, ErrorMessage.BAD_REQUEST, serviceException);
         }
         if (serviceException instanceof NoAuthorityException) {
-            return new CommandException(message, HttpServletResponse.SC_FORBIDDEN, ErrorMessage.FORBIDDEN, serviceException);
+            return new CommandException(fullMessage, HttpServletResponse.SC_FORBIDDEN, ErrorMessage.FORBIDDEN, serviceException);
         }
 
         if (serviceException instanceof NotFoundException) {
-            return new CommandException(message, HttpServletResponse.SC_NOT_FOUND, ErrorMessage.NOT_FOUND, serviceException);
+            return new CommandException(fullMessage, HttpServletResponse.SC_NOT_FOUND, ErrorMessage.NOT_FOUND, serviceException);
         }
-        return new CommandException(message, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ErrorMessage.NOT_FOUND, serviceException);
+        return new CommandException(fullMessage, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ErrorMessage.NOT_FOUND,
+                serviceException);
     }
 
     public int getErrorCode() {
