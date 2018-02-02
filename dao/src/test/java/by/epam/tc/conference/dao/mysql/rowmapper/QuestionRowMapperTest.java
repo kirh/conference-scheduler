@@ -26,7 +26,7 @@ public class QuestionRowMapperTest {
     private ResultSet resultSet;
 
     @Test
-    public void shouldBuldQuestionWhenResultSetGiven() throws SQLException {
+    public void shouldBuildQuestionWhenResultSetGiven() throws SQLException {
         when(resultSet.getLong(ID_COLUMN)).thenReturn(1L);
         when(resultSet.getString(TEXT_COLUMN)).thenReturn("question");
         when(resultSet.getLong(USER_ID_COLUMN)).thenReturn(2L);
