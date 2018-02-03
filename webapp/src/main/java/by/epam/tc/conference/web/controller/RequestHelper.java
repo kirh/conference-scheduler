@@ -9,9 +9,9 @@ public class RequestHelper {
     private final CommandFactory commandFactory = CommandFactory.getInstance();
 
     public Command getCommand(HttpServletRequest request) {
-        String pathInfo = request.getPathInfo();
+        String path = request.getServletPath();
         String action = request.getParameter("action");
-        String pathWithoutLeadingSlash = pathInfo.substring(1);
+        String pathWithoutLeadingSlash = path.substring(1);
         String command = action == null ? pathWithoutLeadingSlash : pathWithoutLeadingSlash + "?" + action;
         return commandFactory.getCommand(command);
     }

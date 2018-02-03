@@ -23,13 +23,11 @@ public class AuthenticationFilter implements Filter {
 
     private static final String LOGIN_PAGE = "/login";
     private static final String SIGN_UP_PAGE = "/register";
-    private static final String STATIC_PREFIX = "/static/";
     private static final String CHANGE_LOCALE = "/change-locale";
     private Set<String> uriWhiteSet;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        ServletContext servletContext = filterConfig.getServletContext();
         HashSet<String> set = new HashSet<>();
         set.add(LOGIN_PAGE);
         set.add(SIGN_UP_PAGE);
@@ -42,9 +40,9 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession();
         UserPrincipal user = (UserPrincipal) session.getAttribute(SessionAttribute.USER_PRINCIPAL);
-        String uri = getUri(httpRequest);
+        String uri = httpRequest.getServletPath();
 
-        if (user == null && !uriWhiteSet.contains(uri) && !uri.startsWith(STATIC_PREFIX)) {
+        if (user == null && !uriWhiteSet.contains(uri)) {
             ((HttpServletResponse) response).sendRedirect(LOGIN_PAGE);
         } else {
             if (user != null) {

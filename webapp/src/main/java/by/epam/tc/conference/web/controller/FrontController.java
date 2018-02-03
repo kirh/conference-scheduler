@@ -44,7 +44,6 @@ public class FrontController extends HttpServlet {
             int errorCode = e.getErrorCode();
             response.sendError(errorCode, errorMessage);
             logger.error("Error code = {}", errorCode, e);
-            response.sendError(errorCode);
         } catch (Exception e) {
             logger.error("Error code = 500", e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ErrorMessage.INTERNAL);
@@ -52,10 +51,10 @@ public class FrontController extends HttpServlet {
     }
 
     private void logRequest(HttpServletRequest request) {
-        String pathInfo = request.getPathInfo();
+        String path = request.getServletPath();
         String method = request.getMethod();
         String queryString = request.getQueryString();
-        logger.debug("{}{}{}", method, pathInfo, queryString == null ? "" : "?" + queryString);
+        logger.debug("{}{}{}", method, path, queryString == null ? "" : "?" + queryString);
     }
 }
 
