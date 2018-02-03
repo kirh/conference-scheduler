@@ -21,6 +21,6 @@ public class MessageRowMapper implements RowMapper<Message> {
         long questionId = resultSet.getLong(QUESTION_ID);
         long userId = resultSet.getLong(USER_ID);
         Timestamp createTime = resultSet.getTimestamp(CREATE_TIME);
-        return new Message(id, text, questionId, userId);
+        return new Message(id, text, questionId, userId, createTime);
     }
 }

@@ -28,6 +28,14 @@ public class Message implements Identifiable {
         this.userId = userId;
     }
 
+    public Message(Long id, String text, Long questionId, Long userId, Timestamp createTime) {
+        this.id = id;
+        this.text = text;
+        this.questionId = questionId;
+        this.userId = userId;
+        this.createTime = createTime;
+    }
+
     @Override
     public Long getId() {
         return id;
