@@ -54,7 +54,7 @@ function remove(element, url) {
         }
     }
     try {
-        xHttp.open('POST', url, true);
+        xHttp.open('DELETE', url, true);
         xHttp.send();
     } catch (exception) {
         console.log(exception);
