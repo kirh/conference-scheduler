@@ -53,8 +53,6 @@ public class QuestionServiceImplTest {
         question = new Question();
     }
 
-    //issue with aspect
-    @Ignore
     @Test(expected = InvalidDataException.class)
     public void shouldNotCreateQuestionOnCreateWhenInvalidQuestion() throws ServiceException, DaoException {
         when(validator.validate(question)).thenReturn(false);
