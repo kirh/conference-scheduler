@@ -6,7 +6,7 @@ import by.epam.tc.conference.services.SectionService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.helper.Builder;
+import by.epam.tc.conference.web.controller.command.bulder.Builder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;

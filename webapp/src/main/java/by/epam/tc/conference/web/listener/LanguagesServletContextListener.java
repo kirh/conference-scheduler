@@ -1,6 +1,6 @@
 package by.epam.tc.conference.web.listener;
 
-import by.epam.tc.conference.web.controller.Language;
+import by.epam.tc.conference.web.Language;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

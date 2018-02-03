@@ -1,5 +1,6 @@
 package by.epam.tc.conference.web.controller;
 
+import by.epam.tc.conference.web.ErrorMessage;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * General application controller. Processes all GET POST DELETE HTTP requests.
+ */
 public class FrontController extends HttpServlet {
 
     private static final Logger logger = LogManager.getLogger(FrontController.class);

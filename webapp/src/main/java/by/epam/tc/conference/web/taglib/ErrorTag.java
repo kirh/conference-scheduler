@@ -1,6 +1,6 @@
-package by.epam.tc.conference.web.tag;
+package by.epam.tc.conference.web.taglib;
 
-import by.epam.tc.conference.web.controller.ErrorMessage;
+import by.epam.tc.conference.web.ErrorMessage;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;

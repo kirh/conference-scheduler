@@ -1,6 +1,6 @@
 package by.epam.tc.conference.web.filter;
 
-import by.epam.tc.conference.web.controller.Language;
+import by.epam.tc.conference.web.Language;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 
 import javax.servlet.*;

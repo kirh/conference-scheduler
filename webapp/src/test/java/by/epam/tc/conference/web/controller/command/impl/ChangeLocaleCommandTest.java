@@ -1,6 +1,6 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
-import by.epam.tc.conference.web.controller.Language;
+import by.epam.tc.conference.web.Language;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;

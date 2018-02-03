@@ -9,7 +9,7 @@
     
     <tag>
         <name>error</name>
-        <tag-class>by.epam.tc.conference.web.tag.ErrorTag</tag-class>
+        <tag-class>by.epam.tc.conference.web.taglib.ErrorTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 

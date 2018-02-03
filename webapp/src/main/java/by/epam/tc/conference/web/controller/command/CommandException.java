@@ -5,7 +5,7 @@ import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.NoAuthorityException;
 import by.epam.tc.conference.services.exception.NotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
-import by.epam.tc.conference.web.controller.ErrorMessage;
+import by.epam.tc.conference.web.ErrorMessage;
 
 import javax.servlet.http.HttpServletResponse;
 

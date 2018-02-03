@@ -1,6 +1,6 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
-import by.epam.tc.conference.web.controller.ErrorMessage;
+import by.epam.tc.conference.web.ErrorMessage;
 import by.epam.tc.conference.web.controller.command.Command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

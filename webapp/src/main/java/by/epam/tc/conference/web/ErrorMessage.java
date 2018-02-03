@@ -1,5 +1,8 @@
-package by.epam.tc.conference.web.controller;
+package by.epam.tc.conference.web;
 
+/**
+ * Base error message keys
+ */
 public final class ErrorMessage {
     public static final String FORBIDDEN = "error.forbidden";
     public static final String INTERNAL = "error.internal";

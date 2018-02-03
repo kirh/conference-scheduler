@@ -4,7 +4,7 @@ import by.epam.tc.conference.entity.User;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.exception.AlreadyExistsException;
-import by.epam.tc.conference.web.controller.command.helper.Builder;
+import by.epam.tc.conference.web.controller.command.bulder.Builder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

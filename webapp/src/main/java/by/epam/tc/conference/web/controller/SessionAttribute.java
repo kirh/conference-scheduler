@@ -1,5 +1,8 @@
 package by.epam.tc.conference.web.controller;
 
+/**
+ * Common session attributes
+ */
 public class SessionAttribute {
 
     public static final String USER_PRINCIPAL = "userPrincipal";

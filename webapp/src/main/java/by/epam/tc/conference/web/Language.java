@@ -1,10 +1,13 @@
-package by.epam.tc.conference.web.controller;
+package by.epam.tc.conference.web;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Contains application languages
+ */
 public enum Language {
     ENGLISH(new Locale("en")),
     RUSSIAN(new Locale("ru")),

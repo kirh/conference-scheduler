@@ -1,4 +1,4 @@
-package by.epam.tc.conference.web.controller.command.helper;
+package by.epam.tc.conference.web.controller.command.bulder;
 
 import by.epam.tc.conference.entity.User;
 

@@ -5,11 +5,11 @@ import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.exception.AlreadyExistsException;
 import by.epam.tc.conference.services.exception.ServiceException;
-import by.epam.tc.conference.web.controller.ErrorMessage;
+import by.epam.tc.conference.web.ErrorMessage;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.helper.Builder;
+import by.epam.tc.conference.web.controller.command.bulder.Builder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

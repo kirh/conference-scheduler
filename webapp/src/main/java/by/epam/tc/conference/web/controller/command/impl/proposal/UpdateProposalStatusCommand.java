@@ -3,7 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl.proposal;
 import by.epam.tc.conference.entity.ProposalStatus;
 import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
-import by.epam.tc.conference.web.controller.ErrorMessage;
+import by.epam.tc.conference.web.ErrorMessage;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
