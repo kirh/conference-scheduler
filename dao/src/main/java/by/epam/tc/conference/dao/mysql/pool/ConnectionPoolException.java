@@ -1,7 +1,7 @@
 package by.epam.tc.conference.dao.mysql.pool;
 
 /**
- * Wrapper for checked exceptions in connection pool
+ * Thrown when error occurs in connection pool.
  */
 public class ConnectionPoolException extends RuntimeException {
 
