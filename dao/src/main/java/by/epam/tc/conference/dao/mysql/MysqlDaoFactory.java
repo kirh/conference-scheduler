@@ -1,10 +1,10 @@
 package by.epam.tc.conference.dao.mysql;
 
 import by.epam.tc.conference.dao.*;
+import by.epam.tc.conference.dao.mysql.impl.*;
 import by.epam.tc.conference.dao.mysql.pool.ConnectionPool;
 import by.epam.tc.conference.dao.mysql.pool.Connector;
 import by.epam.tc.conference.dao.mysql.pool.ConnectorImpl;
-import by.epam.tc.conference.dao.mysql.impl.*;
 import by.epam.tc.conference.dao.mysql.rowmapper.*;
 import by.epam.tc.conference.dto.MessageDetails;
 import by.epam.tc.conference.dto.ProposalDetails;
