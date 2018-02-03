@@ -14,7 +14,6 @@ public class DeleteConferenceCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(DeleteConferenceCommand.class);
     private static final String CONFERENCE_ID_PARAM = "id";
-    private static final String REDIRECT_ADMIN_DASHBOARD = "redirect:/admin-dashboard";
     private final ConferenceService conferenceService;
 
     public DeleteConferenceCommand(ConferenceService conferenceService) {
@@ -28,7 +27,7 @@ public class DeleteConferenceCommand extends AbstractCommand {
             logger.debug("Deleting conference id={}", conferenceId);
             long userId = getUserId(request);
             conferenceService.deleteConferenceById(conferenceId, userId);
-            return REDIRECT_ADMIN_DASHBOARD;
+            return "";
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to delete conference");
         }

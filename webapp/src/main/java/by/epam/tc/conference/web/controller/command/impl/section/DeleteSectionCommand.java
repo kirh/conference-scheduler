@@ -14,7 +14,6 @@ public class DeleteSectionCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(DeleteSectionCommand.class);
     private static final String SECTION_ID_PARAM = "id";
-    private static final String REDIRECT_TO_PREVIOUS_PAGE = "redirect:";
 
     private final SectionService sectionService;
 
@@ -29,7 +28,7 @@ public class DeleteSectionCommand extends AbstractCommand {
             logger.debug("Deleting section id={}", sectionId);
             Long userId = getUserId(request);
             sectionService.deleteSection(sectionId, userId);
-            return REDIRECT_TO_PREVIOUS_PAGE;
+            return "";
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to delete section");
         }

@@ -34,13 +34,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${proposals}" var="proposal">
+                    <c:forEach items="${proposals}" var="proposal" varStatus="status">
                         <c:url var="showProposal" value="/proposal">
                             <c:param name="action" value="show"/>
                             <c:param name="id" value="${proposal.id}"/>
                         </c:url>
-                        <tr>
-                            <td class="conference-name"><a href="${showProposal}">${proposal.title}</a></td>
+                        <c:set var="id" value="proposal-${status.count}"/>
+                        <tr id="${id}">
+                            <td class="name"><a href="${showProposal}">${proposal.title}</a></td>
                             <td><a href="${showProposal}">${proposal.conferenceName}</a></td>
                             <td><a href="${showProposal}">${proposal.sectionName}</a></td>
                             <td><a href="${showProposal}">${proposal.status}</a></td>
@@ -50,7 +51,7 @@
                                     <c:param name="id" value="${proposal.id}"/>
                                 </c:url>
                                 <button type="button" class="btn btn-cancel"
-                                        onclick="confirmAndRedirect('${deleteProposal}')"
+                                        onclick="confirmAndRemove('${id}','${deleteProposal}')"
                                         title="${locDelete}">
                                     <i class="fa fa-trash"></i>
                                 </button>

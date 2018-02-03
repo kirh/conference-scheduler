@@ -32,3 +32,31 @@ function confirmAndRedirect(uri) {
 function goToPreviousPage() {
     history.back()
 }
+
+
+function confirmAndRemove(id, url) {
+    var element = document.getElementById(id);
+    var nameCell = element.getElementsByClassName('name')[0];
+    var sure = confirm("Are you sure want to remove " + nameCell.innerText + "?");
+    if (sure) {
+        remove(element, url);
+    }
+}
+
+function remove(element, url) {
+    var xHttp = new XMLHttpRequest();
+    xHttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var parent = element.parentNode;
+            parent.removeChild(element);
+        } else if (this.readyState == 4) {
+            alert(this.statusText);
+        }
+    }
+    try {
+        xHttp.open('POST', url, true);
+        xHttp.send();
+    } catch (exception) {
+        console.log(exception);
+    }
+}

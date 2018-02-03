@@ -28,9 +28,10 @@
         <c:if test="${empty sections}">
             <tr><td class="text-center" colspan="2">${locNoSections}</td></tr>
         </c:if>
-        <c:forEach items="${sections}" var="section">
-            <tr>
-                <td class="conference-description" title="view proposals">
+        <c:forEach items="${sections}" var="section" varStatus="status">
+            <c:set var="id" value="section-${status.count}"/>
+            <tr id="${id}">
+                <td class="name" title="view proposal">
                     <c:url var="showProposals" value="/proposal">
                         <c:param name="action" value="showAll"/>
                         <c:param name="sectionId" value="${section.id}"/>
@@ -52,7 +53,7 @@
                                 <c:param name="id" value="${section.id}"/>
                             </c:url>
                             <button type="button" class="btn btn-cancel"
-                                    onclick="confirmAndRedirect('${deleteSection}')" title="${locDelete}">
+                                    onclick="confirmAndRemove('${id}', '${deleteSection}')" title="${locDelete}">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </c:when>

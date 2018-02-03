@@ -14,13 +14,11 @@
     <h2 class="page-header">${locAdminDashboardHeader}</h2>
     <table class="center">
         <tbody>
-        <c:forEach items="${conferences}" var="conference">
-            <tr>
-                <c:url var="showConference" value="/conference">
-                    <c:param name="action" value="show"/>
-                    <c:param name="id" value="${conference.id}"/>
-                </c:url>
-                    <td class="conference-name"><a href="${showConference}">${conference.name}</a></td>
+        <c:forEach items="${conferences}" var="conference" varStatus="status">
+            <c:set var="id" value="conference-${status.count}"/>
+            <tr id="${id}">
+                <c:url var="showConference" value="/conference?action=show&id=${conference.id}"/>
+                    <td class="name"><a href="${showConference}">${conference.name}</a></td>
                 <td>
                     <a href="${showConference}"> <fmt:formatDate value="${conference.date}"/></a>
                 </td>
@@ -37,7 +35,8 @@
                         <c:param name="action" value="delete"/>
                         <c:param name="id" value="${conference.id}"/>
                     </c:url>
-                    <button type="button" class="btn btn-cancel" onclick="confirmAndRedirect('${deleteConference}')"
+                    <button type="button" class="btn btn-cancel"
+                            onclick="confirmAndRemove('${id}', '${deleteConference}')"
                             title="${locDelete}">
                         <i class="fa fa-trash"></i>
                     </button>

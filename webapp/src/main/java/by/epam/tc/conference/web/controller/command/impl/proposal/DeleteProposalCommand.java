@@ -14,7 +14,6 @@ public class DeleteProposalCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(DeleteProposalCommand.class);
     private static final String PROPOSAL_ID_PARAM = "id";
-    private static final String REDIRECT_USER_DASHBOARD = "redirect:/user-dashboard";
     private final ProposalService proposalService;
 
     public DeleteProposalCommand(ProposalService proposalService) {
@@ -28,7 +27,7 @@ public class DeleteProposalCommand extends AbstractCommand {
             logger.debug("Deleting proposal id={}", proposalId);
             Long userId = getUserId(request);
             proposalService.deleteProposal(proposalId, userId);
-            return REDIRECT_USER_DASHBOARD;
+            return "";
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to delete proposal");
         }
