@@ -43,6 +43,7 @@ public class LocaleFilter implements Filter {
                 language = Language.resolve(locale);
                 break;
             }
+
         }
         return language == null ? Language.DEFAULT.getLocale() : language.getLocale();
     }
