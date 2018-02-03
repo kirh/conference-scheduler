@@ -1,6 +1,6 @@
 package by.epam.tc.conference.web.listener;
 
-import by.epam.tc.conference.web.controller.Languages;
+import by.epam.tc.conference.web.controller.Language;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -15,9 +15,9 @@ public class LanguagesServletContextListener implements ServletContextListener{
     @Override
     public void contextInitialized(ServletContextEvent event) {
         ServletContext servletContext = event.getServletContext();
-        Languages[] languages = Languages.values();
-        List<Languages> languagesList = Arrays.asList(languages);
-        servletContext.setAttribute("languages", languagesList);
+        Language[] languages = Language.values();
+        List<Language> languageList = Arrays.asList(languages);
+        servletContext.setAttribute("languages", languageList);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.web.controller.ErrorMessage;
-import by.epam.tc.conference.web.controller.Languages;
+import by.epam.tc.conference.web.controller.Language;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;
@@ -22,16 +22,16 @@ public class ChangeLocaleCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         logger.traceEntry();
-        String language = request.getParameter(LANGUAGE_PARAM);
-        if (!Languages.contains(language)) {
-            logger.debug("Language '{}' not supported. Bad request", language);
-            String message = "Language " + language + " not supported";
+        String languageTag = request.getParameter(LANGUAGE_PARAM);
+        if (!Language.contains(languageTag)) {
+            String message = "Language " + languageTag + " not supported";
             throw new CommandException(message, HttpServletResponse.SC_BAD_REQUEST, ErrorMessage.BAD_REQUEST);
         }
-        Locale locale = new Locale(language);
+        Language language = Language.resolve(languageTag);
+        Locale locale = language.getLocale();
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.LOCALE, locale);
-        logger.debug("Language switched to '{}'", language);
+        logger.debug("Language switched to '{}'", languageTag);
         return REDIRECT_PREVIOUS_PAGE;
     }
 }
