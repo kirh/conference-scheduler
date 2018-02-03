@@ -14,7 +14,7 @@
     <h2 class="page-header">${param.sectionTopic}</h2>
     <table class="center">
         <tr>
-            <th colspan="2">Proposals</th>
+            <th colspan="3">Proposals</th>
         </tr>
         <tbody>
         <c:if test="${empty proposals}">
@@ -22,13 +22,14 @@
         </c:if>
         <c:forEach items="${proposals}" var="proposal">
             <tr>
-                <td class="conference-name">
+                <td class="name">
                     <c:url value="/proposal" var="showProposal">
                         <c:param name="action" value="show"/>
                         <c:param name="id" value="${proposal.id}"/>
                     </c:url>
                     <a href="${showProposal}">${proposal.title}</a></td>
-                <td>${proposal.username}</td>
+                <td><a href="${showProposal}">${proposal.username}</a></td>
+                <td><a href="${showProposal}">${proposal.status}</a></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -36,7 +36,7 @@
                         <c:param name="id" value="${question.id}"/>
                     </c:url>
                     <tr>
-                        <td class="conference-name"><a href="${showQuestion}">${question.title}</a></td>
+                        <td class="name"><a href="${showQuestion}">${question.title}</a></td>
                         <td><a href="${showQuestion}">${question.conferenceName}</a></td>
                         <c:if test="${userPrincipal.admin}">
                             <td><a href="${showQuestion}">${question.username}</a></td>

@@ -54,7 +54,7 @@ header {
     position: relative;
     height: 250px;
     background: url(../img/header.jpg) no-repeat bottom;
-    background-size: cover;
+    background-size: cover;    ;
 }
 
 header::before {
@@ -94,7 +94,8 @@ header h1 {
     border: none;
     outline: none;
     font-size: 1.4rem;
-    color: #fefefe
+    color: #fefefe;
+    text-transform: capitalize;
 }
 .language-selector option{
     color: #000000;
@@ -242,7 +243,7 @@ tbody  tr:hover td {
     font-weight: bolder;
 }
 
-.conference-name {
+.name {
     font-weight: bold;
 }
 
