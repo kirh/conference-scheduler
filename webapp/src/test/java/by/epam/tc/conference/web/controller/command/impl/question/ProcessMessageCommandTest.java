@@ -2,11 +2,9 @@ package by.epam.tc.conference.web.controller.command.impl.question;
 
 import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.services.MessageService;
-import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.helper.Builder;
-import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

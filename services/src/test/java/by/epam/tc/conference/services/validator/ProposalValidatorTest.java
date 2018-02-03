@@ -4,13 +4,8 @@ import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.entity.ProposalStatus;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
 
 public class ProposalValidatorTest {
 

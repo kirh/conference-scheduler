@@ -1,9 +1,7 @@
 package by.epam.tc.conference.web.controller.command.impl.conference;
 
 import by.epam.tc.conference.services.ConferenceService;
-import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;

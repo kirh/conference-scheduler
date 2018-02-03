@@ -3,7 +3,6 @@ package by.epam.tc.conference.web.controller.command.impl;
 import by.epam.tc.conference.dto.ProposalDetails;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ProposalDetailsService;
-import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.CommandException;
@@ -22,7 +21,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.verify;

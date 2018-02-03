@@ -1,7 +1,6 @@
 package by.epam.tc.conference.services.impl;
 
 import by.epam.tc.conference.dao.DaoException;
-import by.epam.tc.conference.dao.MessageDao;
 import by.epam.tc.conference.dao.QuestionDao;
 import by.epam.tc.conference.dao.QuestionDetailsDao;
 import by.epam.tc.conference.dto.QuestionDetails;
@@ -26,7 +25,6 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

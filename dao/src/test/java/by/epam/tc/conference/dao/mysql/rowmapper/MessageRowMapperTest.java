@@ -1,6 +1,5 @@
 package by.epam.tc.conference.dao.mysql.rowmapper;
 
-import by.epam.tc.conference.dto.MessageDetails;
 import by.epam.tc.conference.entity.Message;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +12,6 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

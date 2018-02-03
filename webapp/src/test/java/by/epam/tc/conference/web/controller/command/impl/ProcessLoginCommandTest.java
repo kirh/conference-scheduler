@@ -1,7 +1,6 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.entity.UserPrincipal;
-import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import org.junit.Before;

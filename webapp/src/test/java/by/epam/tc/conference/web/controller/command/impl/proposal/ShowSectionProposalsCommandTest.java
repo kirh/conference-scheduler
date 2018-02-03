@@ -1,15 +1,10 @@
 package by.epam.tc.conference.web.controller.command.impl.proposal;
 
-import by.epam.tc.conference.dto.ProposalDetails;
 import by.epam.tc.conference.services.ProposalDetailsService;
-import by.epam.tc.conference.services.ProposalService;
-import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -19,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

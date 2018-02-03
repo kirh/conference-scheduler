@@ -6,15 +6,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.time.Instant;
 import java.util.Date;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConferenceValidatorTest {

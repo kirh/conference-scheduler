@@ -20,7 +20,6 @@ import java.util.function.Function;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

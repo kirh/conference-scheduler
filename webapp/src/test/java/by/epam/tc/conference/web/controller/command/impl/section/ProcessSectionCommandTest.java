@@ -3,7 +3,6 @@ package by.epam.tc.conference.web.controller.command.impl.section;
 import by.epam.tc.conference.entity.Section;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.SectionService;
-import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.CommandException;

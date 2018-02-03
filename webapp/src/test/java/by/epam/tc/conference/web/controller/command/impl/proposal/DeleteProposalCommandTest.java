@@ -1,14 +1,10 @@
 package by.epam.tc.conference.web.controller.command.impl.proposal;
 
-import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ProposalService;
-import by.epam.tc.conference.services.exception.NotFoundException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.impl.CommandTestHelper;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
