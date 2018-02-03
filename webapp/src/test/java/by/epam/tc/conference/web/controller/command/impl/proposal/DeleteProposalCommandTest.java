@@ -41,7 +41,7 @@ public class DeleteProposalCommandTest {
     private DeleteProposalCommand command;
 
     @Test
-    public void shouldDeleteProposalAndRedirectToDashboardWhenIdGiven() throws ServiceException, CommandException {
+    public void shouldBeEmptyViewWhenDeleted() throws ServiceException, CommandException {
         UserPrincipal user = new UserPrincipal();
         user.setId(CURRENT_USER_ID);
         when(request.getSession().getAttribute(SessionAttribute.USER_PRINCIPAL)).thenReturn(user);
@@ -50,6 +50,6 @@ public class DeleteProposalCommandTest {
         String view = command.execute(request, response);
 
         verify(proposalService).deleteProposal(1L, CURRENT_USER_ID);
-        assertThat(view, is("redirect:/user-dashboard"));
+        assertThat(view, is(emptyString()));
     }
 }

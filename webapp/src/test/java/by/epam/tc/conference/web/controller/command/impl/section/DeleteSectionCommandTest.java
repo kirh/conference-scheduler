@@ -53,11 +53,11 @@ public class DeleteSectionCommandTest {
     }
 
     @Test
-    public void shouldRedirectToPreviousPageAfterDelete() throws CommandException {
+    public void shouldBeEmptyViewAfterDelete() throws CommandException {
         when(request.getParameter("id")).thenReturn("1");
 
         String view = command.execute(request, response);
 
-        assertThat(view, is("redirect:"));
+        assertThat(view, is(emptyString()));
     }
 }

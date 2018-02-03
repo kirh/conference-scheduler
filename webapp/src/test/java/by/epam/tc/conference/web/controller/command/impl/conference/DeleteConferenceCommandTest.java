@@ -16,6 +16,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
@@ -54,11 +56,11 @@ public class DeleteConferenceCommandTest {
     }
 
     @Test
-    public void shouldRedirectToDashboardWhenConferenceDeleted() throws CommandException {
+    public void shouldBeEmptyViewWhenDeleted() throws CommandException {
         when(request.getParameter("id")).thenReturn("1");
 
         String view = command.execute(request, response);
 
-        assertThat(view, is("redirect:/admin-dashboard"));
+        assertThat(view, is(emptyString()));
     }
 }
