@@ -11,11 +11,11 @@ public class SectionDaoImpl extends AbstractDao<Section> implements SectionDao {
 
     private static final String UPDATE = "update section set s_topic=?, s_c_id=? where s_id=?";
     private static final String DELETE = "delete from section where s_id=?";
-    private static final String SELECT = "select * from section where s_id=?";
-    private static final String SELECT_ALL = "select * from section";
+    private static final String SELECT = "select s_id, s_topic, s_c_id from section where s_id=?";
+    private static final String SELECT_ALL = "select s_id, s_topic, s_c_id from section";
     private static final String SAVE = "insert into section (s_topic, s_c_id) values(?, ?)";
-    private static final String SELECT_BY_SECTION_ID = "select * from section where s_c_id=?";
-    private static final String SELECT_ALL_PAGE = "select * from conference limit ?,? order by s_id";
+    private static final String SELECT_BY_SECTION_ID = "select s_id, s_topic, s_c_id from section where s_c_id=?";
+    private static final String SELECT_ALL_PAGE = "select s_id, s_topic, s_c_id from conference limit ?,? order by s_id";
 
     public SectionDaoImpl(Executor<Section> executor) {
         super(executor);

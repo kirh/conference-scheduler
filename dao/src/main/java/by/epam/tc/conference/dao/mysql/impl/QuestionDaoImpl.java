@@ -9,10 +9,11 @@ public class QuestionDaoImpl extends AbstractDao<Question> implements QuestionDa
 
     private static final String UPDATE = "update question set q_text=?, q_u_id=?, q_c_id=? where q_id=?";
     private static final String DELETE = "delete from question where q_id=?";
-    private static final String SELECT = "select * from question where q_id=?";
-    private static final String SELECT_ALL = "select * from question";
+    private static final String SELECT = "select q_id, q_text, q_u_id, q_c_id from question where q_id=?";
+    private static final String SELECT_ALL = "select q_id, q_text, q_u_id, q_c_id from question";
     private static final String SAVE = "insert into question (q_text, q_u_id, q_c_id) values(?, ?, ?)";
-    private static final String SELECT_ALL_PAGE = "select * from question limit ?,? order by q_id";
+    private static final String SELECT_ALL_PAGE = "select q_id, q_text, q_u_id, q_c_id from question limit ?,?"
+            + " order by q_id";
 
     public QuestionDaoImpl(Executor<Question> executor) {
         super(executor);

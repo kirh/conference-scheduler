@@ -8,10 +8,11 @@ public class MessageDaoImpl extends AbstractDao<Message> implements MessageDao {
 
     private static final String UPDATE = "update message set m_text=?, m_q_id=?, m_u_id=? where m_id=?";
     private static final String DELETE = "delete from message where m_id=?";
-    private static final String SELECT = "select * from message where m_id=?";
-    private static final String SELECT_ALL = "select * from message";
+    private static final String SELECT = "select m_id, m_text, m_q_id, m_u_id, m_create_time from message where m_id=?";
+    private static final String SELECT_ALL = "select m_id, m_text, m_q_id, m_u_id, m_create_time from message";
     private static final String SAVE = "insert into message (m_text, m_q_id, m_u_id) values(?, ?, ?)";
-    private static final String SELECT_ALL_PAGE = "select * from message limit ?,? order by m_id";
+    private static final String SELECT_ALL_PAGE = "select m_id, m_text, m_q_id, m_u_id, m_create_time"
+            + " from message limit ?,? order by m_id";
 
     public MessageDaoImpl(Executor<Message> executor) {
         super(executor);

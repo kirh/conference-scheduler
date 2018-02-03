@@ -9,10 +9,8 @@ import java.util.List;
 
 public class MessageDetailsDaoImpl implements MessageDetailsDao {
 
-    private static final String SELECT_BY_QUESTION_SQL = "select message.*, u_username, u_is_admin from message join " +
-            "user on " +
-            "m_u_id=u_id where " +
-            "m_q_id=? order by m_id";
+    private static final String SELECT_BY_QUESTION_SQL = "select m_id, m_text, m_q_id, m_u_id, m_create_time,"
+            + " u_username, u_is_admin from message join user on m_u_id=u_id where m_q_id=? order by m_id";
 
     private final Executor<MessageDetails> executor;
 

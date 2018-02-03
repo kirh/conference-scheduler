@@ -9,21 +9,27 @@ import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-    private static final String UPDATE = "update user set u_username=?, u_password=?, u_email=?, u_first_name=? " +
-            "u_last_name=? u_is_admin=? where u_id=?";
+    private static final String UPDATE = "update user set u_username=?, u_password=?, u_email=?, u_first_name=? "
+            + "u_last_name=? u_is_admin=? where u_id=?";
     private static final String DELETE = "delete from user where u_id=?";
-    private static final String SELECT = "select * from user where u_id=?";
-    private static final String SELECT_ALL = "select * from user";
-    private static final String SAVE = "insert into user (u_username, u_password, u_email, u_first_name, " +
-            "u_last_name, u_is_admin) values(?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_BY_USERNAME = "select * from user where u_username=?";
-    private static final String SELECT_ALL_PAGE = "select * from user limit ?,? order by u_id";
-    private static final String SELECT_ADMINISTRATOR_BY_PROPOSAL = "select user.* from proposal join section on " +
-            "p_s_id=s_id join conference on s_c_id=c_id join user on u_id=c_u_id where p_id=?";
-    private static final String SELECT_ADMINISTRATOR_BY_SECTION = "select user.* from section join conference on " +
-            "s_c_id=c_id join user on c_u_id=u_id where s_id=?";
-    private static final String SELECT_ADMINISTRATOR_BY_QUESTION = "select user.* from question join conference on " +
-            "q_c_id=c_id join user on c_u_id=u_id where q_id=?";
+    private static final String SELECT = "select u_id, u_username, u_password, u_email, u_first_name, u_last_name, "
+            + "u_is_admin from user where u_id=?";
+    private static final String SELECT_ALL = "select u_id, u_username, u_password, u_email, u_first_name, u_last_name, "
+            + "u_is_admin from user";
+    private static final String SAVE = "insert into user (u_username, u_password, u_email, u_first_name, "
+            + "u_last_name, u_is_admin) values(?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_BY_USERNAME = "select u_id, u_username, u_password, u_email, u_first_name,"
+            + " u_last_name, u_is_admin from user where u_username=?";
+    private static final String SELECT_ALL_PAGE = "select u_id, u_username, u_password, u_email, u_first_name, u_last_name, u_is_admin from user limit ?,? order by u_id";
+    private static final String SELECT_ADMINISTRATOR_BY_PROPOSAL = "select u_id, u_username, u_password, u_email, "
+            + "u_first_name, u_last_name, u_is_admin from proposal join section on "
+            + "p_s_id=s_id join conference on s_c_id=c_id join user on u_id=c_u_id where p_id=?";
+    private static final String SELECT_ADMINISTRATOR_BY_SECTION = "select u_id, u_username, u_password, u_email, "
+            + "u_first_name, u_last_name, u_is_admin from section join conference on "
+            + "s_c_id=c_id join user on c_u_id=u_id where s_id=?";
+    private static final String SELECT_ADMINISTRATOR_BY_QUESTION = "select u_id, u_username, u_password, u_email, "
+            + "u_first_name, u_last_name, u_is_admin from question join conference on "
+            + "q_c_id=c_id join user on c_u_id=u_id where q_id=?";
 
     public UserDaoImpl(Executor<User> executor) {
         super(executor);

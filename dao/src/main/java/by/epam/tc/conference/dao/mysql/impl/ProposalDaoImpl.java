@@ -10,16 +10,21 @@ import java.util.List;
 
 public class ProposalDaoImpl extends AbstractDao<Proposal> implements ProposalDao {
 
-    private static final String UPDATE = "update proposal set p_title=?, p_description=?, p_s_id=?, p_u_id=?, " +
-            "p_status=? where p_id=?";
+    private static final String UPDATE = "update proposal set p_title=?, p_description=?, p_s_id=?, p_u_id=?, "
+            + "p_status=? where p_id=?";
     private static final String DELETE = "delete from proposal where p_id=?";
-    private static final String SELECT = "select * from proposal where p_id=?";
-    private static final String SELECT_ALL = "select * from proposal";
-    private static final String SAVE = "insert into proposal (p_title, p_description, p_s_id, p_u_id) " +
-            "values(?, ?, ?, ?)";
-    private static final String SELECT_BY_SECTION_ID = "select * from proposal where p_s_id=?";
-    private static final String SELECT_BY_USER_ID = "select * from proposal where p_u_id=?";
-    private static final String SELECT_ALL_PAGE = "select * from proposal limit ?,? order by p_id";
+    private static final String SELECT = "select p_id, p_title, p_description, p_u_id, p_s_id, p_status from proposal"
+            + " where p_id=?";
+    private static final String SELECT_ALL = "select p_id, p_title, p_description, p_u_id, p_s_id, p_status"
+            + " from proposal";
+    private static final String SAVE = "insert into proposal (p_title, p_description, p_s_id, p_u_id)"
+            + " values(?, ?, ?, ?)";
+    private static final String SELECT_BY_SECTION_ID = "select p_id, p_title, p_description, p_u_id, p_s_id, p_status"
+            + " from proposal where p_s_id=?";
+    private static final String SELECT_BY_USER_ID = "select p_id, p_title, p_description, p_u_id, p_s_id, p_status"
+            + " from proposal where p_u_id=?";
+    private static final String SELECT_ALL_PAGE = "select p_id, p_title, p_description, p_u_id, p_s_id, p_status"
+            + " from proposal limit ?,? order by p_id";
     private static final String UPDATE_STATUS_SQL = "update proposal set p_status=? where p_id=?";
 
     public ProposalDaoImpl(Executor<Proposal> executor) {
