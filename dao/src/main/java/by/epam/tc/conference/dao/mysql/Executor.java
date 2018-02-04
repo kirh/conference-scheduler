@@ -2,7 +2,7 @@ package by.epam.tc.conference.dao.mysql;
 
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.mysql.pool.ConnectionPoolException;
-import by.epam.tc.conference.dao.mysql.pool.Connector;
+import by.epam.tc.conference.dao.mysql.connector.Connector;
 import by.epam.tc.conference.dao.mysql.rowmapper.RowMapper;
 import by.epam.tc.conference.entity.Identifiable;
 
