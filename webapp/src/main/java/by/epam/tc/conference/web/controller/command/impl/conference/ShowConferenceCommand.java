@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * Adds conference with specified id to request and returns conference view
+ */
 public class ShowConferenceCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(ShowConferenceCommand.class);

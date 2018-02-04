@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Adds conference with specified id to request attributes and returns conference form view for editing.
+ */
 public class UpdateConferenceCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(UpdateProposalStatusCommand.class);

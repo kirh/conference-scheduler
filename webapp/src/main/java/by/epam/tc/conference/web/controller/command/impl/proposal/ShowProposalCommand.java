@@ -11,11 +11,15 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Adds proposal with specified id to request attribute and returns proposal view.
+ */
 public class ShowProposalCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(ShowProposalCommand.class);
     private static final String PROPOSAL_ID_PARAM = "id";
     private static final String PROPOSAL_ATTRIBUTE = "proposal";
+    private static final String PROPOSAL_VIEW = "proposal";
     private final ProposalService proposalService;
 
     public ShowProposalCommand(ProposalService proposalService) {
@@ -29,7 +33,7 @@ public class ShowProposalCommand extends AbstractCommand {
             logger.debug("Show proposal id={}", id);
             Proposal proposal = proposalService.getProposal(id);
             request.setAttribute(PROPOSAL_ATTRIBUTE, proposal);
-            return "proposal";
+            return PROPOSAL_VIEW;
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to show proposal");
         }

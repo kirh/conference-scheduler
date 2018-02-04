@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * Adds conferences to request attributes and returns conferences view.
+ */
 public class ShowAllConferencesCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(ShowAllConferencesCommand.class);
     private static final String CONFERENCES_ATTRIBUTE = "conferences";
+    private static final String CONFERENCES_VIEW = "conferences";
     private final ConferenceService conferenceService;
 
     public ShowAllConferencesCommand(ConferenceService conferenceService) {
@@ -28,7 +32,7 @@ public class ShowAllConferencesCommand extends AbstractCommand {
             logger.debug("Show all conferences");
             List<Conference> conferences = conferenceService.getAllConferences();
             request.setAttribute(CONFERENCES_ATTRIBUTE, conferences);
-            return  "conferences";
+            return CONFERENCES_VIEW;
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to show all conferences");
         }

@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Creates or updates existing conference when id specified and redirects to dashboard.
+ */
 public class ProcessConferenceCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(ProcessConferenceCommand.class);

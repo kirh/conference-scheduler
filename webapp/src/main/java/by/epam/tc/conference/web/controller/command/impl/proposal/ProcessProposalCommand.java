@@ -13,7 +13,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * Creates proposal from request parameters.
+ */
 public class ProcessProposalCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(ProcessConferenceCommand.class);

@@ -10,6 +10,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Delete proposal with id specified in request parameter.
+ */
 public class DeleteProposalCommand extends AbstractCommand {
 
     private static final Logger logger = LogManager.getLogger(DeleteProposalCommand.class);
