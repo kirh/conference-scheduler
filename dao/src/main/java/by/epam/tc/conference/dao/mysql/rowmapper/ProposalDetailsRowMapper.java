@@ -6,7 +6,7 @@ import by.epam.tc.conference.entity.ProposalStatus;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProposalDetailsRowMapper implements RowMapper<ProposalDetails>{
+public class ProposalDetailsRowMapper implements RowMapper<ProposalDetails> {
 
     private static final String ID_COLUMN = "p_id";
     private static final String TITLE_COLUMN = "p_title";
