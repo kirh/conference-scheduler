@@ -25,6 +25,6 @@ public class MessageDetailRowMapper implements RowMapper<MessageDetails> {
         Timestamp createTime = resultSet.getTimestamp(CREATE_TIME_COLUMN);
         String username = resultSet.getString(USERNAME_COLUMN);
         boolean sendByAdmin = resultSet.getBoolean(IS_ADMIN_COLUMN);
-        return new MessageDetails(id, text, questionId, userId, username, sendByAdmin);
+        return new MessageDetails(id, text, questionId, userId, username, createTime, sendByAdmin);
     }
 }
