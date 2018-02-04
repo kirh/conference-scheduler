@@ -8,7 +8,7 @@ import by.epam.tc.conference.services.exception.ServiceException;
 import java.util.List;
 
 /**
- * Contains Base operations with messages
+ * Contains Base operations with messages.
  */
 public interface MessageService {
 

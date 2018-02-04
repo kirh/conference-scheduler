@@ -45,11 +45,10 @@ public interface ProposalService {
      *
      * @param proposalId proposal identifier
      * @param status     to set up for proposal
-     * @throws NoAuthorityException when user has no authority to update status     *
+     * @throws NoAuthorityException when user has no authority to update status
      * @throws ServiceException     when error during data access occurs
      */
-    void updateStatus(long proposalId, ProposalStatus status, long userId) throws
-            ServiceException;
+    void updateStatus(long proposalId, ProposalStatus status, long userId) throws ServiceException;
 
     /**
      * Updates proposal with the same id to given proposal state
@@ -59,8 +58,5 @@ public interface ProposalService {
      * @throws NoAuthorityException when user has no authority to update proposal
      * @throws ServiceException     when error during data access occurs
      */
-    void updateProposal(Proposal proposal, long userId) throws
-            ServiceException;
-
-
+    void updateProposal(Proposal proposal, long userId) throws ServiceException;
 }

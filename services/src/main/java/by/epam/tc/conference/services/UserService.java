@@ -8,7 +8,7 @@ import by.epam.tc.conference.services.exception.InvalidDataException;
 import by.epam.tc.conference.services.exception.ServiceException;
 
 /**
- * Base user operations
+ * Base user operations.
  */
 public interface UserService {
 

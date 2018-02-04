@@ -9,7 +9,7 @@ import by.epam.tc.conference.services.exception.ServiceException;
 import java.util.List;
 
 /**
- * Contains base operation with sections
+ * Contains base operation with sections.
  */
 public interface SectionService {
 
@@ -50,8 +50,7 @@ public interface SectionService {
      * @throws NoAuthorityException when user has no authority to update this section
      * @throws ServiceException     when error during data access occurs
      */
-    void updateSection(Section section, long userId) throws
-            ServiceException;
+    void updateSection(Section section, long userId) throws ServiceException;
 
     /**
      * Returns section with specified id
