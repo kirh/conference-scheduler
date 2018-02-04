@@ -2,6 +2,8 @@ package by.epam.tc.conference.dto;
 
 import by.epam.tc.conference.entity.Message;
 
+import java.sql.Timestamp;
+
 public class MessageDetails extends Message {
 
     private static final long serialVersionUID = 42L;
@@ -12,14 +14,10 @@ public class MessageDetails extends Message {
     public MessageDetails() {
     }
 
-    public MessageDetails(String text, Long questionId, Long userId, String username, boolean sendByAdmin) {
-        super(text, questionId, userId);
-        this.username = username;
-        this.sendByAdmin = sendByAdmin;
-    }
+    public MessageDetails(Long id, String text, Long questionId, Long userId, String username, Timestamp createTime,
+                          boolean sendByAdmin) {
 
-    public MessageDetails(Long id, String text, Long questionId, Long userId, String username, boolean sendByAdmin) {
-        super(id, text, questionId, userId);
+        super(id, text, questionId, userId, createTime);
         this.username = username;
         this.sendByAdmin = sendByAdmin;
     }
