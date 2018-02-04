@@ -1,5 +1,7 @@
-package by.epam.tc.conference.dao.mysql.pool;
+package by.epam.tc.conference.dao.mysql.connector;
 
+import by.epam.tc.conference.dao.mysql.connector.ConnectorImpl;
+import by.epam.tc.conference.dao.mysql.pool.ConnectionPool;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

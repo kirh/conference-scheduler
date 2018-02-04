@@ -1,4 +1,7 @@
-package by.epam.tc.conference.dao.mysql.pool;
+package by.epam.tc.conference.dao.mysql.connector;
+
+import by.epam.tc.conference.dao.mysql.pool.ConnectionPool;
+import by.epam.tc.conference.dao.mysql.pool.ConnectionPoolException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  * Proxy that manages connections. Holds different connection for each thread.
- * On demand retrieves connection from connection pool and holds it till the
+ * If there is no connection, retrieves connection from connection pool and holds it till the
  * end of operation or transaction. Client should invoke {@link #closeConnection()}
  * or finish transaction to release connection
  */

@@ -1,4 +1,6 @@
-package by.epam.tc.conference.dao.mysql.pool;
+package by.epam.tc.conference.dao.mysql.connector;
+
+import by.epam.tc.conference.dao.mysql.pool.ConnectionPoolException;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
