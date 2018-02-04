@@ -38,6 +38,6 @@ public class MessageRowMapperTest {
         MessageRowMapper rowMapper = new MessageRowMapper();
         Message actual = rowMapper.map(resultSet);
 
-        assertEquals(actual, new Message(1L, "text", 2L, 3L));
+        assertEquals(actual, new Message(1L, "text", 2L, 3L, timestamp));
     }
 }
