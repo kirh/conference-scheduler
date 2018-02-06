@@ -2,6 +2,7 @@ package by.epam.tc.conference.web.controller.command.impl.conference;
 
 import by.epam.tc.conference.services.ConferenceService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.Dispatcher;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +31,7 @@ public class DeleteConferenceCommand extends AbstractCommand {
             logger.debug("Deleting conference id={}", conferenceId);
             long userId = getUserId(request);
             conferenceService.deleteConferenceById(conferenceId, userId);
-            return "";
+            return Dispatcher.SKIP;
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to delete conference");
         }

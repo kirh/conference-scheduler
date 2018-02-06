@@ -60,5 +60,5 @@ public interface ConferenceService {
      * @return list of all upcoming conferences
      * @throws ServiceException when error during data access occurs
      */
-    List<Conference> getAllConferences() throws ServiceException;
+    List<Conference> getAllUpComingConferences() throws ServiceException;
 }

@@ -1,4 +1,4 @@
-package by.epam.tc.conference.web.controller.command.bulder;
+package by.epam.tc.conference.web.controller.command.builder;
 
 import by.epam.tc.conference.entity.Identifiable;
 import by.epam.tc.conference.entity.UserPrincipal;

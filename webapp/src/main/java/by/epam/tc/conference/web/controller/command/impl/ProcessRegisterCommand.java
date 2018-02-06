@@ -9,7 +9,7 @@ import by.epam.tc.conference.web.ErrorMessage;
 import by.epam.tc.conference.web.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.bulder.Builder;
+import by.epam.tc.conference.web.controller.command.builder.Builder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

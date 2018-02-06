@@ -130,9 +130,9 @@ public class ConferenceServiceImplTest {
     @Test
     public void shouldBeConferencesWhenGetAllConferences() throws ServiceException, DaoException {
         List<Conference> conferences = Collections.emptyList();
-        when(conferenceDao.findAll()).thenReturn(conferences);
+        when(conferenceDao.findAllActual()).thenReturn(conferences);
 
-        List<Conference> actual = conferenceService.getAllConferences();
+        List<Conference> actual = conferenceService.getAllUpComingConferences();
 
         assertThat(actual, is(sameInstance(conferences)));
     }

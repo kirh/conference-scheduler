@@ -4,7 +4,7 @@ import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.bulder.Builder;
+import by.epam.tc.conference.web.controller.command.builder.Builder;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import by.epam.tc.conference.web.controller.command.impl.conference.ProcessConferenceCommand;
 import org.apache.logging.log4j.LogManager;

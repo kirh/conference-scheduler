@@ -5,7 +5,7 @@ import by.epam.tc.conference.entity.Question;
 import by.epam.tc.conference.services.QuestionService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.bulder.Builder;
+import by.epam.tc.conference.web.controller.command.builder.Builder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

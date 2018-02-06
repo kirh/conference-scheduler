@@ -16,12 +16,14 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
             + "conference where c_id=?";
     private static final String SELECT_ALL = "select c_id, c_name, c_address, c_u_id, c_date, c_description"
             + " from conference order by c_date";
+    private static final String SELECT_ALL_ACTUAL = "select c_id, c_name, c_address, c_u_id, c_date, c_description"
+            + " from conference where c_date > now() order by c_date";
     private static final String SAVE = "insert into conference (c_name, c_address, c_description, c_date, c_u_id)"
             + " values(?, ?, ?, ?, ?)";
     private static final String SELECT_BY_USER_ID = "select c_id, c_name, c_address, c_u_id, c_date, c_description"
             + " from conference where c_u_id=?";
     private static final String SELECT_ALL_ACTUAL_PAGE = "select c_id, c_name, c_address, c_u_id, c_date,"
-           + " c_description from conference limit ?,? where c_date > now() order by c_date asc";
+            + " c_description from conference limit ?,? where c_date > now() order by c_date asc";
 
     public ConferenceDaoImpl(Executor<Conference> executor) {
         super(executor);
@@ -83,5 +85,10 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
     @Override
     public List<Conference> findConferencesByUserId(long id) throws DaoException {
         return executor.executeAndFetchAll(SELECT_BY_USER_ID, id);
+    }
+
+    @Override
+    public List<Conference> findAllActual() throws DaoException {
+        return executor.executeAndFetchAll(SELECT_ALL_ACTUAL);
     }
 }

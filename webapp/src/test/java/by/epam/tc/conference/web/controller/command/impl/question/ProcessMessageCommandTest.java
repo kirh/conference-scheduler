@@ -4,7 +4,7 @@ import by.epam.tc.conference.entity.Message;
 import by.epam.tc.conference.services.MessageService;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.controller.command.CommandException;
-import by.epam.tc.conference.web.controller.command.bulder.Builder;
+import by.epam.tc.conference.web.controller.command.builder.Builder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

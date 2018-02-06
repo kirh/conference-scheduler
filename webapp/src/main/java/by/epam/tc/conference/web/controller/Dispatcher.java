@@ -17,6 +17,7 @@ public class Dispatcher {
 
     public static final String REDIRECT_PREFIX = "redirect:";
     public static final String FORWARD_PREFIX = "forward:";
+    public static final String SKIP = "";
 
     private static final Logger logger = LogManager.getLogger(Dispatcher.class);
     private static final String VIEW_PATH_PREFIX = "/WEB-INF/jsp/";
@@ -30,7 +31,7 @@ public class Dispatcher {
      * If prefix is followed by '/' dispatcher interprets it as relative to the servlet container root, otherwise
      * relative to current uri.
      * When prefix not specified then it will render view.
-     * If query is {@code null} or empty nothing will be done.
+     * If query is {@code null} or empty string nothing will be done.
      *
      * @param query    to proceed
      * @param request  object that contains the request the client has made of the servlet
@@ -41,6 +42,7 @@ public class Dispatcher {
      */
     public void dispatch(String query, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if (query == null || query.isEmpty()) {
+            logger.debug("Processing skipped by query = '{}'", query);
             return;
         }
         logger.debug("Processing query '{}'", query);

@@ -2,7 +2,7 @@ package by.epam.tc.conference.web.controller.command;
 
 import by.epam.tc.conference.services.*;
 import by.epam.tc.conference.web.ErrorMessage;
-import by.epam.tc.conference.web.controller.command.bulder.*;
+import by.epam.tc.conference.web.controller.command.builder.*;
 import by.epam.tc.conference.web.controller.command.impl.*;
 import by.epam.tc.conference.web.controller.command.impl.conference.*;
 import by.epam.tc.conference.web.controller.command.impl.proposal.*;

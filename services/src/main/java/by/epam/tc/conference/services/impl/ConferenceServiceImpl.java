@@ -98,9 +98,9 @@ public class ConferenceServiceImpl implements ConferenceService {
 
 
     @Override
-    public List<Conference> getAllConferences() throws ServiceException {
+    public List<Conference> getAllUpComingConferences() throws ServiceException {
         try {
-            List<Conference> conferences = conferenceDao.findAll();
+            List<Conference> conferences = conferenceDao.findAllActual();
             logger.debug("Found {} conferences", conferences.size());
             return conferences;
         } catch (DaoException e) {

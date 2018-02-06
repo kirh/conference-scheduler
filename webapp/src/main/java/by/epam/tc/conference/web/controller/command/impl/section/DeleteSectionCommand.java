@@ -2,6 +2,7 @@ package by.epam.tc.conference.web.controller.command.impl.section;
 
 import by.epam.tc.conference.services.SectionService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.Dispatcher;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +29,7 @@ public class DeleteSectionCommand extends AbstractCommand {
             logger.debug("Deleting section id={}", sectionId);
             Long userId = getUserId(request);
             sectionService.deleteSection(sectionId, userId);
-            return "";
+            return Dispatcher.SKIP;
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to delete section");
         }

@@ -2,6 +2,7 @@ package by.epam.tc.conference.web.controller.command.impl.proposal;
 
 import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.controller.Dispatcher;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.impl.AbstractCommand;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +31,7 @@ public class DeleteProposalCommand extends AbstractCommand {
             logger.debug("Deleting proposal id={}", proposalId);
             Long userId = getUserId(request);
             proposalService.deleteProposal(proposalId, userId);
-            return "";
+            return Dispatcher.SKIP;
         } catch (ServiceException e) {
             throw CommandException.from(e, "Failed to delete proposal");
         }

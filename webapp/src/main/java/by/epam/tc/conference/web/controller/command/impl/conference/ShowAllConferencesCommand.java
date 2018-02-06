@@ -30,7 +30,7 @@ public class ShowAllConferencesCommand extends AbstractCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
             logger.debug("Show all conferences");
-            List<Conference> conferences = conferenceService.getAllConferences();
+            List<Conference> conferences = conferenceService.getAllUpComingConferences();
             request.setAttribute(CONFERENCES_ATTRIBUTE, conferences);
             return CONFERENCES_VIEW;
         } catch (ServiceException e) {

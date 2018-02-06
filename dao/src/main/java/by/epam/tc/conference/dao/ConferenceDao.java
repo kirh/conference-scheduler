@@ -16,4 +16,12 @@ public interface ConferenceDao extends GenericDao<Conference> {
      * @throws DaoException when error during data access occurs
      */
     List<Conference> findConferencesByUserId(long id) throws DaoException;
+
+    /**
+     * Returns list of all planned conferences from underlying persistence data storage
+     *
+     * @return list of all objects from underlying persistence data storage
+     * @throws DaoException when access error occurs
+     */
+    List<Conference> findAllActual() throws DaoException;
 }
