@@ -1,7 +1,7 @@
 package by.epam.tc.conference.web.filter;
 
 import by.epam.tc.conference.entity.UserPrincipal;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import org.apache.logging.log4j.ThreadContext;
 
 import javax.servlet.*;
@@ -60,18 +60,6 @@ public class AuthenticationFilter implements Filter {
         String role = user.isAdmin() ? "admin" : "participant";
         ThreadContext.put("role", role);
 
-    }
-
-    private String getUri(HttpServletRequest request) {
-        try {
-            String contextPathEncoded = request.getContextPath();
-            String contextPath = URLDecoder.decode(contextPathEncoded, StandardCharsets.UTF_8.displayName());
-            String uriEncoded = request.getRequestURI();
-            String uri = URLDecoder.decode(uriEncoded, StandardCharsets.UTF_8.displayName());
-            return uri.substring(contextPath.length());
-        } catch (UnsupportedEncodingException e) {
-            throw new AssertionError("UTF-8 is unknown");
-        }
     }
 
     @Override

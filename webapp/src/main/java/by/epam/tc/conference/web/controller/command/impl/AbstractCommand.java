@@ -2,7 +2,7 @@ package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.web.ErrorMessage;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;
 

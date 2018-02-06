@@ -2,7 +2,7 @@ package by.epam.tc.conference.dao.mysql.impl;
 
 import by.epam.tc.conference.dao.DaoException;
 import by.epam.tc.conference.dao.TransactionManager;
-import by.epam.tc.conference.dao.mysql.pool.Connector;
+import by.epam.tc.conference.dao.mysql.connector.Connector;
 
 import java.sql.SQLException;
 

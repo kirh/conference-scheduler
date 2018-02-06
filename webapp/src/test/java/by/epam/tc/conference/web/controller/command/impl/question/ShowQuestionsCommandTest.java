@@ -3,7 +3,7 @@ package by.epam.tc.conference.web.controller.command.impl.question;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.QuestionService;
 import by.epam.tc.conference.services.exception.ServiceException;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package by.epam.tc.conference.web.controller;
+package by.epam.tc.conference.web;
 
 /**
  * Common session attributes

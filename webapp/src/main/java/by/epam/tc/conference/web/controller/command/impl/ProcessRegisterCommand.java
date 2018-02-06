@@ -6,7 +6,7 @@ import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.exception.AlreadyExistsException;
 import by.epam.tc.conference.services.exception.ServiceException;
 import by.epam.tc.conference.web.ErrorMessage;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.bulder.Builder;

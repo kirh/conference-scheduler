@@ -1,8 +1,10 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.entity.Conference;
+import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ConferenceService;
 import by.epam.tc.conference.services.exception.ServiceException;
+import by.epam.tc.conference.web.ErrorMessage;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,9 +27,14 @@ public class AdminDashboardCommand extends AbstractCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+        logger.debug("loading admin dashboard");
+        UserPrincipal user = getUser(request);
+        if (!user.isAdmin()) {
+            throw new CommandException("Page only for administrators", HttpServletResponse.SC_FORBIDDEN,
+                    ErrorMessage.FORBIDDEN);
+        }
         try {
-            logger.debug("loading admin dashboard");
-            Long userId = getUserId(request);
+            Long userId = user.getId();
             List<Conference> conferences = conferenceService.findConferencesByAdministratorId(userId);
             request.setAttribute(CONFERENCES_ATTRIBUTE, conferences);
             return ADMIN_DASHBOARD_VIEW;

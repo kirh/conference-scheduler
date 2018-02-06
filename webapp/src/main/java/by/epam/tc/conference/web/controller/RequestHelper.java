@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * Returns command appropriate for request
  */
 public class RequestHelper {
+
     private final CommandFactory commandFactory = CommandFactory.getInstance();
 
     /**
@@ -21,8 +22,7 @@ public class RequestHelper {
     public Command getCommand(HttpServletRequest request) throws CommandException {
         String path = request.getServletPath();
         String action = request.getParameter("action");
-        String pathWithoutLeadingSlash = path.substring(1);
-        String command = action == null ? pathWithoutLeadingSlash : pathWithoutLeadingSlash + "?action=" + action;
+        String command = action == null ? path : path + "?action=" + action;
         return commandFactory.getCommand(command);
     }
 }

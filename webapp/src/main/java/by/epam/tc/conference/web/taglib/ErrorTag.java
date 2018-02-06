@@ -35,9 +35,7 @@ public class ErrorTag extends TagSupport {
 
         JspWriter out = pageContext.getOut();
         try {
-            out.write("<span class=\"error\">");
             out.write(errorMessage);
-            out.write("</span>");
             return SKIP_BODY;
         } catch (IOException e) {
             throw new JspTagException(e.getMessage(), e);

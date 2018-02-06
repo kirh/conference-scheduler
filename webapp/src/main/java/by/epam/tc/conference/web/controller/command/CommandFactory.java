@@ -35,36 +35,40 @@ public final class CommandFactory {
         ProposalDetailsService proposalDetailsService = serviceFactory.getProposalDetailsService();
         QuestionService questionService = serviceFactory.getQuestionService();
         MessageService messageService = serviceFactory.getMessageService();
-        commands.put("", new RootPageCommand());
-        commands.put("conference?action=add", (request, response) -> "conference-form");
-        commands.put("conference?action=delete", new DeleteConferenceCommand(conferenceService));
-        commands.put("conference?action=process", new ProcessConferenceCommand(new ConferenceBuilder(), conferenceService));
-        commands.put("conference?action=show", new ShowConferenceCommand(conferenceService, sectionService));
-        commands.put("conference?action=showAll", new ShowAllConferencesCommand(conferenceService));
-        commands.put("conference?action=update", new UpdateConferenceCommand(conferenceService));
-        commands.put("proposal?action=create", (request, response) -> "proposal-form");
-        commands.put("proposal?action=delete", new DeleteProposalCommand(proposalService));
-        commands.put("proposal?action=process", new ProcessProposalCommand(proposalService, new ProposalBuilder()));
-        commands.put("proposal?action=showAll", new ShowSectionProposalsCommand(proposalDetailsService));
-        commands.put("proposal?action=show", new ShowProposalCommand(proposalService));
-        commands.put("proposal?action=update", new UpdateProposalStatusCommand(proposalService));
-        commands.put("question?action=process", new ProcessQuestionCommand(questionService, new QuestionBuilder(), new MessageBuilder()));
-        commands.put("question?action=show", new ShowQuestionCommand(questionService, messageService));
-        commands.put("question?action=showAll", new ShowQuestionsCommand(questionService));
-        commands.put("question?action=create", (request, response) -> "question-form");
-        commands.put("question?action=processMessage", new ProcessMessageCommand(messageService, new MessageBuilder()));
-        commands.put("section?action=delete", new DeleteSectionCommand(sectionService));
-        commands.put("section?action=process", new ProcessSectionCommand(new SectionBuilder(), sectionService));
-        commands.put("section?action=update", new UpdateSectionCommand(sectionService));
-        commands.put("section?action=create", (request, response) -> "section-form");
-        commands.put("admin-dashboard", new AdminDashboardCommand(conferenceService));
-        commands.put("change-locale", new ChangeLocaleCommand());
-        commands.put("login", (request, response) -> "login");
-        commands.put("login?action=process", new ProcessLoginCommand(userService));
-        commands.put("logout", new LogoutCommand());
-        commands.put("user-dashboard", new ParticipantDashboardCommand(proposalDetailsService));
-        commands.put("register?action=process", new ProcessRegisterCommand(userService, new UserBuilder()));
-        commands.put("register", (request, response) -> "register");
+
+        commands.put("/", new RootPageCommand());
+        commands.put("/conference?action=add", (request, response) -> "conference-form");
+        commands.put("/conference?action=delete", new DeleteConferenceCommand(conferenceService));
+        commands.put("/conference?action=process", new ProcessConferenceCommand(new ConferenceBuilder(),
+                conferenceService));
+        commands.put("/conference?action=show", new ShowConferenceCommand(conferenceService, sectionService));
+        commands.put("/conference?action=showAll", new ShowAllConferencesCommand(conferenceService));
+        commands.put("/conference?action=update", new UpdateConferenceCommand(conferenceService));
+        commands.put("/proposal?action=create", (request, response) -> "proposal-form");
+        commands.put("/proposal?action=delete", new DeleteProposalCommand(proposalService));
+        commands.put("/proposal?action=process", new ProcessProposalCommand(proposalService, new ProposalBuilder()));
+        commands.put("/proposal?action=showAll", new ShowSectionProposalsCommand(proposalDetailsService));
+        commands.put("/proposal?action=show", new ShowProposalCommand(proposalService));
+        commands.put("/proposal?action=update", new UpdateProposalStatusCommand(proposalService));
+        commands.put("/question?action=process", new ProcessQuestionCommand(questionService, new QuestionBuilder(),
+                new MessageBuilder()));
+        commands.put("/question?action=show", new ShowQuestionCommand(questionService, messageService));
+        commands.put("/question?action=showAll", new ShowQuestionsCommand(questionService));
+        commands.put("/question?action=create", (request, response) -> "question-form");
+        commands.put("/question?action=processMessage", new ProcessMessageCommand(messageService, new MessageBuilder
+                ()));
+        commands.put("/section?action=delete", new DeleteSectionCommand(sectionService));
+        commands.put("/section?action=process", new ProcessSectionCommand(new SectionBuilder(), sectionService));
+        commands.put("/section?action=update", new UpdateSectionCommand(sectionService));
+        commands.put("/section?action=create", (request, response) -> "section-form");
+        commands.put("/admin-dashboard", new AdminDashboardCommand(conferenceService));
+        commands.put("/change-locale", new ChangeLocaleCommand());
+        commands.put("/login", (request, response) -> "login");
+        commands.put("/login?action=process", new ProcessLoginCommand(userService));
+        commands.put("/logout", new LogoutCommand());
+        commands.put("/user-dashboard", new ParticipantDashboardCommand(proposalDetailsService));
+        commands.put("/register?action=process", new ProcessRegisterCommand(userService, new UserBuilder()));
+        commands.put("/register", (request, response) -> "register");
 
         this.commands = Collections.unmodifiableMap(commands);
     }

@@ -38,10 +38,6 @@ public class ProcessRegisterCommandTest {
     @InjectMocks
     private ProcessRegisterCommand command;
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
     @Test
     public void shouldAttemptToRegisterWhenExecute() throws Exception {
         User user = new User();

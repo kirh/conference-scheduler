@@ -2,7 +2,7 @@ package by.epam.tc.conference.web.controller.command.bulder;
 
 import by.epam.tc.conference.entity.Identifiable;
 import by.epam.tc.conference.entity.UserPrincipal;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

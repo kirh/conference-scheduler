@@ -3,8 +3,8 @@ package by.epam.tc.conference.services.exception;
 import by.epam.tc.conference.commons.ConferenceException;
 
 /**
- * General exception for service layer
- * Will be thrown if any error occurs
+ * General exception for service layer.
+ * Will be thrown if any checked exception during process occurs
  *
  * @see AlreadyExistsException
  * @see AuthenticationException

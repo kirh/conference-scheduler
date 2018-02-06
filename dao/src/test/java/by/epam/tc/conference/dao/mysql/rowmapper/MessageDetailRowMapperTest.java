@@ -42,6 +42,6 @@ public class MessageDetailRowMapperTest {
         MessageDetailRowMapper rowMapper = new MessageDetailRowMapper();
         MessageDetails actual = rowMapper.map(resultSet);
 
-        assertEquals(actual, new MessageDetails(1L, "text", 2L, 3L, "name", true));
+        assertEquals(actual, new MessageDetails(1L, "text", 2L, 3L, "name", timestamp, true));
     }
 }

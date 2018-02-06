@@ -1,8 +1,8 @@
 package by.epam.tc.conference.dao.mysql;
 
 import by.epam.tc.conference.dao.DaoException;
-import by.epam.tc.conference.dao.mysql.pool.ConnectionPoolException;
 import by.epam.tc.conference.dao.mysql.connector.Connector;
+import by.epam.tc.conference.dao.mysql.pool.ConnectionPoolException;
 import by.epam.tc.conference.dao.mysql.rowmapper.RowMapper;
 import by.epam.tc.conference.entity.Identifiable;
 
@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Executes query with given parameters and maps result to T.
+ *
+ * @param <T> the type to map result
+ */
 public class Executor<T extends Identifiable> {
 
     private final Connector connector;
@@ -24,6 +29,13 @@ public class Executor<T extends Identifiable> {
         this.rowMapper = rowMapper;
     }
 
+    /**
+     * Executes update query based on input sql query and params.
+     *
+     * @param query       sql query to execute
+     * @param queryParams params to insert into query
+     * @throws DaoException when error during db request occurs
+     */
     public void executeUpdate(String query, Object... queryParams) throws
             DaoException {
         try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS)) {
@@ -35,7 +47,15 @@ public class Executor<T extends Identifiable> {
         }
     }
 
-    public Long executeInsert(String query, Object... queryParams) throws DaoException {
+    /**
+     * Executes update statement and returns generated id.
+     *
+     * @param query       sql to execute
+     * @param queryParams parameters to fill in sql query.
+     * @return generated id
+     * @throws DaoException when no generated key found or another error during data access
+     */
+    public long executeInsert(String query, Object... queryParams) throws DaoException {
         try (PreparedStatement statement = createStatement(query, queryParams, Statement.RETURN_GENERATED_KEYS)) {
             statement.executeUpdate();
             return getGeneratedId(statement);
@@ -46,6 +66,15 @@ public class Executor<T extends Identifiable> {
         }
     }
 
+    /**
+     * Executes query and attempts to fetch one row. Returns optional object of T when result contains
+     * row or empty optional otherwise.
+     *
+     * @param query       sql to execute
+     * @param queryParams parameters to fill in sql query
+     * @return optional object of T when result contains row or empty optional otherwise.
+     * @throws DaoException when error during data  access occurs
+     */
     public Optional<T> executeAndFetchOne(String query, Object... queryParams) throws DaoException {
         try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS);
              ResultSet resultSet = executePrepared(statement)) {
@@ -54,13 +83,20 @@ public class Executor<T extends Identifiable> {
                 return Optional.of(object);
             }
             return Optional.empty();
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException("Failed to execute query " + e.getMessage(), e);
         } finally {
             connector.closeConnection();
         }
     }
 
+    /**
+     * Executes query and attempts to map fetch all rows.
+     * @param query sql to execute
+     * @param queryParams parameters to fill in sql query
+     * @return list of T objects returned by query
+     * @throws DaoException when error during data  access occurs
+     */
     public List<T> executeAndFetchAll(String query, Object... queryParams) throws DaoException {
         try (PreparedStatement statement = createStatement(query, queryParams, Statement.NO_GENERATED_KEYS);
              ResultSet resultSet = executePrepared(statement)) {
@@ -77,7 +113,7 @@ public class Executor<T extends Identifiable> {
         }
     }
 
-    private Long getGeneratedId(PreparedStatement statement) throws SQLException {
+    private long getGeneratedId(PreparedStatement statement) throws SQLException {
         try (ResultSet keysResultSet = statement.getGeneratedKeys()) {
             if (keysResultSet.next()) {
                 int id = keysResultSet.getInt(1);

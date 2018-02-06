@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -45,7 +45,7 @@
                             <td><a href="${showProposal}">${proposal.conferenceName}</a></td>
                             <td><a href="${showProposal}">${proposal.sectionName}</a></td>
                             <td><a href="${showProposal}">${proposal.status}</a></td>
-                            <td>
+                            <td class="cell-controls">
                                 <c:url var="deleteProposal" value="/proposal">
                                     <c:param name="action" value="delete"/>
                                     <c:param name="id" value="${proposal.id}"/>

@@ -42,7 +42,7 @@ public class FrontController extends HttpServlet {
         processRequest(request, response);
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             logRequest(request);
             Command command = helper.getCommand(request);

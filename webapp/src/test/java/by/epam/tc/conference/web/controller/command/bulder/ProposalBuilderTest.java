@@ -3,7 +3,7 @@ package by.epam.tc.conference.web.controller.command.bulder;
 import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.entity.ProposalStatus;
 import by.epam.tc.conference.entity.UserPrincipal;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;

@@ -4,7 +4,7 @@ import by.epam.tc.conference.entity.Proposal;
 import by.epam.tc.conference.entity.UserPrincipal;
 import by.epam.tc.conference.services.ProposalService;
 import by.epam.tc.conference.services.exception.ServiceException;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import by.epam.tc.conference.web.controller.command.bulder.Builder;
 import org.junit.Before;

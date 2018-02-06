@@ -9,18 +9,18 @@ import java.util.List;
 
 public class ConferenceDaoImpl extends AbstractDao<Conference> implements ConferenceDao {
 
-    private static final String UPDATE = "update conference set c_name=?, c_description=?, c_address=?, c_datetime=?,"
+    private static final String UPDATE = "update conference set c_name=?, c_description=?, c_address=?, c_date=?,"
             + " c_u_id=? where c_id=?";
     private static final String DELETE = "delete from conference where c_id=?";
-    private static final String SELECT = "select c_id, c_name, c_address, c_u_id, c_datetime, c_description from "
+    private static final String SELECT = "select c_id, c_name, c_address, c_u_id, c_date, c_description from "
             + "conference where c_id=?";
-    private static final String SELECT_ALL = "select c_id, c_name, c_address, c_u_id, c_datetime, c_description"
-            + " from conference order by c_datetime";
-    private static final String SAVE = "insert into conference (c_name, c_address, c_description, c_datetime, c_u_id)"
+    private static final String SELECT_ALL = "select c_id, c_name, c_address, c_u_id, c_date, c_description"
+            + " from conference order by c_date";
+    private static final String SAVE = "insert into conference (c_name, c_address, c_description, c_date, c_u_id)"
             + " values(?, ?, ?, ?, ?)";
-    private static final String SELECT_BY_USER_ID = "select c_id, c_name, c_address, c_u_id, c_datetime, c_description"
+    private static final String SELECT_BY_USER_ID = "select c_id, c_name, c_address, c_u_id, c_date, c_description"
             + " from conference where c_u_id=?";
-    private static final String SELECT_ALL_ACTUAL_PAGE = "select c_id, c_name, c_address, c_u_id, c_datetime,"
+    private static final String SELECT_ALL_ACTUAL_PAGE = "select c_id, c_name, c_address, c_u_id, c_date,"
            + " c_description from conference limit ?,? where c_date > now() order by c_date asc";
 
     public ConferenceDaoImpl(Executor<Conference> executor) {

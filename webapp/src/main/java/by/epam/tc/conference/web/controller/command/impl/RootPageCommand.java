@@ -1,7 +1,7 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.entity.UserPrincipal;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

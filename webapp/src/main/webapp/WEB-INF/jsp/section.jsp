@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -18,7 +18,7 @@
         </tr>
         <tbody>
         <c:if test="${empty proposals}">
-            <tr><td class="text-center" colspan="2">No proposals</td></tr>
+            <tr><td class="text-center" colspan="3">${locNoProposals}</td></tr>
         </c:if>
         <c:forEach items="${proposals}" var="proposal">
             <tr>

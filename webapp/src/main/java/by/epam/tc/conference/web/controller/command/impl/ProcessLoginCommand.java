@@ -1,11 +1,11 @@
 package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.entity.UserPrincipal;
+import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.services.exception.AuthenticationException;
 import by.epam.tc.conference.services.exception.ServiceException;
-import by.epam.tc.conference.services.UserService;
 import by.epam.tc.conference.web.ErrorMessage;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +22,7 @@ public class ProcessLoginCommand implements Command {
     private static final String PARAM_PASSWORD = "password";
     private static final String REDIRECT_TO_ROOT_PAGE = "redirect:/";
     private static final String LOGIN_VIEW = "login";
+    private static final String LOGIN_ERROR_MESSAGE_KEY = "login.error";
 
     private final UserService userService;
 
@@ -43,7 +44,7 @@ public class ProcessLoginCommand implements Command {
             return REDIRECT_TO_ROOT_PAGE;
         } catch (AuthenticationException e) {
             logger.debug("User doesn't exist or password mismatch username='{}'", username);
-            request.setAttribute("error", "login.error");
+            request.setAttribute("error", LOGIN_ERROR_MESSAGE_KEY);
             return LOGIN_VIEW;
         } catch (ServiceException e) {
             throw new CommandException("Failed to process login username " + username, HttpServletResponse

@@ -49,10 +49,13 @@ public class ConnectionPool {
         DbResourceManager resourceManager = DbResourceManager.getInstance();
         String url = resourceManager.getValue(DbParameter.DB_URL);
         dataSource.setURL(url);
+
         String user = resourceManager.getValue(DbParameter.USER);
         dataSource.setUser(user);
+
         String password = resourceManager.getValue(DbParameter.PASSWORD);
         dataSource.setPassword(password);
+
         String poolSize = resourceManager.getValue(DbParameter.POOL_SIZE);
         Integer capacity = Integer.valueOf(poolSize);
         givenAwayConnections = new ArrayBlockingQueue<>(capacity);
@@ -85,7 +88,7 @@ public class ConnectionPool {
         boolean removed = givenAwayConnections.remove(connection);
         if (removed) {
             availableConnections.add(connection);
-            logger.debug("Connection returned");
+            logger.debug("Connection returned to pool");
         } else {
             logger.debug("Attempt to return unknown connection");
         }
@@ -106,6 +109,7 @@ public class ConnectionPool {
             statement.execute(VALIDATION_QUERY);
         } catch (SQLException e) {
             valid = false;
+            logger.debug("Invalid connection detected");
         }
         return valid;
     }
@@ -130,7 +134,7 @@ public class ConnectionPool {
             try {
                 connection.close();
             } catch (SQLException e) {
-                // ignored
+                logger.debug("Failed to close connection", e);
             }
         }
     }

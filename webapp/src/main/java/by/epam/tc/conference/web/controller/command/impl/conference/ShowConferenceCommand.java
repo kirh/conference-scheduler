@@ -37,7 +37,7 @@ public class ShowConferenceCommand extends AbstractCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         try {
             Long conferenceId = parseIdParameter(request, CONFERENCE_ID_PARAM);
-            logger.debug("Show conference id{}", conferenceId);
+            logger.debug("Show conference id={}", conferenceId);
             Conference conference = conferenceService.getConference(conferenceId);
             request.setAttribute(CONFERENCE_ATTRIBUTE, conference);
             List<Section> sections = sectionService.findSectionsByConferenceId(conferenceId);

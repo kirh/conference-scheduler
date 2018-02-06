@@ -1,5 +1,8 @@
 package by.epam.tc.conference.web.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ public class Dispatcher {
     public static final String REDIRECT_PREFIX = "redirect:";
     public static final String FORWARD_PREFIX = "forward:";
 
+    private static final Logger logger = LogManager.getLogger(Dispatcher.class);
     private static final String VIEW_PATH_PREFIX = "/WEB-INF/jsp/";
     private static final String VIEW_PATH_POSTFIX = ".jsp";
 
@@ -39,6 +43,7 @@ public class Dispatcher {
         if (query == null || query.isEmpty()) {
             return;
         }
+        logger.debug("Processing query '{}'", query);
         if (query.startsWith(REDIRECT_PREFIX)) {
             redirect(query, request, response);
         } else if (query.startsWith(FORWARD_PREFIX)) {
@@ -54,9 +59,11 @@ public class Dispatcher {
         String path = query.replace(REDIRECT_PREFIX, "");
         if (!path.isEmpty()) {
             response.sendRedirect(path);
+            logger.debug("Redirected to '{}'", path);
         } else {
             String referer = request.getHeader("referer");
             response.sendRedirect(referer);
+            logger.debug("Redirected to '{}'", referer);
         }
     }
 
@@ -64,6 +71,7 @@ public class Dispatcher {
             IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
+        logger.debug("Forwarded to {}", path);
     }
 
 }

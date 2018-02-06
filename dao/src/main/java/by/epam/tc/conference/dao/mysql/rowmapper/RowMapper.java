@@ -10,7 +10,6 @@ import java.sql.SQLException;
  *
  * @param <T> the type of result object
  */
-
 @FunctionalInterface
 public interface RowMapper<T extends Identifiable> {
 
@@ -22,6 +21,5 @@ public interface RowMapper<T extends Identifiable> {
      * @throws SQLException if the columnLabel is not valid; if a database access error
      *                      occurs or this method is called on a closed result set
      */
-
     T map(ResultSet resultSet) throws SQLException;
 }

@@ -20,7 +20,7 @@ public class ConferenceRowMapperTest {
     private static final String NAME_COLUMN = "c_name";
     private static final String ADDRESS_COLUMN = "c_address";
     private static final String ADMINISTRATOR_ID_COLUMN = "c_u_id";
-    private static final String DATE_COLUMN = "c_datetime";
+    private static final String DATE_COLUMN = "c_date";
     private static final String DESCRIPTION_COLUMN = "c_description";
 
     @Mock

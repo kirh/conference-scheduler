@@ -2,7 +2,7 @@ package by.epam.tc.conference.web.controller.command.impl;
 
 import by.epam.tc.conference.web.ErrorMessage;
 import by.epam.tc.conference.web.Language;
-import by.epam.tc.conference.web.controller.SessionAttribute;
+import by.epam.tc.conference.web.SessionAttribute;
 import by.epam.tc.conference.web.controller.command.Command;
 import by.epam.tc.conference.web.controller.command.CommandException;
 import org.apache.logging.log4j.LogManager;
@@ -21,8 +21,8 @@ public class ChangeLocaleCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        logger.traceEntry();
         String languageTag = request.getParameter(LANGUAGE_PARAM);
+        logger.debug("Changing user language to '{}'", languageTag);
         if (!Language.contains(languageTag)) {
             String message = "Language " + languageTag + " not supported";
             throw new CommandException(message, HttpServletResponse.SC_BAD_REQUEST, ErrorMessage.BAD_REQUEST);

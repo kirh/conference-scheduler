@@ -52,7 +52,7 @@ function remove(element, url) {
         } else if (this.readyState == 4) {
             alert(this.statusText);
         }
-    }
+    };
     try {
         xHttp.open('DELETE', url, true);
         xHttp.send();

@@ -48,7 +48,7 @@ public class CommandException extends ConferenceException {
     }
 
     /**
-     * Factory method for constructing CommandException from {@seeServiceException} with
+     * Factory method for constructing CommandException from {@link ServiceException} with
      * standard error code and user error message values.
      * @param serviceException exception to wrap
      * @param message the details message

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -18,12 +18,14 @@
         <c:param name="action" value="update"/>
         <c:param name="id" value="${proposal.id}"/>
     </c:url>
+        <div class="text-center">
     <button class="btn" type="button" onclick="confirmAndRedirect('${updateStatus}&status=approved')">
-        <i class="fa fa-check-square-o" title="${locApprove}"></i>
+            ${locApprove}<i class="fa fa-check-square-o" title="${locApprove}"></i>
     </button>
     <button class="btn btn-cancel" type="button" onclick="confirmAndRedirect('${updateStatus}&status=rejected')">
-        <i class="fa fa-ban" title="${locReject}"></i>
+            ${locReject}<i class="fa fa-ban" title="${locReject}"></i>
     </button>
+            </div>
     </c:if>
 </section>
 

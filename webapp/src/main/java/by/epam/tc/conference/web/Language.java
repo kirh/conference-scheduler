@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Contains application languages
+ * Contains application languages.
  */
 public enum Language {
     ENGLISH(new Locale("en")),
@@ -29,7 +29,7 @@ public enum Language {
 
     /**
      * Returns language display name.
-     * @return capitalized language display name
+     * @return language display name
      */
     public String getDisplayName() {
         return locale.getDisplayLanguage(locale);

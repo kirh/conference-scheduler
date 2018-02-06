@@ -60,6 +60,7 @@ public class ConferenceValidator extends AbstractValidator<Conference> {
         if (!isMatches(name, AT_LEAST_FIVE_LETTERS_PATTERN)) {
             logger.debug("Invalid:name={} Should contain at least five letters", name);
             return false;
-        } else return true;
+        }
+        return true;
     }
 }
